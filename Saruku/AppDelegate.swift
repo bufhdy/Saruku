@@ -8,6 +8,8 @@
 
 import Cocoa
 import SwiftUI
+import HotKey
+import Carbon
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
@@ -49,7 +51,29 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                               action: #selector(quitApp(_:)),
                               keyEquivalent: "q")
         
+//        if Storage.fileExists("globalKeybind.json", in: .documents) {
+//            let globalKeybinds = Storage.retrieve("globalKeybind.json", from: .documents, as: GlobalKeybindPreferences.self)
+//            hotKey = HotKey(keyCombo: KeyCombo(carbonKeyCode: globalKeybinds.keyCode, carbonModifiers: globalKeybinds.carbonFlags))
+//        }
     }
+    
+//    public var hotKey: HotKey? {
+//        didSet {
+//            guard let hotKey = hotKey else { return }
+//            
+//            hotKey.keyDownHandler = { [weak self] in
+//                NSApplication.shared.orderedWindows.forEach { (window) in
+//                    if let mainWindow = window as? MainWindow {
+//                        print("woo")
+//                        NSApplication.shared.activate(ignoringOtherApps: true)
+//                        // to be conti
+//                    }
+//                }
+//            }
+//        }
+//        
+//    
+//    }
     
     @objc func statusBarButtonClicked(_ sender: NSStatusBarButton) {
         let event = NSApp.currentEvent!

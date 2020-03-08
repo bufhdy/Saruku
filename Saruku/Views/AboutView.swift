@@ -38,6 +38,7 @@ struct AboutView: View {
                     .font(.system(.caption))
                 Text("Typeface: Acme by Huerta Tipográfica")
                     .font(.system(.caption))
+                // Text("Special thanks to Liam. Anger helped.").font(.system(.caption))
                 
                 Spacer().frame(height: 10)
                 
