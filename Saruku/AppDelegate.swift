@@ -75,8 +75,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         statusBarItem.menu = nil
     }
     
-    // Menu actions
+    // TODO: Integrate the 2 funcs
     @objc func openPrefsWindow(_ sender: Any) {
+        NSApp.activate(ignoringOtherApps: true)
         if let prefsView = prefsView, prefsView.prefsWindowDelegate.windowIsOpen {
             prefsView.window.makeKeyAndOrderFront(self)
         } else {
@@ -85,6 +86,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     @objc func openAboutWindow(_ sender: Any) {
+        NSApp.activate(ignoringOtherApps: true)
         if let aboutView = aboutView, aboutView.aboutWindowDelegate.windowIsOpen {
             aboutView.window.makeKeyAndOrderFront(self)
         } else {
