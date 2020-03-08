@@ -12,6 +12,7 @@
 		146335B9241110C9006E6B7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146335B8241110C9006E6B7F /* Assets.xcassets */; };
 		146335BC241110C9006E6B7F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146335BB241110C9006E6B7F /* Preview Assets.xcassets */; };
 		146335BF241110C9006E6B7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 146335BD241110C9006E6B7F /* Main.storyboard */; };
+		1487D35C2414CEC50019D49D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1487D35B2414CEC50019D49D /* README.md */; };
 		14E027D924149AC2004CA423 /* PrefsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E027D824149AC2004CA423 /* PrefsView.swift */; };
 		14E027DB2414B92F004CA423 /* AppItemData.json in Resources */ = {isa = PBXBuildFile; fileRef = 14E027DA2414B92F004CA423 /* AppItemData.json */; };
 		14FCA58224114CFB00860F8D /* ItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FCA58124114CFB00860F8D /* ItemSource.swift */; };
@@ -27,6 +28,7 @@
 		146335BE241110C9006E6B7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		146335C0241110C9006E6B7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		146335C1241110C9006E6B7F /* Saruku.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Saruku.entitlements; sourceTree = "<group>"; };
+		1487D35B2414CEC50019D49D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		14E027D824149AC2004CA423 /* PrefsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsView.swift; sourceTree = "<group>"; };
 		14E027DA2414B92F004CA423 /* AppItemData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = AppItemData.json; path = Saruku/Data/AppItemData.json; sourceTree = SOURCE_ROOT; };
 		14FCA58124114CFB00860F8D /* ItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSource.swift; sourceTree = "<group>"; };
@@ -47,6 +49,7 @@
 		146335A8241110C9006E6B7F = {
 			isa = PBXGroup;
 			children = (
+				1487D35B2414CEC50019D49D /* README.md */,
 				146335B3241110C9006E6B7F /* Saruku */,
 				146335B2241110C9006E6B7F /* Products */,
 			);
@@ -162,6 +165,7 @@
 			files = (
 				146335BF241110C9006E6B7F /* Main.storyboard in Resources */,
 				146335BC241110C9006E6B7F /* Preview Assets.xcassets in Resources */,
+				1487D35C2414CEC50019D49D /* README.md in Resources */,
 				14E027DB2414B92F004CA423 /* AppItemData.json in Resources */,
 				146335B9241110C9006E6B7F /* Assets.xcassets in Resources */,
 			);
