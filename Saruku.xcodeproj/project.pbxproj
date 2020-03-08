@@ -21,11 +21,27 @@
 		149B73072415347200DDEBD7 /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = 149B73062415347200DDEBD7 /* HotKey */; };
 		149B73092415376100DDEBD7 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149B73082415376100DDEBD7 /* Storage.swift */; };
 		149B730B2415387C00DDEBD7 /* GlobalKeybindPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149B730A2415387C00DDEBD7 /* GlobalKeybindPreferences.swift */; };
+		149B732F2415473400DDEBD7 /* LaunchAtLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149B732D2415472000DDEBD7 /* LaunchAtLogin.framework */; };
+		149B73302415473400DDEBD7 /* LaunchAtLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 149B732D2415472000DDEBD7 /* LaunchAtLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14E027D924149AC2004CA423 /* PrefsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E027D824149AC2004CA423 /* PrefsView.swift */; };
 		14E027DB2414B92F004CA423 /* AppItemData.json in Resources */ = {isa = PBXBuildFile; fileRef = 14E027DA2414B92F004CA423 /* AppItemData.json */; };
 		14FCA58224114CFB00860F8D /* ItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FCA58124114CFB00860F8D /* ItemSource.swift */; };
 		14FCA5862411DB9800860F8D /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FCA5852411DB9800860F8D /* EditView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		149B73312415473400DDEBD7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				149B73302415473400DDEBD7 /* LaunchAtLogin.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		146335B1241110C9006E6B7F /* Saruku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saruku.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +60,7 @@
 		149B73032415339300DDEBD7 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		149B73082415376100DDEBD7 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		149B730A2415387C00DDEBD7 /* GlobalKeybindPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalKeybindPreferences.swift; sourceTree = "<group>"; };
+		149B732D2415472000DDEBD7 /* LaunchAtLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LaunchAtLogin.framework; path = Carthage/Build/Mac/LaunchAtLogin.framework; sourceTree = "<group>"; };
 		14E027D824149AC2004CA423 /* PrefsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsView.swift; sourceTree = "<group>"; };
 		14E027DA2414B92F004CA423 /* AppItemData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = AppItemData.json; path = Saruku/Data/AppItemData.json; sourceTree = SOURCE_ROOT; };
 		14FCA58124114CFB00860F8D /* ItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSource.swift; sourceTree = "<group>"; };
@@ -55,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				149B732F2415473400DDEBD7 /* LaunchAtLogin.framework in Frameworks */,
 				149B73072415347200DDEBD7 /* HotKey in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -65,6 +83,7 @@
 		146335A8241110C9006E6B7F = {
 			isa = PBXGroup;
 			children = (
+				149B732D2415472000DDEBD7 /* LaunchAtLogin.framework */,
 				149B73032415339300DDEBD7 /* Cartfile */,
 				1487D35B2414CEC50019D49D /* README.md */,
 				146335B3241110C9006E6B7F /* Saruku */,
@@ -146,6 +165,8 @@
 				146335AD241110C9006E6B7F /* Sources */,
 				146335AE241110C9006E6B7F /* Frameworks */,
 				146335AF241110C9006E6B7F /* Resources */,
+				149B73312415473400DDEBD7 /* Embed Frameworks */,
+				149B73322415475500DDEBD7 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -211,6 +232,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		149B73322415475500DDEBD7 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PROJECT_DIR}/Carthage/Build/Mac/LaunchAtLogin.framework/Resources/copy-helper.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		146335AD241110C9006E6B7F /* Sources */ = {
@@ -364,7 +407,7 @@
 				CODE_SIGN_ENTITLEMENTS = Saruku/Saruku.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Saruku/Preview Content\"";
 				DEVELOPMENT_TEAM = WP2TDFSJS9;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -372,6 +415,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Saruku.xcodeproj/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = Saruku/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -393,7 +437,7 @@
 				CODE_SIGN_ENTITLEMENTS = Saruku/Saruku.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Saruku/Preview Content\"";
 				DEVELOPMENT_TEAM = WP2TDFSJS9;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -401,6 +445,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Saruku.xcodeproj/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = Saruku/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -10,6 +10,7 @@ import Cocoa
 import SwiftUI
 import HotKey
 import Carbon
+import LaunchAtLogin
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {

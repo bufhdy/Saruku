@@ -9,12 +9,23 @@
 import SwiftUI
 import HotKey
 import Carbon
+import LaunchAtLogin
+
+struct ToggleModel {
+    var value: Bool {
+        willSet {
+            LaunchAtLogin.isEnabled = !value
+            print("\(LaunchAtLogin.isEnabled)")
+        }
+    }
+}
 
 struct PrefsView: View {
     var window: NSWindow!
     @State var prefsWindowDelegate = WindowsDelegate()
     
     @State var launchAtLogin: Bool = false
+    @State var launchAtLoginModel = ToggleModel(value: LaunchAtLogin.isEnabled)
     
     var body: some View {
         VStack(spacing: 0) {
@@ -31,7 +42,8 @@ struct PrefsView: View {
             }
             .padding([.horizontal, .top])
             
-            Toggle(isOn: $launchAtLogin) {
+            
+            Toggle(isOn: $launchAtLoginModel.value) {
                 Text("Launch Saruku at login")
                     .font(.custom("Acme", size: 15))
                     .foregroundColor(Color("Newspaper"))
