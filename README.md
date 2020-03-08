@@ -1,4 +1,4 @@
-# Saruku
+# Saruku (Still developing!)
 
 ![saruku-icon](https://github.com/bufhdy/Saruku/raw/master/Icons/icon_256.png)
 
