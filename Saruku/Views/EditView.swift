@@ -27,11 +27,11 @@ struct EditView: View {
                     .foregroundColor(Color("Cherry"))
                     .overlay(Circle().stroke(Color.black.opacity(0.3), lineWidth: 0.5))
             }
-            .frame(width: 12, height: 12)
+            .frame(width: 11.5, height: 11.5)
             .onTapGesture {
                 self.editing = false
             }
-            .offset(x: 4, y: 4)
+            .offset(x: 4.25, y: 4.25)
             .animation(Animation.linear(duration: 0.1))
             .opacity(submittingMoveState == .zero ? 1 : 0)
             
@@ -53,7 +53,7 @@ struct EditView: View {
                     .overlay(Circle().stroke(Color.black.opacity(0.3), lineWidth: 0.5))
                     .animation(.linear)
             }
-            .frame(width: 12, height: 12)
+            .frame(width: 11.5, height: 11.5)
             .offset(y: submittingMoveState.height)
             .gesture(DragGesture()
                 .onChanged { value in
@@ -80,7 +80,7 @@ struct EditView: View {
                     self.editing = false
                 }
             }
-            .offset(x: 4, y: 44)
+            .offset(x: 4.25, y: 44.25)
             
             HStack(spacing: 0) {
                 Spacer()

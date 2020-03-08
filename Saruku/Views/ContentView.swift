@@ -104,7 +104,7 @@ struct AppItemView: View {
                 
                 // Text("x")
             }
-                .frame(width: 12, height: 12)
+                .frame(width: 11.5, height: 11.5)
                 .onHover { value in
                     self.showDelete = value
                 }
@@ -115,7 +115,7 @@ struct AppItemView: View {
                         self.timeRemaining = 0
                     }
                 }
-                .offset(x: 4, y: 4)
+                .offset(x: 4.25, y: 4.25)
             
             EditView(hour: $hour, minute: item.duration % 3600 / 60, rightEditing: $rightEditng, editing: $editing, second: $item.duration, editingMoveState: $editingMoveState, isFirst: isFirst)
                 .opacity(editing ? 1 : 0)
@@ -128,7 +128,7 @@ struct AppItemView: View {
                 
                 // Text("x")
             }
-                .frame(width: 12, height: 12)
+            .frame(width: 11.5, height: 11.5)
                 .opacity(timeRemaining == 0 ? 1 : 0)
                 .onHover { value in
                     self.showEdit = self.editing ? self.rightEditng : value
@@ -161,7 +161,7 @@ struct AppItemView: View {
                     self.showEdit = false
                     self.editing.toggle()
                 }
-                .offset(x: 44, y: 44)
+                .offset(x: 44.25, y: 44.25)
         }
         .frame(width: 60, height: 60)
         .background(ItemBackground(isFirst: isFirst, color: Color("Vintage")))
