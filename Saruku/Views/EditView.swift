@@ -49,8 +49,9 @@ struct EditView: View {
             
             ZStack {
                 Circle()
-                    .foregroundColor(Color("Sorrow"))
+                    .foregroundColor(self.hour != 0 || self.minute != 0 ? Color("Sorrow") : Color("Newspaper").opacity(0.6))
                     .overlay(Circle().stroke(Color.black.opacity(0.3), lineWidth: 0.5))
+                    .animation(.linear)
             }
             .frame(width: 12, height: 12)
             .offset(y: submittingMoveState.height)
@@ -61,19 +62,23 @@ struct EditView: View {
                         self.submittingMoveState.height = 0
                     }
                     
-                    if self.submittingMoveState.height < -36 {
-                        self.submittingMoveState.height = -36
+                    if self.submittingMoveState.height < -40 {
+                        self.submittingMoveState.height = -40
                     }
-                    self.minute = Int(Double(self.submittingMoveState.height) * 59.0 / -36.0)
+                    self.minute = Int(Double(self.submittingMoveState.height) * 59.0 / -40.0)
                 }
                 .onEnded { _ in
                     self.submittingMoveState = .zero
-                    self.editing = false
+                    if self.hour != 0 || self.minute != 0 {
+                        self.editing = false
+                    }
                 }
             )
             .onTapGesture {
-                self.second = self.toSecond()
-                self.editing = false
+                if self.hour != 0 || self.minute != 0 {
+                    self.second = self.toSecond()
+                    self.editing = false
+                }
             }
             .offset(x: 4, y: 44)
             
