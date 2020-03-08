@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "EditView.toHrMin():EditView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.second">
+            </PersistentString>
+            <PersistentString
+               value = "self.hour">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

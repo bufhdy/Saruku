@@ -1,0 +1,374 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		146335B5241110C9006E6B7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146335B4241110C9006E6B7F /* AppDelegate.swift */; };
+		146335B7241110C9006E6B7F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146335B6241110C9006E6B7F /* ContentView.swift */; };
+		146335B9241110C9006E6B7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146335B8241110C9006E6B7F /* Assets.xcassets */; };
+		146335BC241110C9006E6B7F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146335BB241110C9006E6B7F /* Preview Assets.xcassets */; };
+		146335BF241110C9006E6B7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 146335BD241110C9006E6B7F /* Main.storyboard */; };
+		14E027D924149AC2004CA423 /* PrefsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E027D824149AC2004CA423 /* PrefsView.swift */; };
+		14FCA58224114CFB00860F8D /* ItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FCA58124114CFB00860F8D /* ItemSource.swift */; };
+		14FCA58424114E0300860F8D /* AppItemData.json in Resources */ = {isa = PBXBuildFile; fileRef = 14FCA58324114E0300860F8D /* AppItemData.json */; };
+		14FCA5862411DB9800860F8D /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FCA5852411DB9800860F8D /* EditView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		146335B1241110C9006E6B7F /* Saruku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saruku.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		146335B4241110C9006E6B7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		146335B6241110C9006E6B7F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		146335B8241110C9006E6B7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		146335BB241110C9006E6B7F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		146335BE241110C9006E6B7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		146335C0241110C9006E6B7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		146335C1241110C9006E6B7F /* Saruku.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Saruku.entitlements; sourceTree = "<group>"; };
+		14E027D824149AC2004CA423 /* PrefsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsView.swift; sourceTree = "<group>"; };
+		14FCA58124114CFB00860F8D /* ItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSource.swift; sourceTree = "<group>"; };
+		14FCA58324114E0300860F8D /* AppItemData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppItemData.json; sourceTree = SOURCE_ROOT; };
+		14FCA5852411DB9800860F8D /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		146335AE241110C9006E6B7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		146335A8241110C9006E6B7F = {
+			isa = PBXGroup;
+			children = (
+				146335B3241110C9006E6B7F /* Saruku */,
+				146335B2241110C9006E6B7F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		146335B2241110C9006E6B7F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				146335B1241110C9006E6B7F /* Saruku.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		146335B3241110C9006E6B7F /* Saruku */ = {
+			isa = PBXGroup;
+			children = (
+				146335B4241110C9006E6B7F /* AppDelegate.swift */,
+				146335B6241110C9006E6B7F /* ContentView.swift */,
+				14FCA5852411DB9800860F8D /* EditView.swift */,
+				14E027D824149AC2004CA423 /* PrefsView.swift */,
+				14FCA58324114E0300860F8D /* AppItemData.json */,
+				14FCA58124114CFB00860F8D /* ItemSource.swift */,
+				146335B8241110C9006E6B7F /* Assets.xcassets */,
+				146335BD241110C9006E6B7F /* Main.storyboard */,
+				146335C0241110C9006E6B7F /* Info.plist */,
+				146335C1241110C9006E6B7F /* Saruku.entitlements */,
+				146335BA241110C9006E6B7F /* Preview Content */,
+			);
+			path = Saruku;
+			sourceTree = "<group>";
+		};
+		146335BA241110C9006E6B7F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				146335BB241110C9006E6B7F /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		146335B0241110C9006E6B7F /* Saruku */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 146335C4241110C9006E6B7F /* Build configuration list for PBXNativeTarget "Saruku" */;
+			buildPhases = (
+				146335AD241110C9006E6B7F /* Sources */,
+				146335AE241110C9006E6B7F /* Frameworks */,
+				146335AF241110C9006E6B7F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Saruku;
+			productName = Saruku;
+			productReference = 146335B1241110C9006E6B7F /* Saruku.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		146335A9241110C9006E6B7F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Minai Toto";
+				TargetAttributes = {
+					146335B0241110C9006E6B7F = {
+						CreatedOnToolsVersion = 11.3;
+					};
+				};
+			};
+			buildConfigurationList = 146335AC241110C9006E6B7F /* Build configuration list for PBXProject "Saruku" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 146335A8241110C9006E6B7F;
+			productRefGroup = 146335B2241110C9006E6B7F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				146335B0241110C9006E6B7F /* Saruku */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		146335AF241110C9006E6B7F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				146335BF241110C9006E6B7F /* Main.storyboard in Resources */,
+				146335BC241110C9006E6B7F /* Preview Assets.xcassets in Resources */,
+				14FCA58424114E0300860F8D /* AppItemData.json in Resources */,
+				146335B9241110C9006E6B7F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		146335AD241110C9006E6B7F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14E027D924149AC2004CA423 /* PrefsView.swift in Sources */,
+				146335B7241110C9006E6B7F /* ContentView.swift in Sources */,
+				14FCA58224114CFB00860F8D /* ItemSource.swift in Sources */,
+				14FCA5862411DB9800860F8D /* EditView.swift in Sources */,
+				146335B5241110C9006E6B7F /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		146335BD241110C9006E6B7F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				146335BE241110C9006E6B7F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		146335C2241110C9006E6B7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		146335C3241110C9006E6B7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		146335C5241110C9006E6B7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Saruku/Saruku.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Saruku/Preview Content\"";
+				DEVELOPMENT_TEAM = WP2TDFSJS9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Saruku.xcodeproj/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = Saruku/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cut-and-go.Saruku";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		146335C6241110C9006E6B7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Saruku/Saruku.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Saruku/Preview Content\"";
+				DEVELOPMENT_TEAM = WP2TDFSJS9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Saruku.xcodeproj/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = Saruku/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cut-and-go.Saruku";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		146335AC241110C9006E6B7F /* Build configuration list for PBXProject "Saruku" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				146335C2241110C9006E6B7F /* Debug */,
+				146335C3241110C9006E6B7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		146335C4241110C9006E6B7F /* Build configuration list for PBXNativeTarget "Saruku" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				146335C5241110C9006E6B7F /* Debug */,
+				146335C6241110C9006E6B7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 146335A9241110C9006E6B7F /* Project object */;
+}
