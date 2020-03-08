@@ -7,29 +7,24 @@
 //
 
 import SwiftUI
-import HotKey
-import Carbon
 import LaunchAtLogin
 
-struct ToggleModel {
-    var value: Bool {
-        willSet {
-            LaunchAtLogin.isEnabled = !value
-            print("\(LaunchAtLogin.isEnabled)")
-        }
+struct LaunchAtLoginToggle {
+    var value: Bool = LaunchAtLogin.isEnabled {
+        willSet { LaunchAtLogin.isEnabled = !value }
     }
 }
 
 struct PrefsView: View {
     var window: NSWindow!
     @State var prefsWindowDelegate = WindowsDelegate()
+    @State var launchAtLoginModel = LaunchAtLoginToggle()
     
-    @State var launchAtLogin: Bool = false
-    @State var launchAtLoginModel = ToggleModel(value: LaunchAtLogin.isEnabled)
+    @State var tabIndex: Int = 0
     
     var body: some View {
         VStack(spacing: 0) {
-            TabView {
+            TabView(selection: $tabIndex) {
                 GeneralView()
                     .tabItem({ Text("General") })
                     .tag(0)
@@ -83,19 +78,7 @@ struct PrefsView: View {
 
 struct GeneralView: View {
     @State var language = 0
-    @State var shortcutTitle: String = "" // "Option+Command+Z"
-    
-//    func register() {
-//        self.unregister()
-//    }
-//    
-//    func unregister() {
-//        let appDelegate = NSApplication.shared.delegate as! AppDelegate
-//        // appDelegate.hotKey = nil
-//        self.shortcutTitle = ""
-//        
-//        Storage.remove("globalKeybind.json", from: .documents)
-//    }
+    @State var shortcutTitle: String = ""
     
     var body: some View {
         Form {
@@ -112,7 +95,6 @@ struct GeneralView: View {
             }
             
             Section {
-                Text("Hello, General!")
                 HStack {
                     Button(action: {}) {
                         Text("Set Shortcut")
@@ -125,17 +107,10 @@ struct GeneralView: View {
         }
         .padding()
     }
-    
-//    init() {
-//        if Storage.fileExists("globalKeybind.json", in: .documents) {
-//            // let globalKeybinds = Storage.retrieve("globalKeybind.json", from: .documents, as: GlobalKeybindPreferences.self)
-//        }
-//    }
 }
 
 struct CustomView: View {
     @State var theme = 0
-    @State var shortcut: String = "" // "Option+Command+Z"
     
     var body: some View {
         Form {
@@ -161,7 +136,6 @@ struct ColourBar: View {
     var body: some View {
         HStack(spacing: 8) {
             Text(name)
-                .font(.custom("Acme", size: 15))
                 .foregroundColor(colours[1])
             
             Spacer()
@@ -196,4 +170,3 @@ struct PrefsView_Previews: PreviewProvider {
             .colorScheme(.light)
     }
 }
-
