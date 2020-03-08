@@ -12,6 +12,9 @@ struct AboutView: View {
     var window: NSWindow!
     @State var aboutWindowDelegate = WindowsDelegate()
     
+    let version: String
+    let build: String
+    
     var body: some View {
         VStack(spacing: 0) {
             VStack {
@@ -23,7 +26,7 @@ struct AboutView: View {
                 Text("Saruku")
                     .font(.custom("Acme", size: 18))
                     .foregroundColor(Color("Newspaper"))
-                Text("Version 0.1 (4)")
+                Text("Version \(self.version) (\(self.build))")
                     .font(.system(.caption))
                 
                 Spacer().frame(height: 10)
@@ -53,6 +56,9 @@ struct AboutView: View {
     }
     
     init() {
+        self.version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+        self.build = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
+        
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 300, height: 300),
             styleMask: [.closable, .fullSizeContentView, .titled],
