@@ -10,17 +10,18 @@ import SwiftUI
 
 struct PrefsView: View {
     var window: NSWindow!
-    @State var prefsWindowDelegate = PrefsWindowDelegate()
+    @State var prefsWindowDelegate = WindowsDelegate()
     
     var body: some View {
         Text("Hello, Prefs!")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color("Vintage"))
     }
     
     init() {
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 400, height: 300),
-            styleMask: [.borderless, .closable, .fullSizeContentView, .titled, .utilityWindow],
+            styleMask: [.borderless, .closable, .fullSizeContentView, .titled],
             backing: .buffered, defer: false)
         window.title = "Preferences"
         window.center()
@@ -28,14 +29,6 @@ struct PrefsView: View {
         window.delegate = prefsWindowDelegate
         prefsWindowDelegate.windowIsOpen = true
         window.makeKeyAndOrderFront(nil)
-    }
-    
-    class PrefsWindowDelegate: NSObject, NSWindowDelegate {
-        var windowIsOpen = false
-        
-        func windowWillClose(_ notification: Notification) {
-            windowIsOpen = false
-        }
     }
 }
 

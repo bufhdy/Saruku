@@ -13,6 +13,8 @@
 		146335BC241110C9006E6B7F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146335BB241110C9006E6B7F /* Preview Assets.xcassets */; };
 		146335BF241110C9006E6B7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 146335BD241110C9006E6B7F /* Main.storyboard */; };
 		1487D35C2414CEC50019D49D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1487D35B2414CEC50019D49D /* README.md */; };
+		1487D3612414D62E0019D49D /* Acme.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1487D3602414D62E0019D49D /* Acme.ttf */; };
+		1487D3632414D6AA0019D49D /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1487D3622414D6AA0019D49D /* AboutView.swift */; };
 		14E027D924149AC2004CA423 /* PrefsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E027D824149AC2004CA423 /* PrefsView.swift */; };
 		14E027DB2414B92F004CA423 /* AppItemData.json in Resources */ = {isa = PBXBuildFile; fileRef = 14E027DA2414B92F004CA423 /* AppItemData.json */; };
 		14FCA58224114CFB00860F8D /* ItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FCA58124114CFB00860F8D /* ItemSource.swift */; };
@@ -29,6 +31,8 @@
 		146335C0241110C9006E6B7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		146335C1241110C9006E6B7F /* Saruku.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Saruku.entitlements; sourceTree = "<group>"; };
 		1487D35B2414CEC50019D49D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1487D3602414D62E0019D49D /* Acme.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Acme.ttf; sourceTree = "<group>"; };
+		1487D3622414D6AA0019D49D /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		14E027D824149AC2004CA423 /* PrefsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsView.swift; sourceTree = "<group>"; };
 		14E027DA2414B92F004CA423 /* AppItemData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = AppItemData.json; path = Saruku/Data/AppItemData.json; sourceTree = SOURCE_ROOT; };
 		14FCA58124114CFB00860F8D /* ItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSource.swift; sourceTree = "<group>"; };
@@ -66,6 +70,7 @@
 		146335B3241110C9006E6B7F /* Saruku */ = {
 			isa = PBXGroup;
 			children = (
+				1487D35F2414D62E0019D49D /* Fonts */,
 				146335B4241110C9006E6B7F /* AppDelegate.swift */,
 				1487D35A2414CD640019D49D /* Data */,
 				14E027E02414CCF8004CA423 /* Views */,
@@ -95,12 +100,21 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		1487D35F2414D62E0019D49D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1487D3602414D62E0019D49D /* Acme.ttf */,
+			);
+			path = Fonts;
+			sourceTree = SOURCE_ROOT;
+		};
 		14E027E02414CCF8004CA423 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				146335B6241110C9006E6B7F /* ContentView.swift */,
 				14FCA5852411DB9800860F8D /* EditView.swift */,
 				14E027D824149AC2004CA423 /* PrefsView.swift */,
+				1487D3622414D6AA0019D49D /* AboutView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -163,6 +177,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1487D3612414D62E0019D49D /* Acme.ttf in Resources */,
 				146335BF241110C9006E6B7F /* Main.storyboard in Resources */,
 				146335BC241110C9006E6B7F /* Preview Assets.xcassets in Resources */,
 				1487D35C2414CEC50019D49D /* README.md in Resources */,
@@ -182,6 +197,7 @@
 				146335B7241110C9006E6B7F /* ContentView.swift in Sources */,
 				14FCA58224114CFB00860F8D /* ItemSource.swift in Sources */,
 				14FCA5862411DB9800860F8D /* EditView.swift in Sources */,
+				1487D3632414D6AA0019D49D /* AboutView.swift in Sources */,
 				146335B5241110C9006E6B7F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
