@@ -31,7 +31,7 @@ struct AboutView: View {
                 Text("Credits")
                     .font(.custom("Acme", size: 15))
                     .foregroundColor(Color("Newspaper"))
-                Text("Source Code on GitHub")
+                Text("Source code on GitHub")
                     .font(.system(.caption))
                 Text("Typeface: Acme by Huerta Tipográfica")
                     .font(.system(.caption))
@@ -41,14 +41,12 @@ struct AboutView: View {
                 Text("Copyright © 2020 Toto Minai")
                     .font(.custom("Acme", size: 12))
                     .foregroundColor(Color("Newspaper"))
-            }.frame(height: 300)
-            
-            
+            }.frame(height: 278)
             
             Rectangle()
                 .foregroundColor(.clear)
-                .background(LinearGradient(gradient: Gradient(colors: [Color(hex: 0xFF2B5F, alpha: 0), Color(hex: 0xFF2B5F, alpha: 0.6)]), startPoint: .top, endPoint: .bottom))
-                .frame(height: 20)
+                .background(LinearGradient(gradient: Gradient(colors: [Color("Cherry").opacity(0), Color("Cherry").opacity(0.6)]), startPoint: .top, endPoint: .bottom))
+                .frame(height: 22)
         }
         .background(Color("Vintage"))
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -56,9 +54,14 @@ struct AboutView: View {
     
     init() {
         window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 300, height: 320),
+            contentRect: NSRect(x: 0, y: 0, width: 300, height: 300),
             styleMask: [.closable, .fullSizeContentView, .titled],
             backing: .buffered, defer: false)
+        window.titlebarAppearsTransparent = true
+        window.isMovableByWindowBackground = true
+        window.backgroundColor = NSColor(named: "Vintage")
+        window.standardWindowButton(.miniaturizeButton)?.isHidden = true
+        window.standardWindowButton(.zoomButton)?.isHidden = true
         window.center()
         window.contentView = NSHostingView(rootView: self)
         window.delegate = aboutWindowDelegate
