@@ -8,7 +8,8 @@ Saruku is a macOS menu bar app that provides cool down time for SNS apps to help
 
 ## To-dos
 
--[ ] Settings
--[ ] More joyful animations
--[ ] Efficient timer
+⚠️ Efficient timer
 
+🔰 Settings
+
+😖 More joyful animations
