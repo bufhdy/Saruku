@@ -24,76 +24,94 @@ struct EditView: View {
         ZStack(alignment: .topLeading) {
             ZStack {
                 Circle()
-                    .foregroundColor(Color.red)
+                    .foregroundColor(Color("Cherry"))
                     .overlay(Circle().stroke(Color.black.opacity(0.3), lineWidth: 0.5))
             }
-                .frame(width: 12, height: 12)
-                .onTapGesture {
-                    self.editing = false
-                }
-                .offset(x: 6, y: 6)
+            .frame(width: 12, height: 12)
+            .onTapGesture {
+                self.editing = false
+            }
+            .offset(x: 4, y: 4)
+            .animation(Animation.linear(duration: 0.1))
+            .opacity(submittingMoveState == .zero ? 1 : 0)
+            
+            
+            SlideBgView(isFirst: isFirst)
+                .animation(Animation.linear(duration: 0.1))
+                .opacity(submittingMoveState != .zero ? 1 : 0)
+                
+        
+            SlideBgView(isFirst: isFirst)
+                .offset(x: 40)
+                .animation(Animation.linear(duration: 0.1))
+                .opacity(rightEditing ? 1 : 0)
+                
             
             ZStack {
                 Circle()
-                    .foregroundColor(Color.green)
+                    .foregroundColor(Color("Sorrow"))
                     .overlay(Circle().stroke(Color.black.opacity(0.3), lineWidth: 0.5))
             }
-                .frame(width: 12, height: 12)
-                .offset(y: submittingMoveState.height)
-                .gesture(DragGesture()
-                    .onChanged { value in
-                        self.submittingMoveState = value.translation
-                        if self.submittingMoveState.height > 0 {
-                            self.submittingMoveState.height = 0
-                        }
-                        
-                        if self.submittingMoveState.height < -36 {
-                            self.submittingMoveState.height = -36
-                        }
-                        self.minute = Int(Double(self.submittingMoveState.height) * 59.0 / -36.0)
+            .frame(width: 12, height: 12)
+            .offset(y: submittingMoveState.height)
+            .gesture(DragGesture()
+                .onChanged { value in
+                    self.submittingMoveState = value.translation
+                    if self.submittingMoveState.height > 0 {
+                        self.submittingMoveState.height = 0
                     }
-                    .onEnded { _ in
-                        self.submittingMoveState = .zero
-                        self.editing = false
+                    
+                    if self.submittingMoveState.height < -36 {
+                        self.submittingMoveState.height = -36
                     }
-                )
-                .onTapGesture {
-                    self.second = self.toSecond()
+                    self.minute = Int(Double(self.submittingMoveState.height) * 59.0 / -36.0)
+                }
+                .onEnded { _ in
+                    self.submittingMoveState = .zero
                     self.editing = false
                 }
-                .offset(x: 6, y: 42)
+            )
+            .onTapGesture {
+                self.second = self.toSecond()
+                self.editing = false
+            }
+            .offset(x: 4, y: 44)
             
             HStack(spacing: 0) {
                 Spacer()
                 
                 VStack(spacing: 0) {
                     Stepper(value: $hour, in: 0...9) { Text("") }
-                    .frame(width: 13, height: 21, alignment: .trailing)
-                    .clipShape(Rectangle())
+                        .frame(width: 13, height: 21, alignment: .trailing)
+                        .clipShape(Rectangle())
                     
                     Spacer().frame(height: 3)
                     
                     Text("\(hour)")
-                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                        .font(.custom("Acme", size: 12))
+                        .foregroundColor(Color("Sorrow"))
                         .frame(width: 20)
                         .animation(nil)
                     Text("H")
-                        .font(.system(size: 12, weight: .regular, design: .rounded))
+                        .font(.custom("Acme", size: 12))
+                        .foregroundColor(Color("Newspaper"))
                 }.frame(width: 20)
                 
                 VStack(spacing: 0) {
-                    Stepper(value: $minute, in: 0...60) { Text("") }
-                    .frame(width: 13, height: 21, alignment: .trailing)
-                    .clipShape(Rectangle())
+                    Stepper(value: $minute, in: 0...60) { Text("").foregroundColor(Color("Newspaper")) }
+                        .frame(width: 13, height: 21, alignment: .trailing)
+                        .clipShape(Rectangle())
                     
                     Spacer().frame(height: 3)
                     
                     Text("\(minute)")
-                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                        .font(.custom("Acme", size: 12))
+                        .foregroundColor(Color("Sorrow"))
                         .frame(width: 20)
                         .animation(nil)
                     Text("M")
-                        .font(.system(size: 12, weight: .regular, design: .rounded))
+                        .font(.custom("Acme", size: 12))
+                        .foregroundColor(Color("Newspaper"))
                 }
                 .frame(width: 20)
                 .opacity(rightEditing ? 0 : 1)
