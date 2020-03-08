@@ -14,10 +14,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var popover: NSPopover!
     var statusBarItem: NSStatusItem!
     var statusBarMenu: NSMenu!
-    var prefsWindow: NSWindow!
-    var windowIsOpen = false
-    
     var prefsView: PrefsView?
+    
+    var windowIsOpen = false
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the popover
@@ -31,7 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         // Create the status bar
         statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         statusBarItem.button?.image = NSImage(named: "StatusIcon")
-        statusBarItem.button?.action = #selector(statusBarButtonClicked(sender:))
+        statusBarItem.button?.action = #selector(statusBarButtonClicked(_:))
         statusBarItem.button?.sendAction(on: [.leftMouseUp, .rightMouseUp])
         
         // Create the status bar menu
@@ -48,7 +47,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
     }
     
-    @objc func statusBarButtonClicked(sender: NSStatusBarButton) {
+    @objc func statusBarButtonClicked(_ sender: NSStatusBarButton) {
         let event = NSApp.currentEvent!
         if event.type == NSEvent.EventType.rightMouseUp {
             statusBarItem.menu = statusBarMenu
@@ -66,20 +65,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             self.popover.contentViewController?.view.window?.becomeKey()
         }
     }
-
-    @objc func quitApp(_ sender: AnyObject?) {
-        NSApp.terminate(self)
-    }
-
+    
+    // Reset status bar
     @objc func menuDidClose(_ menu: NSMenu) {
         statusBarItem.menu = nil
     }
     
+    // Menu actions
     @objc func openPrefsWindow(_ sender: Any) {
         if let prefsView = prefsView, prefsView.prefsWindowDelegate.windowIsOpen {
             prefsView.window.makeKeyAndOrderFront(self)
         } else {
             prefsView = PrefsView()
         }
+    }
+
+    @objc func quitApp(_ sender: Any) {
+        NSApp.terminate(self)
     }
 }
