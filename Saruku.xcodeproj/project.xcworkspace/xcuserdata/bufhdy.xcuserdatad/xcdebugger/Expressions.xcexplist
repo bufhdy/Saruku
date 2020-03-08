@@ -13,5 +13,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "AppDelegate.openPrefs(_:):AppDelegate.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.windowIsOpen">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

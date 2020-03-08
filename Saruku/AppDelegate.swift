@@ -14,8 +14,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var popover: NSPopover!
     var statusBarItem: NSStatusItem!
     var statusBarMenu: NSMenu!
+    var prefsWindow: NSWindow!
+    var windowIsOpen = false
     
-    var perferenceWindow: NSWindow!
+    var prefsView: PrefsView?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the popover
@@ -36,12 +38,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         statusBarMenu = NSMenu()
         statusBarMenu.delegate = self
         statusBarMenu.addItem(withTitle: "Preferences...",
-                              action: nil,
+                              action: #selector(openPrefsWindow(_:)),
                               keyEquivalent: ",")
         statusBarMenu.addItem(NSMenuItem.separator())
         statusBarMenu.addItem(withTitle: "Quit Saruku",
                               action: #selector(quitApp(_:)),
                               keyEquivalent: "q")
+        
+        
     }
     
     @objc func statusBarButtonClicked(sender: NSStatusBarButton) {
@@ -62,7 +66,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             self.popover.contentViewController?.view.window?.becomeKey()
         }
     }
-    
 
     @objc func quitApp(_ sender: AnyObject?) {
         NSApp.terminate(self)
@@ -70,5 +73,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     @objc func menuDidClose(_ menu: NSMenu) {
         statusBarItem.menu = nil
+    }
+    
+    @objc func openPrefsWindow(_ sender: Any) {
+        if let prefsView = prefsView, prefsView.prefsWindowDelegate.windowIsOpen {
+            prefsView.window.makeKeyAndOrderFront(self)
+        } else {
+            prefsView = PrefsView()
+        }
     }
 }
