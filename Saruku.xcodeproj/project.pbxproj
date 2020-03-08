@@ -19,8 +19,6 @@
 		1487D3672414F5890019D49D /* Backyard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1487D3662414F5890019D49D /* Backyard.swift */; };
 		149B73042415339300DDEBD7 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 149B73032415339300DDEBD7 /* Cartfile */; };
 		149B73072415347200DDEBD7 /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = 149B73062415347200DDEBD7 /* HotKey */; };
-		149B73092415376100DDEBD7 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149B73082415376100DDEBD7 /* Storage.swift */; };
-		149B730B2415387C00DDEBD7 /* GlobalKeybindPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149B730A2415387C00DDEBD7 /* GlobalKeybindPreferences.swift */; };
 		149B732F2415473400DDEBD7 /* LaunchAtLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149B732D2415472000DDEBD7 /* LaunchAtLogin.framework */; };
 		149B73302415473400DDEBD7 /* LaunchAtLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 149B732D2415472000DDEBD7 /* LaunchAtLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14E027D924149AC2004CA423 /* PrefsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E027D824149AC2004CA423 /* PrefsView.swift */; };
@@ -58,8 +56,6 @@
 		1487D3642414F53C0019D49D /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		1487D3662414F5890019D49D /* Backyard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backyard.swift; sourceTree = "<group>"; };
 		149B73032415339300DDEBD7 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
-		149B73082415376100DDEBD7 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
-		149B730A2415387C00DDEBD7 /* GlobalKeybindPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalKeybindPreferences.swift; sourceTree = "<group>"; };
 		149B732D2415472000DDEBD7 /* LaunchAtLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LaunchAtLogin.framework; path = Carthage/Build/Mac/LaunchAtLogin.framework; sourceTree = "<group>"; };
 		14E027D824149AC2004CA423 /* PrefsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsView.swift; sourceTree = "<group>"; };
 		14E027DA2414B92F004CA423 /* AppItemData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = AppItemData.json; path = Saruku/Data/AppItemData.json; sourceTree = SOURCE_ROOT; };
@@ -83,10 +79,10 @@
 		146335A8241110C9006E6B7F = {
 			isa = PBXGroup;
 			children = (
-				149B732D2415472000DDEBD7 /* LaunchAtLogin.framework */,
 				149B73032415339300DDEBD7 /* Cartfile */,
 				1487D35B2414CEC50019D49D /* README.md */,
 				146335B3241110C9006E6B7F /* Saruku */,
+				149B732D2415472000DDEBD7 /* LaunchAtLogin.framework */,
 				146335B2241110C9006E6B7F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,8 +108,6 @@
 				146335C0241110C9006E6B7F /* Info.plist */,
 				146335C1241110C9006E6B7F /* Saruku.entitlements */,
 				146335BA241110C9006E6B7F /* Preview Content */,
-				149B73082415376100DDEBD7 /* Storage.swift */,
-				149B730A2415387C00DDEBD7 /* GlobalKeybindPreferences.swift */,
 			);
 			path = Saruku;
 			sourceTree = "<group>";
@@ -260,13 +254,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				149B730B2415387C00DDEBD7 /* GlobalKeybindPreferences.swift in Sources */,
 				14E027D924149AC2004CA423 /* PrefsView.swift in Sources */,
 				146335B7241110C9006E6B7F /* ContentView.swift in Sources */,
 				1487D3672414F5890019D49D /* Backyard.swift in Sources */,
 				14FCA58224114CFB00860F8D /* ItemSource.swift in Sources */,
 				1487D3652414F53C0019D49D /* Components.swift in Sources */,
-				149B73092415376100DDEBD7 /* Storage.swift in Sources */,
 				14FCA5862411DB9800860F8D /* EditView.swift in Sources */,
 				1487D3632414D6AA0019D49D /* AboutView.swift in Sources */,
 				146335B5241110C9006E6B7F /* AppDelegate.swift in Sources */,
