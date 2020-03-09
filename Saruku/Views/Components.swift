@@ -35,7 +35,7 @@ struct ItemBackground: View {
     }
 }
 
-struct SlideBgView: View {
+struct SliderBackgroundView: View {
     let isFirst: Bool
 
     var body: some View {
@@ -66,7 +66,6 @@ struct SlideBgView: View {
 
 
 struct MoveBarView: View {
-    
     var body: some View {
         ZStack(alignment: .top) {
             VStack(spacing: 0) {
@@ -96,13 +95,3 @@ struct MoveBarView: View {
         .frame(height: 28)
     }
 }
-
-struct AddView_Previews: PreviewProvider {
-    static var previews: some View {
-        MoveBarView()
-            .colorScheme(.light)
-    }
-}
-
-
-

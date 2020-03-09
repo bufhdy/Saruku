@@ -9,15 +9,23 @@
 import SwiftUI
 
 struct EditView: View {
+    @Binding var items: [AppItem]
+    let index: Int
+    
     @Binding var hour: Int
     @State var minute: Int
+    @Binding var second: Int
+    
     @Binding var editingHour: Bool
     @Binding var editing: Bool
-    @Binding var second: Int
-    @State var submittingMoveState: CGSize = .zero
-    let isFirst: Bool
     
-    func toSecond() -> Int { return hour * 3600 + minute * 60 }
+    @State private var minuteEditorYOffset: CGFloat = 0
+    
+    private func setSecond() {
+        self.second = hour * 3600 + minute * 60
+        self.items[self.index].duration = self.second
+        self.editing = false
+    }
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -27,57 +35,55 @@ struct EditView: View {
                     .overlay(Circle().stroke(Color.black.opacity(0.3), lineWidth: 0.5))
             }
             .frame(width: 11.5, height: 11.5)
-            .onTapGesture {
+            .onTapGesture {  // Close without saving changes, back to original hour and minute
+                self.hour = self.items[self.index].duration / 3600
+                self.minute = self.items[self.index].duration % 3600 / 60
+                
                 self.editing = false
             }
             .offset(x: 4.25, y: 4.25)
+            .opacity(minuteEditorYOffset == 0 ? 1 : 0)
             .animation(Animation.linear(duration: 0.1))
-            .opacity(submittingMoveState == .zero ? 1 : 0)
             
-            
-            SlideBgView(isFirst: isFirst)
+            SliderBackgroundView(isFirst: index == 0)  // For minute editor
                 .animation(Animation.linear(duration: 0.1))
-                .opacity(submittingMoveState != .zero ? 1 : 0)
-                
+                .opacity(minuteEditorYOffset != 0 ? 1 : 0)
         
-            SlideBgView(isFirst: isFirst)
+            SliderBackgroundView(isFirst: index == 0)  // For hour editor
                 .offset(x: 40)
                 .animation(Animation.linear(duration: 0.1))
                 .opacity(editingHour ? 1 : 0)
-                
             
             ZStack {
                 Circle()
-                    .foregroundColor(self.hour != 0 || self.minute != 0 ? Color("Sorrow") : Color("Newspaper").opacity(0.6))
-                    .overlay(Circle().stroke(Color.black.opacity(0.3), lineWidth: 0.5))
+                    .foregroundColor(self.hour != 0 || self.minute != 0 ?
+                        Color("Sorrow") :
+                        Color("Newspaper").opacity(0.6))  // TODO: Need to be set gray scale
                     .animation(.linear)
+                    .overlay(Circle().stroke(Color.black.opacity(0.3), lineWidth: 0.5))
             }
             .frame(width: 11.5, height: 11.5)
-            .offset(y: submittingMoveState.height)
+            .offset(y: minuteEditorYOffset)
             .gesture(DragGesture()
                 .onChanged { value in
-                    self.submittingMoveState = value.translation
-                    if self.submittingMoveState.height > 0 {
-                        self.submittingMoveState.height = 0
+                    self.minuteEditorYOffset = value.translation.height
+                    if self.minuteEditorYOffset > 0 {
+                        self.minuteEditorYOffset = 0
+                    }
+                    if self.minuteEditorYOffset < -40 {
+                        self.minuteEditorYOffset = -40
                     }
                     
-                    if self.submittingMoveState.height < -40 {
-                        self.submittingMoveState.height = -40
-                    }
-                    self.minute = Int(Double(self.submittingMoveState.height) * 59.0 / -40.0)
+                    self.minute = Int(Double(self.minuteEditorYOffset) * 59.0 / -40.0)
                 }
                 .onEnded { _ in
-                    self.submittingMoveState = .zero
-                    if self.hour != 0 || self.minute != 0 {
-                        self.editing = false
-                    }
+                    self.minuteEditorYOffset = 0
+                    
+                    if self.hour != 0 || self.minute != 0 { self.setSecond() }
                 }
             )
             .onTapGesture {
-                if self.hour != 0 || self.minute != 0 {
-                    self.second = self.toSecond()
-                    self.editing = false
-                }
+                if self.hour != 0 || self.minute != 0 { self.setSecond() }
             }
             .offset(x: 4.25, y: 44.25)
             
@@ -85,7 +91,7 @@ struct EditView: View {
                 Spacer()
                 
                 VStack(spacing: 0) {
-                    Stepper(value: $hour, in: 0...9) { Text("") }
+                    Stepper(value: $hour, in: 0...10) { Text("") }  // TODO: Better stepper and change the colour
                         .frame(width: 13, height: 21, alignment: .trailing)
                         .clipShape(Rectangle())
                     
@@ -95,14 +101,14 @@ struct EditView: View {
                         .font(.custom("Acme", size: 12))
                         .foregroundColor(Color("Sorrow"))
                         .frame(width: 20)
-                        .animation(nil)
+                        .animation(nil)  // Disable animation to avoid seeing frame changes
                     Text("H")
                         .font(.custom("Acme", size: 12))
                         .foregroundColor(Color("Newspaper"))
                 }.frame(width: 20)
                 
                 VStack(spacing: 0) {
-                    Stepper(value: $minute, in: 0...60) { Text("").foregroundColor(Color("Newspaper")) }
+                    Stepper(value: $minute, in: 0...59) { Text("").foregroundColor(Color("Newspaper")) }
                         .frame(width: 13, height: 21, alignment: .trailing)
                         .clipShape(Rectangle())
                     
@@ -123,7 +129,7 @@ struct EditView: View {
             }
             .frame(width: 60, height: 60)
         }
-        .background(ItemBackground(isFirst: isFirst, color: Color("Vintage")))
+        .background(ItemBackground(isFirst: index == 0, color: Color("Vintage")))
         .animation(Animation.linear(duration: 0.1))
     }
 }

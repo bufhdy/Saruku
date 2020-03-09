@@ -76,7 +76,10 @@ struct ContentView: View {
                 VStack(spacing: 0) {
                     ZStack {
                         // Single item with icon and close, edit button
-                        AppItemView(items: self.$items.source, at: index)
+                        AppItemView(items: self.$items.source,
+                                    index: index,
+                                    hour: self.items.source[index].duration / 3600,
+                                    icon: getIcon(input: self.items.source[index].name, size: 256)!)
                         
                         // Seperator between items
                         Rectangle()
@@ -140,8 +143,11 @@ struct ContentView: View {
 struct AppItemView: View {
     @Binding var items: [AppItem]
     let index: Int
+    @State var hour: Int
+    let icon: Data
     
-    @State private var timeRemaining = 0
+    // Timer
+    @State private var second = 0
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     @State private var showDeleteButton = false
@@ -150,12 +156,8 @@ struct AppItemView: View {
     @State private var editing = false
     @State private var editingHour = false
     @State private var hourEditorYOffset: CGFloat = 0
-    
-    @State private var hour: Int = 0
-    
-    var icon: Data? = nil
-    
-    func openApp(_ name: String) {
+   
+    private func openApp(_ name: String) {
         let url = NSURL(fileURLWithPath: "/Applications/" + name + ".app", isDirectory: true) as URL
         
         let path = "/bin"
@@ -169,56 +171,59 @@ struct AppItemView: View {
     
     var body: some View {
         ZStack(alignment: .topLeading) {
-            Image(nsImage: NSImage(data: self.icon!)!)
+            Image(nsImage: NSImage(data: self.icon)!)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .saturation(timeRemaining > 1 ? 0 : 1)
+                .saturation(second == 0 ? 1 : 0)
+                .animation(Animation.linear(duration: 0.8))
                 .frame(width: 42, height: 42)
                 .onReceive(timer) { _ in
-                    if self.timeRemaining > 0 { self.timeRemaining -= 1 }
-            }
-            .onTapGesture {
-                self.timeRemaining = self.items[self.index].duration
-                self.openApp(self.items[self.index].name)
-            }
-            .animation(Animation.linear(duration: 0.8))
-            .frame(width: 60, height: 60)
+                    if self.second > 0 { self.second -= 1 }
+                }
+                .onTapGesture {
+                    self.second = self.items[self.index].duration
+                    self.openApp(self.items[self.index].name)
+                }
+                .frame(width: 60, height: 60)
             
-            // Prevent click
-            if self.timeRemaining != 0 {
-                Color.black.opacity(0.0001)
-            }
-            Rectangle()
-                .frame(width: CGFloat(60) * (CGFloat(self.timeRemaining) / CGFloat(items[index].duration)),
+            // Add transparent layer to prevent click
+            if self.second != 0 { Color.black.opacity(0.0001) }
+            
+            ItemBackground(isFirst: index == 0, color: items[index].color.opacity(0.3))
+                .frame(width: CGFloat(60) * (CGFloat(self.second) / CGFloat(items[index].duration)),
                        height: 60,
                        alignment: .leading)
-                .foregroundColor(.clear)
-                .background(ItemBackground(isFirst: index == 0, color: items[index].color.opacity(0.3)))
             
             ZStack {
                 Circle()
                     .foregroundColor(Color("Cherry"))
                     .overlay(Circle().stroke(Color.black.opacity(0.3), lineWidth: 0.5))
             }
-                .frame(width: 11.5, height: 11.5)
-                .onHover { value in
-                    self.showDeleteButton = value
-                }
-                .opacity(showDeleteButton ? 1 : 0)
-                .animation(Animation.linear(duration: 0.1))
-                .onTapGesture {
-                    if self.timeRemaining != 0 {
-                        self.timeRemaining = 0
-                    } else {
-                        self.items.remove(at: self.index)
-                        if self.index == 0 && self.items.count == 0 {
-                            self.items.append(AppItem(name: "Saruku", theme: "FF2B5F", duration: 60))
-                        }
+            .frame(width: 11.5, height: 11.5)
+            .onHover { value in self.showDeleteButton = value }
+            .opacity(showDeleteButton ? 1 : 0)
+            .animation(Animation.linear(duration: 0.1))
+            .onTapGesture {
+                if self.second != 0 { self.second = 0 }  // Quit timer
+                else {  // Delete the item
+                    self.items.remove(at: self.index)
+                    if self.index == 0 && self.items.count == 0 {
+                        self.items.append(AppItem(
+                            name: "Saruku",
+                            theme: "FF2B5F",
+                            duration: 60))
                     }
                 }
-                .offset(x: 4.25, y: 4.25)
+            }
+            .offset(x: 4.25, y: 4.25)
             
-            EditView(hour: $hour, minute: items[index].duration % 3600 / 60, editingHour: $editingHour, editing: $editing, second: $items[index].duration, isFirst: index == 0)
+            EditView(items: $items,
+                     index: index,
+                     hour: $hour,
+                     minute: items[index].duration % 3600 / 60,
+                     second: $items[index].duration,
+                     editingHour: $editingHour,
+                     editing: $editing)
                 .opacity(editing ? 1 : 0)
                 .animation(Animation.linear(duration: 0.1))
             
@@ -226,55 +231,48 @@ struct AppItemView: View {
                 Circle()
                     .foregroundColor(Color("Sorrow"))
                     .overlay(Circle().stroke(Color.black.opacity(0.3), lineWidth: 0.5))
-                
-                // Text("x")
             }
             .frame(width: 11.5, height: 11.5)
-                .opacity(timeRemaining == 0 ? 1 : 0)
-                .onHover { value in
-                    self.showEditButton = self.editing ? self.editingHour : value
-                }
-                .opacity(showEditButton ? 1 : 0)
-                .animation(Animation.linear(duration: 0.1))
-                .offset(y: hourEditorYOffset)
-                .gesture(DragGesture()
-                    .onChanged { value in
-                        self.showEditButton = true
-                        self.editing = true
-                        self.editingHour = true
-                        self.hourEditorYOffset = value.translation.height
-                        if self.hourEditorYOffset > 0 {
-                            self.hourEditorYOffset = 0
-                        }
-                        
-                        if self.hourEditorYOffset < -40 {
-                            self.hourEditorYOffset = -40
-                        }
-                        self.hour = Int(self.hourEditorYOffset) / -4
-                    }
-                    .onEnded { _ in
-                        self.editingHour = false
+            .opacity(second == 0 ? 1 : 0)
+            .onHover { value in
+                self.showEditButton = self.editing ?
+                    self.editingHour :
+                    value
+            }
+            .opacity(showEditButton ? 1 : 0)
+            .offset(y: hourEditorYOffset)
+            .animation(Animation.linear(duration: 0.1))
+            .gesture(DragGesture()
+                .onChanged { value in
+                    self.showEditButton = true
+                    self.editing = true
+                    self.editingHour = true
+                    
+                    self.hourEditorYOffset = value.translation.height
+                    if self.hourEditorYOffset > 0 {  // Border
                         self.hourEditorYOffset = 0
-                        self.showEditButton = false
                     }
-                )
-                .onTapGesture {
-                    self.showEditButton = false
-                    self.editing.toggle()
+                    if self.hourEditorYOffset < -40 {
+                        self.hourEditorYOffset = -40
+                    }
+                    
+                    self.hour = Int(self.hourEditorYOffset) / -4
                 }
-                .offset(x: 44.25, y: 44.25)
+                .onEnded { _ in
+                    self.editingHour = false
+                    self.showEditButton = false
+                    
+                    self.hourEditorYOffset = 0
+                }
+            )
+            .onTapGesture {
+                self.editing = true
+                self.showEditButton = false
+            }
+            .offset(x: 44.25, y: 44.25)
         }
         .frame(width: 60, height: 60)
         .background(ItemBackground(isFirst: index == 0, color: Color("Vintage")))
-    }
-    
-    init(items: Binding<[AppItem]>, at index: Int) {
-        self._items = items
-        self.index = index
-        
-        guard let icon = getIcon(input: self.items[index].name, size: 256)
-        else { return }
-        self.icon = icon
     }
 }
 

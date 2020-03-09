@@ -9,7 +9,6 @@
 import SwiftUI
 import Foundation
 
-
 func getIcon(input: String, size: Int) -> Data? {
     let path = (
         input.contains(".") ?
