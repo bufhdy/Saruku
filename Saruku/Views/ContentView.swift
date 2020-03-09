@@ -193,6 +193,7 @@ struct AppItemView: View {
                 .frame(width: CGFloat(60) * (CGFloat(self.second) / CGFloat(items[index].duration)),
                        height: 60,
                        alignment: .leading)
+                .animation(.easeInOut)
             
             ZStack {
                 Circle()

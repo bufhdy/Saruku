@@ -162,8 +162,8 @@ struct CustomView: View {
                             .font(.custom("Acme", size: 15))
                             .foregroundColor(Color("Newspaper")),
                        content: {
-                        ColoursBar(name: "Blossom", colours: [Color("Vintage"), Color("Newspaper"), Color("Cherry"), Color("Sorrow")]).tag(0)
-                        Text("Nightmare").tag(1)
+                        ColoursBar(name: "Blossom", colours: [Color(hex: 0xFF2B5F), Color(hex: 0x1A1B15), Color(hex: 0x2570B9), Color(hex: 0xF9F3DF)]).tag(0)
+                        ColoursBar(name: "Cybernightmare", colours: [Color(hex: 0xF8FC55), Color(hex: 0xF8FBDC), Color(hex: 0xDD682D), Color(hex: 0x4B3111)]).tag(1)
                 })
             }
         }
@@ -178,7 +178,7 @@ struct ColoursBar: View {
     var body: some View {
         HStack(spacing: 8) {
             Text(name)
-                .foregroundColor(colours[1])
+                .foregroundColor(Color("Newspaper"))
             
             Spacer()
             
