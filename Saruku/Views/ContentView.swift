@@ -12,12 +12,32 @@ import Cocoa
 struct ContentView: View {
     @ObservedObject var items = ItemSource()
     @State var addBarState: CGFloat = 0
+    @State var removeAt: Int? = nil
+    
+    func contentHeight() -> CGFloat {
+        let base = CGFloat(items.source.count) * 65
+        let add = addBarState <= 0 ? 9 : 23
+        return base + CGFloat(add)
+    }
+    
+    func removeBlockOpacity(_ index: Int) -> Double {
+        if index == self.removeAt {
+            return 0.3
+        }
+        return 0
+    }
     
     var body: some View {
         VStack(spacing: 0) {
             ForEach(items.source.indices, id: \.self) { index in
                 VStack(spacing: 0) {
-                    AppItemView(item: self.$items.source[index], isFirst: index == 0)
+                    ZStack {
+                        AppItemView(item: self.$items.source[index], isFirst: index == 0)
+                        
+                        Color("Sorrow")
+                            .opacity(self.removeBlockOpacity(index))
+                            //.animation(.linear)
+                    }
                     
                     if index != self.items.source.count - 1 {
                         RoundedRectangle(cornerRadius: 1)
@@ -30,7 +50,6 @@ struct ContentView: View {
                     }
                 }
             }
-            .zIndex(1)
             
             AddView()
                 .offset(y: -14 + addBarState)
@@ -39,25 +58,31 @@ struct ContentView: View {
                 .gesture(DragGesture()
                     .onChanged { value in
                         self.addBarState = value.translation.height
+                        self.removeAt = nil
                         
-                        if self.addBarState < 0 {
+                        if self.addBarState <= 8 {
+                            if self.addBarState < 0 {
+                                self.removeAt = self.items.source.count - 1
+                            }
                             self.addBarState = 0
                         }
-                        if self.addBarState > 0 {
+                        if self.addBarState > 8 {
                             self.addBarState = 14
                         }
                     }
-                    .onEnded { _ in
-                        if self.addBarState == 14 {
+                    .onEnded { value in
+                        if value.translation.height >= 14 {
                             self.items.source.append(self.items.source[0])
                         }
+                        if let removeAt = self.removeAt {
+                            self.items.source.remove(at: removeAt)
+                        }
+                        
+                        self.removeAt = nil
                         self.addBarState = 0
                     })
         }
-        .frame(width: 60, height: addBarState <= 0 ?
-            CGFloat(items.source.count) * 65 + 9 :
-            CGFloat(items.source.count) * 65 + 23)
-        .animation(nil)
+        .frame(width: 60, height: contentHeight())
     }
 }
 
@@ -70,6 +95,7 @@ struct AppItem: Codable, Identifiable {
     
     var color: Color { Color(hex: Int(self.theme, radix: 16)!) }
 }
+
 
 
 struct AppItemView: View {
