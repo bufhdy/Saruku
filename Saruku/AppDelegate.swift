@@ -8,7 +8,6 @@
 
 import Cocoa
 import SwiftUI
-import LaunchAtLogin
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
@@ -78,7 +77,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     // TODO: Integrate the 2 funcs
     @objc func openPrefsWindow(_ sender: Any) {
         NSApp.activate(ignoringOtherApps: true)
-        if let prefsView = prefsView, prefsView.prefsWindowDelegate.windowIsOpen {
+        if let prefsView = prefsView, prefsView.windowDelegate.windowIsOpen {
             prefsView.window.makeKeyAndOrderFront(self)
         } else {
             prefsView = PrefsView()
@@ -87,7 +86,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     @objc func openAboutWindow(_ sender: Any) {
         NSApp.activate(ignoringOtherApps: true)
-        if let aboutView = aboutView, aboutView.aboutWindowDelegate.windowIsOpen {
+        if let aboutView = aboutView, aboutView.windowDelegate.windowIsOpen {
             aboutView.window.makeKeyAndOrderFront(self)
         } else {
             aboutView = AboutView()

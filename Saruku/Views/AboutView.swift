@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AboutView: View {
     var window: NSWindow!
-    @State var aboutWindowDelegate = WindowsDelegate()
+    @State var windowDelegate = WindowsDelegate()
     
     let version: String
     let build: String
@@ -71,8 +71,8 @@ struct AboutView: View {
         window.standardWindowButton(.zoomButton)?.isHidden = true
         window.center()
         window.contentView = NSHostingView(rootView: self)
-        window.delegate = aboutWindowDelegate
-        aboutWindowDelegate.windowIsOpen = true
+        window.delegate = windowDelegate
+        windowDelegate.windowIsOpen = true
         window.makeKeyAndOrderFront(nil)
     }
 }

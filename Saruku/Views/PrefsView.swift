@@ -9,6 +9,7 @@
 import SwiftUI
 import LaunchAtLogin
 
+// A wrapper for SwiftUI default Toggle(), it will do some extra work when toggling
 struct LaunchAtLoginToggle {
     var value: Bool = LaunchAtLogin.isEnabled {
         willSet { LaunchAtLogin.isEnabled = !value }
@@ -17,7 +18,7 @@ struct LaunchAtLoginToggle {
 
 struct PrefsView: View {
     var window: NSWindow!
-    @State var prefsWindowDelegate = WindowsDelegate()
+    @State var windowDelegate = WindowsDelegate()
     @State var launchAtLoginModel = LaunchAtLoginToggle()
     
     @State var tabIndex: Int = 0
@@ -70,8 +71,8 @@ struct PrefsView: View {
         window.standardWindowButton(.zoomButton)?.isHidden = true
         window.center()
         window.contentView = NSHostingView(rootView: self)
-        window.delegate = prefsWindowDelegate
-        prefsWindowDelegate.windowIsOpen = true
+        window.delegate = windowDelegate
+        windowDelegate.windowIsOpen = true
         window.makeKeyAndOrderFront(nil)
     }
 }
@@ -97,7 +98,7 @@ struct GeneralView: View {
             Section {
                 HStack {
                     Button(action: {}) {
-                        Text("Set Shortcut")
+                        Text("Set ⌥⌘Z Shortcut")
                     }
                     Button(action: {}) {
                         Text("Clear")
@@ -120,7 +121,7 @@ struct CustomView: View {
                             .font(.custom("Acme", size: 15))
                             .foregroundColor(Color("Newspaper")),
                        content: {
-                        ColourBar(name: "Blossom", colours: [Color("Vintage"), Color("Newspaper"), Color("Cherry"), Color("Sorrow")]).tag(0)
+                        ColoursBar(name: "Blossom", colours: [Color("Vintage"), Color("Newspaper"), Color("Cherry"), Color("Sorrow")]).tag(0)
                         Text("Nightmare").tag(1)
                 })
             }
@@ -129,7 +130,7 @@ struct CustomView: View {
     }
 }
 
-struct ColourBar: View {
+struct ColoursBar: View {
     let name: String
     let colours: [Color]
     
