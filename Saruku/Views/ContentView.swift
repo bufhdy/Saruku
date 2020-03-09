@@ -20,6 +20,13 @@ struct ContentView: View {
         return base + CGFloat(add)
     }
     
+    private func topColour(_ index: Int) -> Color {
+        if index == 0 {
+            return Color("Cherry").opacity(0)
+        }
+        return Color("Sorrow").opacity(0.3)
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             ForEach(items.source.indices, id: \.self) { index in
@@ -30,7 +37,7 @@ struct ContentView: View {
                         Rectangle()
                             .foregroundColor(.clear)
                             .background(LinearGradient(
-                                gradient: Gradient(colors: [Color("Sorrow").opacity(0.3), Color("Cherry").opacity(0.3)]),
+                                gradient: Gradient(colors: [self.topColour(index), Color("Cherry").opacity(0.3)]),
                                 startPoint: .top,
                                 endPoint: .bottom))
                             .opacity(index == self.removeAt ? 1 : 0)
@@ -72,7 +79,12 @@ struct ContentView: View {
                             self.items.source.append(self.items.source[0])
                         }
                         if let removeAt = self.removeAt {
-                            self.items.source.remove(at: removeAt)
+                            if removeAt != 0 {
+                                self.items.source.remove(at: removeAt)
+                            } else {
+                                self.items.source.remove(at: removeAt)
+                                self.items.source.append(AppItem(name: "Saruku", theme: "FF2B5F", duration: 60))
+                            }
                         }
                         
                         self.removeAt = nil
@@ -164,6 +176,9 @@ struct AppItemView: View {
                         self.timeRemaining = 0
                     } else {
                         self.items.remove(at: self.index)
+                        if self.index == 0 && self.items.count == 0 {
+                            self.items.append(AppItem(name: "Saruku", theme: "FF2B5F", duration: 60))
+                        }
                     }
                 }
                 .offset(x: 4.25, y: 4.25)
