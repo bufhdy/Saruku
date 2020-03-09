@@ -59,7 +59,6 @@ struct EditView: View {
                     .foregroundColor(self.hour != 0 || self.minute != 0 ?
                         Color("Sorrow") :
                         Color("Newspaper").opacity(0.6))  // TODO: Need to be set gray scale
-                    .animation(.linear)
                     .overlay(Circle().stroke(Color.black.opacity(0.3), lineWidth: 0.5))
             }
             .frame(width: 11.5, height: 11.5)

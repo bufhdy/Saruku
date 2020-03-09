@@ -163,7 +163,7 @@ struct CustomView: View {
                             .foregroundColor(Color("Newspaper")),
                        content: {
                         ColoursBar(name: "Blossom", colours: [Color(hex: 0xFF2B5F), Color(hex: 0x1A1B15), Color(hex: 0x2570B9), Color(hex: 0xF9F3DF)]).tag(0)
-                        ColoursBar(name: "Cybernightmare", colours: [Color(hex: 0xF8FC55), Color(hex: 0xF8FBDC), Color(hex: 0xDD682D), Color(hex: 0x4B3111)]).tag(1)
+                        ColoursBar(name: "Cyber-Nightmare", colours: [Color(hex: 0xE2270C), Color(hex: 0xF8FBDC), Color(hex: 0xDD682D), Color(hex: 0x4B3111)]).tag(1)
                 })
             }
         }
