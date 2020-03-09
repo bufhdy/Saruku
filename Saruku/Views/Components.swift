@@ -63,3 +63,46 @@ struct SlideBgView: View {
         }.frame(width: 20, height: 60)
     }
 }
+
+
+struct AddView: View {
+    
+    var body: some View {
+        ZStack(alignment: .top) {
+            VStack(spacing: 0) {
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .background(LinearGradient(
+                        gradient: Gradient(colors: [Color("Vintage").opacity(0), Color("Sorrow").opacity(0.3)]),
+                        startPoint: .top,
+                        endPoint: .bottom))
+                    .frame(height: 14)
+                
+                Rectangle()
+                    .foregroundColor(Color("Sorrow").opacity(0.3))
+                    .frame(height: 14)
+            }
+            
+            VStack(spacing: 2) {
+                ForEach(0..<2) { _ in
+                    RoundedRectangle(cornerRadius: 1)
+                    .frame(width: 18, height: 2)
+                    .foregroundColor(Color("Sorrow").opacity(0.6))
+                }
+            }.frame(height: 14)
+                .offset(y: 14)
+        }
+        .background(Color("Vintage"))
+        .frame(height: 28)
+    }
+}
+
+struct AddView_Previews: PreviewProvider {
+    static var previews: some View {
+        AddView()
+            .colorScheme(.light)
+    }
+}
+
+
+

@@ -11,6 +11,7 @@ import Cocoa
 
 struct ContentView: View {
     @ObservedObject var items = ItemSource()
+    @State var addBarState: CGFloat = 0
     
     var body: some View {
         VStack(spacing: 0) {
@@ -25,12 +26,35 @@ struct ContentView: View {
                             .frame(width: 60, height: 5)
                             .background(Color("Sorrow").opacity(0.3))
                             .frame(width: 60, height: 5)
-                            .background(Color("Vintage")) // TODO: need to check colours
+                            .background(Color("Vintage"))
                     }
                 }
             }
+            .zIndex(1)
+            
+            AddView()
+                .offset(y: -14 + addBarState)
+                .zIndex(-1)
+                .frame(height: 14 + addBarState, alignment: .top)
+                .gesture(DragGesture()
+                    .onChanged { value in
+                        self.addBarState = value.translation.height
+                        
+                        if self.addBarState < 0 {
+                            self.addBarState = 0
+                        }
+                        if self.addBarState > 0 {
+                            self.addBarState = 14
+                        }
+                    }
+                    .onEnded { _ in
+                        self.addBarState = 0
+                    })
         }
-        .frame(width: 60, height: CGFloat(items.source.count) * 65 - 5)
+        .frame(width: 60, height: addBarState <= 0 ?
+            CGFloat(items.source.count) * 65 + 9 :
+            CGFloat(items.source.count) * 65 + 23)
+        .animation(nil)
     }
 }
 
@@ -176,5 +200,12 @@ struct AppItemView: View {
         else { return }
 
         self.Icon = icon
+    }
+}
+
+struct Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .colorScheme(.light)
     }
 }
