@@ -56,6 +56,7 @@ struct AppItemView: View {
     @State private var editingMoveState: CGSize = .zero
     @State private var hour = 0
     let isFirst: Bool
+    var Icon: Data? = nil
     
     func openApp(_ name: String) {
         let url = NSURL(fileURLWithPath: "/Applications/" + name + ".app", isDirectory: true) as URL
@@ -71,7 +72,7 @@ struct AppItemView: View {
     
     var body: some View {
         ZStack(alignment: .topLeading) {
-            Image(item.name + "Icon")
+            Image(nsImage: NSImage(data: self.Icon!)!)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .saturation(timeRemaining > 1 ? 0 : 1)
@@ -166,6 +167,14 @@ struct AppItemView: View {
         .frame(width: 60, height: 60)
         .background(ItemBackground(isFirst: isFirst, color: Color("Vintage")))
     }
+    
+    init(item: Binding<AppItem>, isFirst: Bool) {
+        self._item = item
+        self.isFirst = isFirst
+        
+        guard let icon = getIcon(input: self.item.name, size: 128)
+        else { return }
+
+        self.Icon = icon
+    }
 }
-
-
