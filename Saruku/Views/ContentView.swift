@@ -21,7 +21,7 @@ struct ContentView: View {
                     
                     if index != self.items.source.count - 1 {
                         RoundedRectangle(cornerRadius: 1)
-                            .frame(width: 18, height: 2)
+                            .frame(width: 15, height: 2)
                             .foregroundColor(Color("Sorrow").opacity(0.5))
                             .frame(width: 60, height: 5)
                             .background(Color("Sorrow").opacity(0.3))
@@ -48,6 +48,9 @@ struct ContentView: View {
                         }
                     }
                     .onEnded { _ in
+                        if self.addBarState == 14 {
+                            self.items.source.append(self.items.source[0])
+                        }
                         self.addBarState = 0
                     })
         }

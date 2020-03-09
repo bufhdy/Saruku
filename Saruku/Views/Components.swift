@@ -86,7 +86,7 @@ struct AddView: View {
             VStack(spacing: 2) {
                 ForEach(0..<2) { _ in
                     RoundedRectangle(cornerRadius: 1)
-                    .frame(width: 18, height: 2)
+                    .frame(width: 15, height: 2)
                     .foregroundColor(Color("Sorrow").opacity(0.6))
                 }
             }.frame(height: 14)
