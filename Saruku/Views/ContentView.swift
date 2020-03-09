@@ -20,13 +20,6 @@ struct ContentView: View {
         return base + CGFloat(add)
     }
     
-    private func removeBlockOpacity(_ index: Int) -> Double {
-        if index == self.removeAt {
-            return 0.3
-        }
-        return 0
-    }
-    
     var body: some View {
         VStack(spacing: 0) {
             ForEach(items.source.indices, id: \.self) { index in
@@ -34,8 +27,13 @@ struct ContentView: View {
                     ZStack {
                         AppItemView(items: self.$items.source, index: index)
                         
-                        Color("Sorrow")
-                            .opacity(self.removeBlockOpacity(index))
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .background(LinearGradient(
+                                gradient: Gradient(colors: [Color("Sorrow").opacity(0.3), Color("Cherry").opacity(0.3)]),
+                                startPoint: .top,
+                                endPoint: .bottom))
+                            .opacity(index == self.removeAt ? 1 : 0)
                             .animation(nil)
                     }
                     

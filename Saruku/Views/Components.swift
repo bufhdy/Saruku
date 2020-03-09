@@ -73,13 +73,13 @@ struct AddView: View {
                 Rectangle()
                     .foregroundColor(.clear)
                     .background(LinearGradient(
-                        gradient: Gradient(colors: [Color("Vintage").opacity(0), Color("Sorrow").opacity(0.3)]),
+                        gradient: Gradient(colors: [Color("Vintage").opacity(0), Color("Cherry").opacity(0.3)]),
                         startPoint: .top,
                         endPoint: .bottom))
                     .frame(height: 14)
                 
                 Rectangle()
-                    .foregroundColor(Color("Sorrow").opacity(0.3))
+                    .foregroundColor(Color("Cherry").opacity(0.3))
                     .frame(height: 14)
             }
             
@@ -87,7 +87,7 @@ struct AddView: View {
                 ForEach(0..<2) { _ in
                     RoundedRectangle(cornerRadius: 1)
                     .frame(width: 15, height: 2)
-                    .foregroundColor(Color("Sorrow").opacity(0.6))
+                    .foregroundColor(Color("Cherry").opacity(0.6))
                 }
             }.frame(height: 14)
                 .offset(y: 14)
