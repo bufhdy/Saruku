@@ -32,11 +32,10 @@ struct ContentView: View {
             ForEach(items.source.indices, id: \.self) { index in
                 VStack(spacing: 0) {
                     ZStack {
-                        AppItemView(item: self.$items.source[index], isFirst: index == 0)
+                        AppItemView(items: self.$items.source, index: index)
                         
                         Color("Sorrow")
                             .opacity(self.removeBlockOpacity(index))
-                            //.animation(.linear)
                     }
                     
                     if index != self.items.source.count - 1 {
@@ -60,13 +59,13 @@ struct ContentView: View {
                         self.addBarState = value.translation.height
                         self.removeAt = nil
                         
-                        if self.addBarState <= 8 {
+                        if self.addBarState <= 10 {
                             if self.addBarState < 0 {
                                 self.removeAt = self.items.source.count - 1
                             }
                             self.addBarState = 0
                         }
-                        if self.addBarState > 8 {
+                        if self.addBarState > 10 {
                             self.addBarState = 14
                         }
                     }
@@ -99,7 +98,7 @@ struct AppItem: Codable, Identifiable {
 
 
 struct AppItemView: View {
-    @Binding var item: AppItem
+    @Binding var items: [AppItem]
     @State private var timeRemaining = 0
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var showDelete = false
@@ -108,7 +107,7 @@ struct AppItemView: View {
     @State private var editing = false
     @State private var editingMoveState: CGSize = .zero
     @State private var hour = 0
-    let isFirst: Bool
+    let index: Int
     var Icon: Data? = nil
     
     func openApp(_ name: String) {
@@ -134,8 +133,8 @@ struct AppItemView: View {
                     if self.timeRemaining > 0 { self.timeRemaining -= 1 }
             }
             .onTapGesture {
-                self.timeRemaining = self.item.duration
-                self.openApp(self.item.name)
+                self.timeRemaining = self.items[self.index].duration
+                self.openApp(self.items[self.index].name)
             }
             .animation(Animation.linear(duration: 0.8))
             .frame(width: 60, height: 60)
@@ -145,18 +144,16 @@ struct AppItemView: View {
                 Color.black.opacity(0.0001)
             }
             Rectangle()
-                .frame(width: CGFloat(60) * (CGFloat(self.timeRemaining) / CGFloat(item.duration)),
+                .frame(width: CGFloat(60) * (CGFloat(self.timeRemaining) / CGFloat(items[index].duration)),
                        height: 60,
                        alignment: .leading)
                 .foregroundColor(.clear)
-                .background(ItemBackground(isFirst: isFirst, color: item.color.opacity(0.3)))
+                .background(ItemBackground(isFirst: index == 0, color: items[index].color.opacity(0.3)))
             
             ZStack {
                 Circle()
                     .foregroundColor(Color("Cherry"))
                     .overlay(Circle().stroke(Color.black.opacity(0.3), lineWidth: 0.5))
-                
-                // Text("x")
             }
                 .frame(width: 11.5, height: 11.5)
                 .onHover { value in
@@ -167,11 +164,13 @@ struct AppItemView: View {
                 .onTapGesture {
                     if self.timeRemaining != 0 {
                         self.timeRemaining = 0
+                    } else {
+                        self.items.remove(at: self.index)
                     }
                 }
                 .offset(x: 4.25, y: 4.25)
             
-            EditView(hour: $hour, minute: item.duration % 3600 / 60, rightEditing: $rightEditng, editing: $editing, second: $item.duration, editingMoveState: $editingMoveState, isFirst: isFirst)
+            EditView(hour: $hour, minute: items[index].duration % 3600 / 60, rightEditing: $rightEditng, editing: $editing, second: $items[index].duration, editingMoveState: $editingMoveState, isFirst: index == 0)
                 .opacity(editing ? 1 : 0)
                 .animation(Animation.linear(duration: 0.1))
             
@@ -218,14 +217,14 @@ struct AppItemView: View {
                 .offset(x: 44.25, y: 44.25)
         }
         .frame(width: 60, height: 60)
-        .background(ItemBackground(isFirst: isFirst, color: Color("Vintage")))
+        .background(ItemBackground(isFirst: index == 0, color: Color("Vintage")))
     }
     
-    init(item: Binding<AppItem>, isFirst: Bool) {
-        self._item = item
-        self.isFirst = isFirst
+    init(items: Binding<[AppItem]>, index: Int) {
+        self._items = items
+        self.index = index
         
-        guard let icon = getIcon(input: self.item.name, size: 128)
+        guard let icon = getIcon(input: self.items[index].name, size: 128)
         else { return }
 
         self.Icon = icon
