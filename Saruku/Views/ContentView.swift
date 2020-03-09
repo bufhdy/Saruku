@@ -61,14 +61,6 @@ struct ContentView: View {
                 .frame(height: 14 + addBarState, alignment: .top)
                 .gesture(DragGesture()
                     .onChanged { value in
-                        if value.translation.height < 0 {
-                            NSCursor.resizeUp.set()
-                        } else if value.translation.height > 10 {
-                            NSCursor.resizeDown.set()
-                        } else {
-                            NSCursor.resizeUpDown.set()
-                        }
-                        
                         self.addBarState = value.translation.height
                         self.removeAt = nil
                         
