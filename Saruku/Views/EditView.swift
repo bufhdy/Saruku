@@ -11,10 +11,9 @@ import SwiftUI
 struct EditView: View {
     @Binding var hour: Int
     @State var minute: Int
-    @Binding var rightEditing: Bool
+    @Binding var editingHour: Bool
     @Binding var editing: Bool
     @Binding var second: Int
-    @Binding var editingMoveState: CGSize
     @State var submittingMoveState: CGSize = .zero
     let isFirst: Bool
     
@@ -44,7 +43,7 @@ struct EditView: View {
             SlideBgView(isFirst: isFirst)
                 .offset(x: 40)
                 .animation(Animation.linear(duration: 0.1))
-                .opacity(rightEditing ? 1 : 0)
+                .opacity(editingHour ? 1 : 0)
                 
             
             ZStack {
@@ -119,7 +118,7 @@ struct EditView: View {
                         .foregroundColor(Color("Newspaper"))
                 }
                 .frame(width: 20)
-                .opacity(rightEditing ? 0 : 1)
+                .opacity(editingHour ? 0 : 1)
                 .animation(.linear)
             }
             .frame(width: 60, height: 60)

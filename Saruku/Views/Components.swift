@@ -65,7 +65,7 @@ struct SlideBgView: View {
 }
 
 
-struct AddView: View {
+struct MoveBarView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -99,7 +99,7 @@ struct AddView: View {
 
 struct AddView_Previews: PreviewProvider {
     static var previews: some View {
-        AddView()
+        MoveBarView()
             .colorScheme(.light)
     }
 }

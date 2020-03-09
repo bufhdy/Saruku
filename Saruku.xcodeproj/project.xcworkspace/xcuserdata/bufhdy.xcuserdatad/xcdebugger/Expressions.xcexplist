@@ -3,6 +3,17 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "AppItemView.init(items:at:):ContentView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.items[index].duration % 3600">
+            </PersistentString>
+            <PersistentString
+               value = "self.hour">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "EditView.toHrMin():EditView.swift">
          <PersistentStrings>
             <PersistentString

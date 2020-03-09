@@ -9,27 +9,40 @@
 import SwiftUI
 import Cocoa
 
+// Core struct for items
+struct AppItem: Codable, Identifiable {
+    let id = UUID()
+    
+    var name: String
+    var theme: String
+    var duration: Int
+    
+    var color: Color { Color(hex: Int(self.theme, radix: 16)!) }
+}
+
 struct ContentView: View {
     @ObservedObject private var items = ItemSource()
-    @State private var addBarState: CGFloat = 0
+    @State private var moveBarYOffset: CGFloat = 0
     @State private var removeAt: Int? = nil
     
+    // Calculate height of the popover
     private func contentHeight() -> CGFloat {
         let base = CGFloat(items.source.count) * 65
-        let add = addBarState <= 0 ? 9 : 23
+        let add = moveBarYOffset <= 0 ? 9 : 23
         return base + CGFloat(add)
     }
     
+    // Special situation for the first item when swiping up to delete
     private func topColour(_ index: Int) -> Color {
-        if index == 0 {
-            return Color("Cherry").opacity(0)
-        }
-        return Color("Sorrow").opacity(0.3)
+        return index == 0 ?
+            Color("Cherry").opacity(0) :
+            Color("Sorrow").opacity(0.3)
     }
     
+    // Swipe down to add new item
     private func newItem() {
         let openPanel = NSOpenPanel()
-        
+        openPanel.directoryURL = URL(fileURLWithPath: "/Applications", isDirectory: true)
         openPanel.title = "Open an application"
         openPanel.showsResizeIndicator = true
         openPanel.showsHiddenFiles = false
@@ -43,15 +56,18 @@ struct ContentView: View {
                 
                 self.items.source.append(AppItem(
                     name: appName,
-                    theme: "E8D08F",
+                    theme: "FF2B5F", // Set to "Cherry", need to integrate
                     duration: 60))
             }
             openPanel.close()
         }
         
+        // After adding new item, open the popover again
         let appDelegate = NSApp.delegate as? AppDelegate
-        
-        appDelegate?.popover.show(relativeTo: (appDelegate?.statusBarItem.button!.bounds)!, of: (appDelegate?.statusBarItem.button!)!, preferredEdge: NSRectEdge.minY)
+        appDelegate?.popover.show(
+            relativeTo: (appDelegate?.statusBarItem.button!.bounds)!,
+            of: (appDelegate?.statusBarItem.button!)!,
+            preferredEdge: NSRectEdge.minY)
     }
     
     var body: some View {
@@ -59,93 +75,84 @@ struct ContentView: View {
             ForEach(items.source.indices, id: \.self) { index in
                 VStack(spacing: 0) {
                     ZStack {
-                        AppItemView(items: self.$items.source, index: index)
+                        // Single item with icon and close, edit button
+                        AppItemView(items: self.$items.source, at: index)
                         
+                        // Seperator between items
                         Rectangle()
                             .foregroundColor(.clear)
                             .background(LinearGradient(
-                                gradient: Gradient(colors: [self.topColour(index), Color("Cherry").opacity(0.3)]),
+                                gradient: Gradient(colors:
+                                    [self.topColour(index), Color("Cherry").opacity(0.3)]),
                                 startPoint: .top,
                                 endPoint: .bottom))
                             .opacity(index == self.removeAt ? 1 : 0)
                             .animation(nil)
                     }
                     
+                    // Covering of item when deleting
                     if index != self.items.source.count - 1 {
                         Rectangle()
                             .foregroundColor(Color("Sorrow").opacity(0.3))
                             .background(Color("Vintage"))
                             .frame(width: 60, height: 5)
-                        .zIndex(-2)
                     }
                 }
             }
-            .animation(.easeInOut)
             
-            AddView()
-                .offset(y: -14 + addBarState)
+            // Add and delete bar. Do not add animation, it'll be slow
+            MoveBarView()
+                .offset(y: -14 + moveBarYOffset)
+                .frame(height: 14 + moveBarYOffset, alignment: .top)
                 .zIndex(-1)
-                .frame(height: 14 + addBarState, alignment: .top)
                 .gesture(DragGesture()
                     .onChanged { value in
-                        self.addBarState = value.translation.height
+                        self.moveBarYOffset = value.translation.height
                         self.removeAt = nil
                         
-                        if self.addBarState <= 10 {
-                            if self.addBarState < 0 {
+                        if self.moveBarYOffset <= 10 {
+                            if self.moveBarYOffset < 0 {
                                 self.removeAt = self.items.source.count - 1
                             }
-                            self.addBarState = 0
-                        }
-                        if self.addBarState > 10 {
-                            self.addBarState = 14
-                        }
+                            self.moveBarYOffset = 0
+                        } else { self.moveBarYOffset = 14 }
                     }
                     .onEnded { value in
-                        if value.translation.height >= 14 {
-                            self.newItem()
-                            // self.items.source.append(self.items.source[0])
-                        }
-                        if let removeAt = self.removeAt {
-                            if removeAt != 0 {
-                                self.items.source.remove(at: removeAt)
-                            } else {
-                                self.items.source.remove(at: removeAt)
-                                self.items.source.append(AppItem(name: "Saruku", theme: "FF2B5F", duration: 60))
+                        if value.translation.height >= 14 { self.newItem() }
+                        else if let removeAt = self.removeAt {
+                            self.items.source.remove(at: removeAt)
+                            if removeAt == 0 {
+                                self.items.source.append(AppItem(
+                                    name: "Saruku",
+                                    theme: "FF2B5F",
+                                    duration: 60))
                             }
+                            self.removeAt = nil
                         }
                         
-                        self.removeAt = nil
-                        self.addBarState = 0
-                    })
+                        self.moveBarYOffset = 0
+                })
         }
         .frame(width: 60, height: contentHeight())
     }
 }
 
-struct AppItem: Codable, Identifiable {
-    let id = UUID()
-    
-    var name: String
-    var theme: String
-    var duration: Int
-    
-    var color: Color { Color(hex: Int(self.theme, radix: 16)!) }
-}
-
-
-
 struct AppItemView: View {
     @Binding var items: [AppItem]
+    let index: Int
+    
     @State private var timeRemaining = 0
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    @State private var showDelete = false
-    @State private var showEdit = false
-    @State private var rightEditng = false
+    
+    @State private var showDeleteButton = false
+    @State private var showEditButton = false
+    
     @State private var editing = false
-    @State private var editingMoveState: CGSize = .zero
-    @State private var hour = 0
-    let index: Int
+    @State private var editingHour = false
+    @State private var hourEditorYOffset: CGFloat = 0
+    
+    @State private var hour: Int = 0
+    
     var icon: Data? = nil
     
     func openApp(_ name: String) {
@@ -195,9 +202,9 @@ struct AppItemView: View {
             }
                 .frame(width: 11.5, height: 11.5)
                 .onHover { value in
-                    self.showDelete = value
+                    self.showDeleteButton = value
                 }
-                .opacity(showDelete ? 1 : 0)
+                .opacity(showDeleteButton ? 1 : 0)
                 .animation(Animation.linear(duration: 0.1))
                 .onTapGesture {
                     if self.timeRemaining != 0 {
@@ -211,7 +218,7 @@ struct AppItemView: View {
                 }
                 .offset(x: 4.25, y: 4.25)
             
-            EditView(hour: $hour, minute: items[index].duration % 3600 / 60, rightEditing: $rightEditng, editing: $editing, second: $items[index].duration, editingMoveState: $editingMoveState, isFirst: index == 0)
+            EditView(hour: $hour, minute: items[index].duration % 3600 / 60, editingHour: $editingHour, editing: $editing, second: $items[index].duration, isFirst: index == 0)
                 .opacity(editing ? 1 : 0)
                 .animation(Animation.linear(duration: 0.1))
             
@@ -225,34 +232,34 @@ struct AppItemView: View {
             .frame(width: 11.5, height: 11.5)
                 .opacity(timeRemaining == 0 ? 1 : 0)
                 .onHover { value in
-                    self.showEdit = self.editing ? self.rightEditng : value
+                    self.showEditButton = self.editing ? self.editingHour : value
                 }
-                .opacity(showEdit ? 1 : 0)
+                .opacity(showEditButton ? 1 : 0)
                 .animation(Animation.linear(duration: 0.1))
-                .offset(y: editingMoveState.height)
+                .offset(y: hourEditorYOffset)
                 .gesture(DragGesture()
                     .onChanged { value in
-                        self.showEdit = true
+                        self.showEditButton = true
                         self.editing = true
-                        self.rightEditng = true
-                        self.editingMoveState = value.translation
-                        if self.editingMoveState.height > 0 {
-                            self.editingMoveState.height = 0
+                        self.editingHour = true
+                        self.hourEditorYOffset = value.translation.height
+                        if self.hourEditorYOffset > 0 {
+                            self.hourEditorYOffset = 0
                         }
                         
-                        if self.editingMoveState.height < -40 {
-                            self.editingMoveState.height = -40
+                        if self.hourEditorYOffset < -40 {
+                            self.hourEditorYOffset = -40
                         }
-                        self.hour = Int(self.editingMoveState.height) / -4
+                        self.hour = Int(self.hourEditorYOffset) / -4
                     }
                     .onEnded { _ in
-                        self.rightEditng = false
-                        self.editingMoveState = .zero
-                        self.showEdit = false
+                        self.editingHour = false
+                        self.hourEditorYOffset = 0
+                        self.showEditButton = false
                     }
                 )
                 .onTapGesture {
-                    self.showEdit = false
+                    self.showEditButton = false
                     self.editing.toggle()
                 }
                 .offset(x: 44.25, y: 44.25)
@@ -261,13 +268,12 @@ struct AppItemView: View {
         .background(ItemBackground(isFirst: index == 0, color: Color("Vintage")))
     }
     
-    init(items: Binding<[AppItem]>, index: Int) {
+    init(items: Binding<[AppItem]>, at index: Int) {
         self._items = items
         self.index = index
         
-        guard let icon = getIcon(input: self.items[index].name, size: 128)
+        guard let icon = getIcon(input: self.items[index].name, size: 256)
         else { return }
-
         self.icon = icon
     }
 }
