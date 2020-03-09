@@ -91,7 +91,15 @@ struct EditView: View {
                 Spacer()
                 
                 VStack(spacing: 0) {
-                    Stepper(value: $hour, in: 0...10) { Text("") }  // TODO: Better stepper and change the colour
+                    Stepper(onIncrement: {
+                        if self.hour < 10 {
+                            self.hour += 1
+                        }
+                    }, onDecrement: {
+                        if self.hour > 0 {
+                            self.hour -= 1
+                        }
+                    }) { Text("") }  // TODO: Better stepper and change the colour
                         .frame(width: 13, height: 21, alignment: .trailing)
                         .clipShape(Rectangle())
                     
@@ -108,7 +116,20 @@ struct EditView: View {
                 }.frame(width: 20)
                 
                 VStack(spacing: 0) {
-                    Stepper(value: $minute, in: 0...59) { Text("").foregroundColor(Color("Newspaper")) }
+                    Stepper(onIncrement: {
+                        if self.minute < 59 {
+                            self.minute += 1
+                        } else {
+                            if self.hour < 10 {
+                                self.hour += 1
+                                self.minute = 0
+                            }
+                        }
+                    }, onDecrement: {
+                        if self.minute > 0 {
+                            self.minute -= 1
+                        }
+                    })  { Text("").foregroundColor(Color("Newspaper")) }
                         .frame(width: 13, height: 21, alignment: .trailing)
                         .clipShape(Rectangle())
                     
