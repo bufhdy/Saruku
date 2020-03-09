@@ -10,17 +10,17 @@ import SwiftUI
 import Cocoa
 
 struct ContentView: View {
-    @ObservedObject var items = ItemSource()
-    @State var addBarState: CGFloat = 0
-    @State var removeAt: Int? = nil
+    @ObservedObject private var items = ItemSource()
+    @State private var addBarState: CGFloat = 0
+    @State private var removeAt: Int? = nil
     
-    func contentHeight() -> CGFloat {
+    private func contentHeight() -> CGFloat {
         let base = CGFloat(items.source.count) * 65
         let add = addBarState <= 0 ? 9 : 23
         return base + CGFloat(add)
     }
     
-    func removeBlockOpacity(_ index: Int) -> Double {
+    private func removeBlockOpacity(_ index: Int) -> Double {
         if index == self.removeAt {
             return 0.3
         }
@@ -36,19 +36,19 @@ struct ContentView: View {
                         
                         Color("Sorrow")
                             .opacity(self.removeBlockOpacity(index))
+                            .animation(nil)
                     }
                     
                     if index != self.items.source.count - 1 {
-                        RoundedRectangle(cornerRadius: 1)
-                            .frame(width: 15, height: 2)
-                            .foregroundColor(Color("Sorrow").opacity(0.5))
-                            .frame(width: 60, height: 5)
-                            .background(Color("Sorrow").opacity(0.3))
-                            .frame(width: 60, height: 5)
+                        Rectangle()
+                            .foregroundColor(Color("Sorrow").opacity(0.3))
                             .background(Color("Vintage"))
+                            .frame(width: 60, height: 5)
+                        .zIndex(-2)
                     }
                 }
             }
+            .animation(.easeInOut)
             
             AddView()
                 .offset(y: -14 + addBarState)
