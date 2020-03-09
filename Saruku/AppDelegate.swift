@@ -24,7 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let popover = NSPopover()
         popover.contentSize = NSSize(width: 60, height: 60)
         popover.behavior = .transient
-        popover.animates = false
+        popover.animates = true
         popover.contentViewController = NSHostingController(rootView: ContentView()) // SwiftUI view
         self.popover = popover
         

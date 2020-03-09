@@ -27,6 +27,33 @@ struct ContentView: View {
         return Color("Sorrow").opacity(0.3)
     }
     
+    private func newItem() {
+        let openPanel = NSOpenPanel()
+        
+        openPanel.title = "Open an application"
+        openPanel.showsResizeIndicator = true
+        openPanel.showsHiddenFiles = false
+        openPanel.canChooseDirectories = false
+        openPanel.allowsMultipleSelection = false
+        openPanel.allowedFileTypes = ["app"]
+        
+        if openPanel.runModal() == NSApplication.ModalResponse.OK {
+            if let url = openPanel.url {
+                let appName = url.deletingPathExtension().lastPathComponent
+                
+                self.items.source.append(AppItem(
+                    name: appName,
+                    theme: "E8D08F",
+                    duration: 60))
+            }
+            openPanel.close()
+        }
+        
+        let appDelegate = NSApp.delegate as? AppDelegate
+        
+        appDelegate?.popover.show(relativeTo: (appDelegate?.statusBarItem.button!.bounds)!, of: (appDelegate?.statusBarItem.button!)!, preferredEdge: NSRectEdge.minY)
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             ForEach(items.source.indices, id: \.self) { index in
@@ -76,7 +103,8 @@ struct ContentView: View {
                     }
                     .onEnded { value in
                         if value.translation.height >= 14 {
-                            self.items.source.append(self.items.source[0])
+                            self.newItem()
+                            // self.items.source.append(self.items.source[0])
                         }
                         if let removeAt = self.removeAt {
                             if removeAt != 0 {
@@ -118,7 +146,7 @@ struct AppItemView: View {
     @State private var editingMoveState: CGSize = .zero
     @State private var hour = 0
     let index: Int
-    var Icon: Data? = nil
+    var icon: Data? = nil
     
     func openApp(_ name: String) {
         let url = NSURL(fileURLWithPath: "/Applications/" + name + ".app", isDirectory: true) as URL
@@ -134,7 +162,7 @@ struct AppItemView: View {
     
     var body: some View {
         ZStack(alignment: .topLeading) {
-            Image(nsImage: NSImage(data: self.Icon!)!)
+            Image(nsImage: NSImage(data: self.icon!)!)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .saturation(timeRemaining > 1 ? 0 : 1)
@@ -240,7 +268,7 @@ struct AppItemView: View {
         guard let icon = getIcon(input: self.items[index].name, size: 128)
         else { return }
 
-        self.Icon = icon
+        self.icon = icon
     }
 }
 
