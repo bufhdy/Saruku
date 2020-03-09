@@ -62,8 +62,8 @@ struct PrefsView: View {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
         
         window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 400, height: 300),
-            styleMask: [.closable, .miniaturizable, .fullSizeContentView, .titled],
+            contentRect: NSRect(x: 0, y: 0, width: 400, height: 400),
+            styleMask: [.closable, .miniaturizable, .fullSizeContentView, .titled, .resizable],
             backing: .buffered, defer: false)
         window.titlebarAppearsTransparent = true
         window.title = "Saruku " + version
@@ -80,19 +80,60 @@ struct PrefsView: View {
 struct GeneralView: View {
     @State var language = 0
     @State var shortcutTitle: String = ""
+    @State var hour = 0
+    @State var minute = 0
     
     var body: some View {
         Form {
             Section {
                 Picker(selection: $language,
-                       label: Text("Language:")
-                            .font(.custom("Acme", size: 15))
-                            .foregroundColor(Color("Newspaper")),
-                       content: {
+                    label: Text("Language: ")
+                        .font(.custom("Acme", size: 15))
+                        .foregroundColor(Color("Newspaper")),
+                    content: {
                         Text("English").tag(0)
                         Text("正體中文").tag(1)
                         Text("日本語").tag(2)
-                })
+                    })
+                
+                    VStack {
+                        Text("Default cooldown: \(self.hour)h \(self.minute)mins")
+                    
+                        HStack {
+                            VStack(spacing: 3) {
+                                Button(action: {
+                                    if self.hour < 10 {
+                                        self.hour += 1
+                                    }
+                                }) { Text("⬆️ Hour") }
+                                
+                                Button(action: {
+                                    if self.hour > 0 {
+                                        self.hour -= 1
+                                    }
+                                }) { Text("⬇️ Hour") }
+                            }
+                            
+                            VStack(spacing: 3) {
+                                Button(action: {
+                                    if self.minute < 59 {
+                                        self.minute += 1
+                                    } else {
+                                        if self.hour < 10 {
+                                            self.hour += 1
+                                            self.minute = 0
+                                        }
+                                    }
+                                }) { Text("⬆️ Minute") }
+                                
+                                Button(action: {
+                                    if self.minute > 0 {
+                                        self.minute -= 1
+                                    }
+                                }) { Text("⬇️ Minute") }
+                            }
+                        }
+                }.animation(nil)
             }
             
             Section {
@@ -117,7 +158,7 @@ struct CustomView: View {
         Form {
             Section {
                 Picker(selection: $theme,
-                       label: Text("Theme:")
+                       label: Text("Theme: ")
                             .font(.custom("Acme", size: 15))
                             .foregroundColor(Color("Newspaper")),
                        content: {
