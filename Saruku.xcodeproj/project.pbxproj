@@ -18,7 +18,6 @@
 		1487D3652414F53C0019D49D /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1487D3642414F53C0019D49D /* Components.swift */; };
 		1487D3672414F5890019D49D /* Backyard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1487D3662414F5890019D49D /* Backyard.swift */; };
 		149B73042415339300DDEBD7 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 149B73032415339300DDEBD7 /* Cartfile */; };
-		149B73072415347200DDEBD7 /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = 149B73062415347200DDEBD7 /* HotKey */; };
 		149B732F2415473400DDEBD7 /* LaunchAtLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149B732D2415472000DDEBD7 /* LaunchAtLogin.framework */; };
 		149B73302415473400DDEBD7 /* LaunchAtLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 149B732D2415472000DDEBD7 /* LaunchAtLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14DC2B3D2415F9F900A367F9 /* ImageBackyard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DC2B3C2415F9F800A367F9 /* ImageBackyard.swift */; };
@@ -72,7 +71,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				149B732F2415473400DDEBD7 /* LaunchAtLogin.framework in Frameworks */,
-				149B73072415347200DDEBD7 /* HotKey in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,7 +170,6 @@
 			);
 			name = Saruku;
 			packageProductDependencies = (
-				149B73062415347200DDEBD7 /* HotKey */,
 			);
 			productName = Saruku;
 			productReference = 146335B1241110C9006E6B7F /* Saruku.app */;
@@ -494,14 +491,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		149B73062415347200DDEBD7 /* HotKey */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 149B73052415347200DDEBD7 /* XCRemoteSwiftPackageReference "HotKey" */;
-			productName = HotKey;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 146335A9241110C9006E6B7F /* Project object */;
 }

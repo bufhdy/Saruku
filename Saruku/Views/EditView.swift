@@ -33,6 +33,8 @@ struct EditView: View {
         }
     }
     
+    @State private var hourTest: Double = 1.0
+    
     private func setSecond() {
         self.second = hour * 3600 + minute * 60
         self.items[self.index].duration = self.second
@@ -169,8 +171,10 @@ struct EditView: View {
                 .animation(.linear)
             }
             .frame(width: 60, height: 60)
+            
         }
         .background(ItemBackground(isFirst: index == 0, color: Color("Vintage")))
         .animation(Animation.linear(duration: 0.1))
+        
     }
 }

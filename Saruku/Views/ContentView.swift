@@ -300,20 +300,6 @@ struct AppItemView: View {
         }
         .frame(width: 60, height: 60)
         .background(ItemBackground(isFirst: index == 0, color: Color("Vintage")))
-        .touchBar {  // Need supporting more function
-            ForEach(self.items.indices, id: \.self) { index in
-                Button(action: {}) {
-                    ZStack {
-                        Image(nsImage: NSImage(data: getIcon(input: self.items[index].name, size: 128)!)!)
-                            .renderingMode(.original)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 24, height: 24)
-                    }
-                    .frame(width: 72)
-                }
-            }
-        }
     }
 }
 
