@@ -196,6 +196,7 @@ struct AboutView: View {
         }
         .background(Color("Vintage"))
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .modifier(SchemeColoured())
     }
     
     init() {
@@ -208,7 +209,7 @@ struct AboutView: View {
             backing: .buffered, defer: false)
         window.titlebarAppearsTransparent = true
         window.isMovableByWindowBackground = true
-        window.backgroundColor = NSColor(named: "Vintage")
+        window.backgroundColor = NSColor(named: NSColor.Name("Vintage"))
         window.standardWindowButton(.miniaturizeButton)?.isHidden = true
         window.standardWindowButton(.zoomButton)?.isHidden = true
         window.center()

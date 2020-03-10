@@ -24,11 +24,8 @@ struct EditView: View {
     @State private var isDragging: Bool = false {
         willSet(newValue) {
             if self.isDragging != newValue {
-                if newValue {
-                    NSCursor.hide()
-                } else {
-                    NSCursor.unhide()
-                }
+                if newValue { NSCursor.hide() }
+                else { NSCursor.unhide() }
             }
         }
     }

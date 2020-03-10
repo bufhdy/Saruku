@@ -10,6 +10,19 @@ import Cocoa
 import SwiftUI
 import UserNotifications
 
+public let defaults = UserDefaults.standard
+
+struct SchemeColoured: ViewModifier {
+    func body(content: Content) -> some View {
+        if defaults.integer(forKey: "defaultTheme") == 0 {
+            return AnyView(content)
+        } else {
+            return AnyView(content
+                .colorScheme(defaults.integer(forKey: "defaultTheme") == 1 ? .light : .dark))
+        }
+    }
+}
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotificationCenterDelegate {
     var popover: NSPopover!
@@ -20,13 +33,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
     
     var prefsWindowIsOpen = false
     
+    var defaultTheme: Int { defaults.integer(forKey: "defaultTheme") }
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the popover
         let popover = NSPopover()
         popover.contentSize = NSSize(width: 60, height: 60)
         popover.behavior = .transient
         popover.animates = true
-        popover.contentViewController = NSHostingController(rootView: ContentView()) // SwiftUI view
+        // SwiftUI view with colour scheme set
+        popover.contentViewController = NSHostingController(rootView: ContentView().modifier(SchemeColoured()))
         self.popover = popover
         
         // Create the status bar
@@ -107,7 +123,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
         
         let showAction = UNNotificationAction(identifier: "SHOW_ACTION", title: "Show", options: .init(rawValue: 0))
         let dismissAction = UNNotificationAction(identifier: "DISMISS_ACTION", title: "Dismiss", options: .init(rawValue: 0))
-        let testCaregory = UNNotificationCategory(identifier: "NOTIFICATION", actions: [showAction, dismissAction], intentIdentifiers: [], options: .customDismissAction)
+        let testCaregory = UNNotificationCategory(identifier: "NOTIFICATION",
+                                                  actions: [showAction, dismissAction],
+                                                  intentIdentifiers: [],
+                                                  options: .customDismissAction)
         
         let request = UNNotificationRequest(identifier: "NOTIFICATION_REQUEST", content: content, trigger: nil)
         
@@ -134,6 +153,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .sound])
+    }
+    
+    func reloadTheme() {
+        self.popover.contentViewController = NSHostingController(rootView:
+            ContentView().colorScheme(self.defaultTheme == 0 ? .light : .dark))
     }
 }
 

@@ -55,10 +55,14 @@ struct ContentView: View {
             if let url = openPanel.url {
                 let appName = url.deletingPathExtension().lastPathComponent
                 
+                let defaultHour = defaults.integer(forKey: "defaultHour")
+                let defaultMinute = defaults.integer(forKey: "defaultMinute")
+                let second = defaultHour * 3600 + defaultMinute * 60
+                
                 self.items.source.append(AppItem(
                     name: appName,
                     theme: "FF2B5F", // Set to "Cherry", need to integrate
-                    duration: 60))
+                    duration: second))
             }
             openPanel.close()
         }
@@ -161,11 +165,8 @@ struct AppItemView: View {
     @State private var isDragging: Bool = false {
         willSet(newValue) {
             if self.isDragging != newValue {
-                if newValue {
-                    NSCursor.hide()
-                } else {
-                    NSCursor.unhide()
-                }
+                if newValue { NSCursor.hide() }
+                else { NSCursor.unhide() }
             }
         }
     }

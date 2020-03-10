@@ -56,6 +56,7 @@ struct PrefsView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color("Vintage"))
+        .modifier(SchemeColoured())
     }
     
     init() {
@@ -67,7 +68,7 @@ struct PrefsView: View {
             backing: .buffered, defer: false)
         window.titlebarAppearsTransparent = true
         window.title = "Saruku " + version
-        window.backgroundColor = NSColor(named: "Vintage")
+        window.backgroundColor = NSColor(named: NSColor.Name("Vintage"))
         window.standardWindowButton(.zoomButton)?.isHidden = true
         window.center()
         window.contentView = NSHostingView(rootView: self)
@@ -78,15 +79,26 @@ struct PrefsView: View {
 }
 
 struct GeneralView: View {
-    @State var language = 0
-    @State var shortcutTitle: String = ""
-    @State var hour = 0
-    @State var minute = 0
+    @State var language = defaults.integer(forKey: "defaultLang")
     
+    @State var hour = defaults.integer(forKey: "defaultHour") {
+        didSet { defaults.set(self.hour, forKey: "defaultHour") }
+    }
+    @State var minute = defaults.integer(forKey: "defaultMinute") {
+        didSet { defaults.set(self.minute, forKey: "defaultMinute") }
+    }
+
     var body: some View {
-        Form {
+        let languageBinding = Binding<Int>(get: {
+            return self.language
+        }, set: {
+            self.language = $0
+            defaults.set(self.language, forKey: "defaultLang")
+        })
+        
+        return Form {
             Section {
-                Picker(selection: $language,
+                Picker(selection: languageBinding,
                     label: Text("Language: ")
                         .font(.custom("Acme", size: 15))
                         .foregroundColor(Color("Newspaper")),
@@ -157,18 +169,36 @@ struct GeneralView: View {
 }
 
 struct CustomView: View {
-    @State var theme = 0
+    @State var theme = defaults.integer(forKey: "defaultTheme")
     
     var body: some View {
-        Form {
+        let themeBinding = Binding<Int>(get: {
+            return self.theme
+        }, set: {
+            self.theme = $0
+            defaults.set(self.theme, forKey: "defaultTheme")
+            let appDelegate = NSApp.delegate as? AppDelegate
+            appDelegate?.reloadTheme()
+        })
+        
+        return Form {
             Section {
-                Picker(selection: $theme,
+                Picker(selection: themeBinding,
                        label: Text("Theme: ")
                             .font(.custom("Acme", size: 15))
                             .foregroundColor(Color("Newspaper")),
                        content: {
-                        ColoursBar(name: "Blossom", colours: [Color(hex: 0xFF2B5F), Color(hex: 0x1A1B15), Color(hex: 0x2570B9), Color(hex: 0xF9F3DF)]).tag(0)
-                        ColoursBar(name: "Cyber-Nightmare", colours: [Color(hex: 0xE2270C), Color(hex: 0xF8FBDC), Color(hex: 0xDD682D), Color(hex: 0x4B3111)]).tag(1)
+                            Text("System").tag(0)
+                            ColoursBar(name: "Blossom",
+                                       colours: [Color(hex: 0xFF2B5F),
+                                                 Color(hex: 0x1A1B15),
+                                                 Color(hex: 0x2570B9),
+                                                 Color(hex: 0xF9F3DF)]).tag(1)
+                            ColoursBar(name: "Cyber-Nightmare",
+                                       colours: [Color(hex: 0xE2270C),
+                                                 Color(hex: 0xF8FBDC),
+                                                 Color(hex: 0xDD682D),
+                                                 Color(hex: 0x4B3111)]).tag(2)
                 })
             }
         }
