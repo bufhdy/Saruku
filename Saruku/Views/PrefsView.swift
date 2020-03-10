@@ -12,7 +12,7 @@ import LaunchAtLogin
 // A wrapper for SwiftUI default Toggle(), it will do some extra work when toggling
 struct LaunchAtLoginToggle {
     var value: Bool = LaunchAtLogin.isEnabled {
-        willSet { LaunchAtLogin.isEnabled = !value }
+        didSet { LaunchAtLogin.isEnabled = value }
     }
 }
 
@@ -85,7 +85,7 @@ struct GeneralView: View {
         didSet { defaults.set(self.hour, forKey: "defaultHour") }
     }
     
-    @State var minute = defaults.integer(forKey: "defaultMinute") {
+    @State var minute = defaults.integer(forKey: "defaultMinute") {  // Bug: default zero will crash
         didSet { defaults.set(self.minute, forKey: "defaultMinute") }
     }
 
@@ -115,7 +115,7 @@ struct GeneralView: View {
                 HStack {
                     Spacer()
                     
-                    Text("Be applied after restart.")
+                    Text("Language will change after restart.")
                        .font(.custom("Acme", size: 12))
                        .foregroundColor(Color("Newspaper").opacity(0.6))
                        .opacity(needsRestart ? 1 : 0)
@@ -238,7 +238,7 @@ struct CustomView: View {
                 HStack {
                     Spacer()
                     
-                    Text("Be applied after restart.")
+                    Text("Theme will be applied after restart.")
                        .font(.custom("Acme", size: 12))
                        .foregroundColor(Color("Newspaper").opacity(0.6))
                        .opacity(needsRestart ? 1 : 0)
