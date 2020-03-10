@@ -127,6 +127,11 @@ struct EditView: View {
                     }, onDecrement: {
                         if self.minute > 0 {
                             self.minute -= 1
+                        } else {
+                            if self.hour > 0 {
+                                self.hour -= 1
+                                self.minute = 59
+                            }
                         }
                     })  { Text("").foregroundColor(Color("Newspaper")) }
                         .frame(width: 13, height: 21, alignment: .trailing)

@@ -129,6 +129,11 @@ struct GeneralView: View {
                                 Button(action: {
                                     if self.minute > 0 {
                                         self.minute -= 1
+                                    } else {
+                                       if self.hour > 0 {
+                                           self.hour -= 1
+                                           self.minute = 59
+                                       }
                                     }
                                 }) { Text("⬇️ Minute") }
                             }
