@@ -170,12 +170,15 @@ struct GeneralView: View {
 
 struct CustomView: View {
     @State var theme = defaults.integer(forKey: "defaultTheme")
+    let originalTheme = defaults.integer(forKey: "defaultTheme")
+    @State var needsRestart = false
     
     var body: some View {
         let themeBinding = Binding<Int>(get: {
             return self.theme
         }, set: {
             self.theme = $0
+            self.needsRestart = self.originalTheme != $0
             defaults.set(self.theme, forKey: "defaultTheme")
             let appDelegate = NSApp.delegate as? AppDelegate
             appDelegate?.reloadTheme()
@@ -200,6 +203,16 @@ struct CustomView: View {
                                                  Color(hex: 0xDD682D),
                                                  Color(hex: 0x4B3111)]).tag(2)
                 })
+                
+                HStack {
+                    Spacer()
+                    
+                    Text("Be applied after restart.")
+                       .font(.custom("Acme", size: 12))
+                       .foregroundColor(Color("Newspaper").opacity(0.6))
+                       .opacity(needsRestart ? 1 : 0)
+                       .animation(.easeInOut)
+                }
             }
         }
         .padding()
