@@ -96,48 +96,48 @@ struct GeneralView: View {
                         Text("日本語").tag(2)
                     })
                 
-                    VStack {
-                        Text("Default cooldown: \(self.hour)h \(self.minute)mins")
-                    
-                        HStack {
-                            VStack(spacing: 3) {
-                                Button(action: {
+                VStack(alignment: .leading) {
+                    Text("Default cooldown: \(self.hour)h \(self.minute)mins")
+                
+                    HStack {
+                        VStack(spacing: 3) {
+                            Button(action: {
+                                if self.hour < 10 {
+                                    self.hour += 1
+                                }
+                            }) { Text("⬆️ Hour") }
+                            
+                            Button(action: {
+                                if self.hour > 0 {
+                                    self.hour -= 1
+                                }
+                            }) { Text("⬇️ Hour") }
+                        }
+                        
+                        VStack(spacing: 3) {
+                            Button(action: {
+                                if self.minute < 59 {
+                                    self.minute += 1
+                                } else {
                                     if self.hour < 10 {
                                         self.hour += 1
+                                        self.minute = 0
                                     }
-                                }) { Text("⬆️ Hour") }
-                                
-                                Button(action: {
-                                    if self.hour > 0 {
-                                        self.hour -= 1
-                                    }
-                                }) { Text("⬇️ Hour") }
-                            }
+                                }
+                            }) { Text("⬆️ Minute") }
                             
-                            VStack(spacing: 3) {
-                                Button(action: {
-                                    if self.minute < 59 {
-                                        self.minute += 1
-                                    } else {
-                                        if self.hour < 10 {
-                                            self.hour += 1
-                                            self.minute = 0
-                                        }
-                                    }
-                                }) { Text("⬆️ Minute") }
-                                
-                                Button(action: {
-                                    if self.minute > 0 {
-                                        self.minute -= 1
-                                    } else {
-                                       if self.hour > 0 {
-                                           self.hour -= 1
-                                           self.minute = 59
-                                       }
-                                    }
-                                }) { Text("⬇️ Minute") }
-                            }
+                            Button(action: {
+                                if self.minute > 0 {
+                                    self.minute -= 1
+                                } else {
+                                   if self.hour > 0 {
+                                       self.hour -= 1
+                                       self.minute = 59
+                                   }
+                                }
+                            }) { Text("⬇️ Minute") }
                         }
+                    }
                 }.animation(nil)
             }
             
