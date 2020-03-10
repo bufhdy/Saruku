@@ -62,7 +62,7 @@ struct PrefsView: View {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
         
         window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 400, height: 400),
+            contentRect: NSRect(x: 0, y: 0, width: 400, height: 300),
             styleMask: [.closable, .miniaturizable, .fullSizeContentView, .titled, .resizable],
             backing: .buffered, defer: false)
         window.titlebarAppearsTransparent = true
