@@ -40,7 +40,7 @@ struct AboutView: View {
                 Image("SarukuIcon")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 120)
+                    .frame(width: 120, height: 140)
                 
                 Text("Saruku")
                     .font(.custom("Acme", size: 18))
