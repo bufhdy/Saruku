@@ -157,6 +157,18 @@ struct AppItemView: View {
     @State private var editing = false
     @State private var editingHour = false
     @State private var hourEditorYOffset: CGFloat = 0
+    
+    @State private var isDragging: Bool = false {
+        willSet(newValue) {
+            if self.isDragging != newValue {
+                if newValue {
+                    NSCursor.hide()
+                } else {
+                    NSCursor.unhide()
+                }
+            }
+        }
+    }
    
     private func openApp(_ name: String) {
         let url = NSURL(fileURLWithPath: "/Applications/" + name + ".app", isDirectory: true) as URL
@@ -259,6 +271,8 @@ struct AppItemView: View {
                     self.editing = true
                     self.editingHour = true
                     
+                    self.isDragging = true
+                    
                     self.hourEditorYOffset = value.translation.height
                     if self.hourEditorYOffset > 0 {  // Border
                         self.hourEditorYOffset = 0
@@ -272,6 +286,8 @@ struct AppItemView: View {
                 .onEnded { _ in
                     self.editingHour = false
                     self.showEditButton = false
+                    
+                    self.isDragging = false
                     
                     self.hourEditorYOffset = 0
                 }

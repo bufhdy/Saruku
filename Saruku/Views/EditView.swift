@@ -21,6 +21,18 @@ struct EditView: View {
     
     @State private var minuteEditorYOffset: CGFloat = 0
     
+    @State private var isDragging: Bool = false {
+        willSet(newValue) {
+            if self.isDragging != newValue {
+                if newValue {
+                    NSCursor.hide()
+                } else {
+                    NSCursor.unhide()
+                }
+            }
+        }
+    }
+    
     private func setSecond() {
         self.second = hour * 3600 + minute * 60
         self.items[self.index].duration = self.second
@@ -65,6 +77,8 @@ struct EditView: View {
             .offset(y: minuteEditorYOffset)
             .gesture(DragGesture()
                 .onChanged { value in
+                    self.isDragging = true
+                    
                     self.minuteEditorYOffset = value.translation.height
                     if self.minuteEditorYOffset > 0 {
                         self.minuteEditorYOffset = 0
@@ -76,6 +90,8 @@ struct EditView: View {
                     self.minute = Int(Double(self.minuteEditorYOffset) * 59.0 / -40.0)
                 }
                 .onEnded { _ in
+                    self.isDragging = false
+                    
                     self.minuteEditorYOffset = 0
                     
                     if self.hour != 0 || self.minute != 0 { self.setSecond() }
