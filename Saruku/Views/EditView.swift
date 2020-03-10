@@ -33,8 +33,6 @@ struct EditView: View {
         }
     }
     
-    @State private var hourTest: Double = 1.0
-    
     private func setSecond() {
         self.second = hour * 3600 + minute * 60
         self.items[self.index].duration = self.second
