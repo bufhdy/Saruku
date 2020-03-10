@@ -17,6 +17,7 @@
 		1487D3632414D6AA0019D49D /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1487D3622414D6AA0019D49D /* AboutView.swift */; };
 		1487D3652414F53C0019D49D /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1487D3642414F53C0019D49D /* Components.swift */; };
 		1487D3672414F5890019D49D /* Backyard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1487D3662414F5890019D49D /* Backyard.swift */; };
+		148C9D802417EBFC009D3A28 /* CookbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148C9D7F2417EBFC009D3A28 /* CookbookView.swift */; };
 		149B73042415339300DDEBD7 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 149B73032415339300DDEBD7 /* Cartfile */; };
 		149B732F2415473400DDEBD7 /* LaunchAtLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149B732D2415472000DDEBD7 /* LaunchAtLogin.framework */; };
 		149B73302415473400DDEBD7 /* LaunchAtLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 149B732D2415472000DDEBD7 /* LaunchAtLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -56,6 +57,7 @@
 		1487D3622414D6AA0019D49D /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		1487D3642414F53C0019D49D /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		1487D3662414F5890019D49D /* Backyard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backyard.swift; sourceTree = "<group>"; };
+		148C9D7F2417EBFC009D3A28 /* CookbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookbookView.swift; sourceTree = "<group>"; };
 		149B73032415339300DDEBD7 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		149B732D2415472000DDEBD7 /* LaunchAtLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LaunchAtLogin.framework; path = Carthage/Build/Mac/LaunchAtLogin.framework; sourceTree = "<group>"; };
 		14DC2B3C2415F9F800A367F9 /* ImageBackyard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBackyard.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				1487D3642414F53C0019D49D /* Components.swift */,
 				14E027D824149AC2004CA423 /* PrefsView.swift */,
 				1487D3622414D6AA0019D49D /* AboutView.swift */,
+				148C9D7F2417EBFC009D3A28 /* CookbookView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				14E027D924149AC2004CA423 /* PrefsView.swift in Sources */,
 				146335B7241110C9006E6B7F /* ContentView.swift in Sources */,
 				1487D3672414F5890019D49D /* Backyard.swift in Sources */,
+				148C9D802417EBFC009D3A28 /* CookbookView.swift in Sources */,
 				14FCA58224114CFB00860F8D /* ItemSource.swift in Sources */,
 				14DC2B3D2415F9F900A367F9 /* ImageBackyard.swift in Sources */,
 				1487D3652414F53C0019D49D /* Components.swift in Sources */,

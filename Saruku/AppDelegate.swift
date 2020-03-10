@@ -30,6 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
     var statusBarMenu: NSMenu!
     var prefsView: PrefsView?
     var aboutView: AboutView?
+    var cookbookView: CookbookView?
     
     var prefsWindowIsOpen = false
     
@@ -61,6 +62,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
         statusBarMenu.addItem(withTitle: "Preferences...",
                               action: #selector(openPrefsWindow(_:)),
                               keyEquivalent: ",")
+        statusBarMenu.addItem(withTitle: "Cookbook",
+                              action: #selector(openHelpWindow(_:)),
+                              keyEquivalent: "")
         statusBarMenu.addItem(NSMenuItem.separator())
         statusBarMenu.addItem(withTitle: "Quit",
                               action: #selector(quitApp(_:)),
@@ -89,11 +93,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
         statusBarItem.menu = nil
     }
     
-    // TODO: Integrate the 2 funcs
+    // TODO: Integrate the 3 funcs
     @objc func openPrefsWindow(_ sender: Any) {
         NSApp.activate(ignoringOtherApps: true)
-        if let prefsView = prefsView, prefsView.windowDelegate.isOpen {
-            prefsView.window.makeKeyAndOrderFront(self)
+        if let view = prefsView, view.windowDelegate.isOpen {
+            view.window.makeKeyAndOrderFront(self)
         } else {
             prefsView = PrefsView()
         }
@@ -101,10 +105,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
     
     @objc func openAboutWindow(_ sender: Any) {
         NSApp.activate(ignoringOtherApps: true)
-        if let aboutView = aboutView, aboutView.windowDelegate.isOpen {
-            aboutView.window.makeKeyAndOrderFront(self)
+        if let view = aboutView, view.windowDelegate.isOpen {
+            view.window.makeKeyAndOrderFront(self)
         } else {
             aboutView = AboutView()
+        }
+    }
+    
+    @objc func openHelpWindow(_ sender: Any) {
+        NSApp.activate(ignoringOtherApps: true)
+        if let view = cookbookView, view.windowDelegate.isOpen {
+            view.window.makeKeyAndOrderFront(self)
+        } else {
+            cookbookView = CookbookView()
         }
     }
 

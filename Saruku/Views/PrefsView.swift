@@ -62,8 +62,8 @@ struct PrefsView: View {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
         
         window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 400, height: 300),
-            styleMask: [.closable, .miniaturizable, .fullSizeContentView, .titled, .resizable],
+            contentRect: NSRect(x: 0, y: 0, width: 400, height: 320),
+            styleMask: [.closable, .miniaturizable, .fullSizeContentView, .titled],
             backing: .buffered, defer: false)
         window.titlebarAppearsTransparent = true
         window.title = "Saruku " + version
