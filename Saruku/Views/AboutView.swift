@@ -70,7 +70,7 @@ struct AboutView: View {
                 }
                 .frame(height: 16)
                 
-                Spacer().frame(height: 2)
+                Spacer().frame(height: 1)
                 
                 ZStack(alignment: .leading) {
                     VStack(spacing: 0) {
