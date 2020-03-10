@@ -178,7 +178,7 @@ struct AboutView: View {
         window.center()
         window.contentView = NSHostingView(rootView: self)
         window.delegate = windowDelegate
-        windowDelegate.windowIsOpen = true
+        windowDelegate.isOpen = true
         window.makeKeyAndOrderFront(nil)
     }
 }

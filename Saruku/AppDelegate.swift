@@ -8,9 +8,10 @@
 
 import Cocoa
 import SwiftUI
+import UserNotifications
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotificationCenterDelegate {
     var popover: NSPopover!
     var statusBarItem: NSStatusItem!
     var statusBarMenu: NSMenu!
@@ -61,7 +62,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 else {
                     self.popover.show(relativeTo: button.bounds,
                                       of: button,
-                                      preferredEdge: NSRectEdge.minY)
+                                      preferredEdge: .minY)
                 }
             }
             
@@ -77,7 +78,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     // TODO: Integrate the 2 funcs
     @objc func openPrefsWindow(_ sender: Any) {
         NSApp.activate(ignoringOtherApps: true)
-        if let prefsView = prefsView, prefsView.windowDelegate.windowIsOpen {
+        if let prefsView = prefsView, prefsView.windowDelegate.isOpen {
             prefsView.window.makeKeyAndOrderFront(self)
         } else {
             prefsView = PrefsView()
@@ -86,7 +87,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     @objc func openAboutWindow(_ sender: Any) {
         NSApp.activate(ignoringOtherApps: true)
-        if let aboutView = aboutView, aboutView.windowDelegate.windowIsOpen {
+        if let aboutView = aboutView, aboutView.windowDelegate.isOpen {
             aboutView.window.makeKeyAndOrderFront(self)
         } else {
             aboutView = AboutView()
@@ -96,12 +97,52 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @objc func quitApp(_ sender: Any) {
         NSApp.terminate(self)
     }
+    
+    func notificationAction(named name: String) {
+        let content = UNMutableNotificationContent()
+        content.title = "Saruku"
+        content.body = "\(name) is ready to go."
+        content.userInfo = ["method": "new"]
+        
+        content.sound = UNNotificationSound.default
+        content.categoryIdentifier = "NOTIFICATION_DEMO"
+        
+        let acceptAction = UNNotificationAction(identifier: "SHOW_ACTION", title: "Show", options: .init(rawValue: 0))
+        let declineAction = UNNotificationAction(identifier: "CLOSE_ACTION", title: "Close", options: .init(rawValue: 0))
+        let testCaregory = UNNotificationCategory(identifier: "NOTIFICATION_DEMO", actions: [acceptAction, declineAction], intentIdentifiers: [], options: .customDismissAction)
+        
+        let request = UNNotificationRequest(identifier: "NOTIFICATION_DEMO_REQUEST", content: content, trigger: nil)
+        
+        let notificationCentre = UNUserNotificationCenter.current()
+        notificationCentre.delegate = self
+        notificationCentre.setNotificationCategories([testCaregory])
+        notificationCentre.add(request)
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        switch response.actionIdentifier {
+        case "SHOW_ACTION":
+            self.popover.show(relativeTo: self.statusBarItem.button!.bounds, of: self.statusBarItem.button!, preferredEdge: .minY)
+        case "CLOSE_ACTION":
+            break
+        default:
+            break
+        }
+        
+        completionHandler()
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
 }
 
 class WindowsDelegate: NSObject, NSWindowDelegate {
-    var windowIsOpen = false
+    var isOpen = false
     
     func windowWillClose(_ notification: Notification) {
-        windowIsOpen = false
+        isOpen = false
     }
 }

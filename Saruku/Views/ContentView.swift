@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Cocoa
+import UserNotifications
 
 // Core struct for items
 struct AppItem: Codable, Identifiable {
@@ -177,8 +178,17 @@ struct AppItemView: View {
                 .saturation(second == 0 ? 1 : 0)
                 .animation(Animation.linear(duration: 0.8))
                 .frame(width: 42, height: 42)
-                .onReceive(timer) { _ in
-                    if self.second > 0 { self.second -= 1 }
+                .onReceive(timer) { _ in  // Timer changed here
+                    if self.second > 0 {
+                        // Send notification
+                        if self.second == 1 {
+                            let appDelegate = NSApp.delegate as? AppDelegate
+                            if !(appDelegate?.popover.isShown)! {
+                                appDelegate?.notificationAction(named: self.items[self.index].name)
+                            }
+                        }
+                        self.second -= 1
+                    }
                 }
                 .onTapGesture {
                     self.second = self.items[self.index].duration
