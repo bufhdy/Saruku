@@ -153,7 +153,7 @@ struct CookbookView: View {
         1: "i",
         2: "ii",
         3: "iii",
-        4: "iv"
+        4: "vi"  // Page seven
     ]
     
     var body: some View {
