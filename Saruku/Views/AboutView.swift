@@ -21,6 +21,18 @@ struct AboutView: View {
         }
     }
     
+    @State var isHover: Bool = false {
+        willSet(newValue) {
+            if self.isHover != newValue {
+                if newValue {
+                    NSCursor.pointingHand.push()
+                } else {
+                    NSCursor.pointingHand.pop()
+                }
+            }
+        }
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             VStack(spacing: 0) {
@@ -52,6 +64,9 @@ struct AboutView: View {
                     .onTapGesture {
                         self.openURL(url: "https://github.com/bufhdy/Saruku")
                     }
+                    .onHover { value in
+                        self.isHover = value
+                    }
                     
                     HStack(spacing: 0) {
                         Text("Source code")
@@ -66,6 +81,10 @@ struct AboutView: View {
                     }
                     .onTapGesture {
                         self.openURL(url: "https://github.com/bufhdy/Saruku")
+                        self.isHover = false
+                    }
+                    .onHover { value in
+                        self.isHover = value
                     }
                 }
                 .frame(height: 16)
@@ -108,18 +127,27 @@ struct AboutView: View {
                         Color.black.opacity(0.0001)
                             .frame(width: 32, height: 16)
                     }
+                    .onHover { value in
+                       self.isHover = value
+                    }
                     .offset(x: 57.5)
                     .onTapGesture {
                         self.openURL(url: "https://fonts.google.com/specimen/Acme")
+                        self.isHover = false
                     }
+                    
                     
                     VStack(spacing: 0) {
                         Color.black.opacity(0.0001)
                             .frame(width: 110.5, height: 16)
                     }
+                    .onHover { value in
+                        self.isHover = value
+                    }
                     .offset(x: 111)
                     .onTapGesture {
                         self.openURL(url: "https://www.huertatipografica.com/en")
+                        self.isHover = false
                     }
                 }
                     
@@ -144,10 +172,17 @@ struct AboutView: View {
                         Color.black.opacity(0.0001)
                             .frame(width: 50, height: 16)
                     }
-                    .offset(x: 89)
                     .onTapGesture {
                         self.openURL(url: "https://twitter.com/bufhdy")
+                        self.isHover = false
+                        
+                        print(self.isHover)
                     }
+                    .onHover { value in
+                        self.isHover = value
+                    }
+                    .offset(x: 89)
+                    
                 }
             }.frame(height: 278)
             
