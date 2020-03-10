@@ -267,11 +267,11 @@ struct AppItemView: View {
             .animation(Animation.linear(duration: 0.1))
             .gesture(DragGesture()
                 .onChanged { value in
+                    self.isDragging = true
+                    
                     self.showEditButton = true
                     self.editing = true
                     self.editingHour = true
-                    
-                    self.isDragging = true
                     
                     self.hourEditorYOffset = value.translation.height
                     if self.hourEditorYOffset > 0 {  // Border
@@ -284,10 +284,10 @@ struct AppItemView: View {
                     self.hour = Int(self.hourEditorYOffset) / -4
                 }
                 .onEnded { _ in
+                    self.isDragging = false
+                    
                     self.editingHour = false
                     self.showEditButton = false
-                    
-                    self.isDragging = false
                     
                     self.hourEditorYOffset = 0
                 }
@@ -300,6 +300,20 @@ struct AppItemView: View {
         }
         .frame(width: 60, height: 60)
         .background(ItemBackground(isFirst: index == 0, color: Color("Vintage")))
+        .touchBar {  // Need supporting more function
+            ForEach(self.items.indices, id: \.self) { index in
+                Button(action: {}) {
+                    ZStack {
+                        Image(nsImage: NSImage(data: getIcon(input: self.items[index].name, size: 128)!)!)
+                            .renderingMode(.original)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24, height: 24)
+                    }
+                    .frame(width: 72)
+                }
+            }
+        }
     }
 }
 

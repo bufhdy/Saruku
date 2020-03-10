@@ -65,8 +65,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
                                       preferredEdge: .minY)
                 }
             }
-            
-            self.popover.contentViewController?.view.window?.becomeKey()
         }
     }
     
