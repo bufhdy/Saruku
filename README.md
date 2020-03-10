@@ -11,7 +11,7 @@ Saruku is a macOS menu bar app that provides cooldown time for SNS apps to help 
 - [ ] Efficient timer
 - [x] Start at login
 - [ ] Shortcut
-- [ ] Dark mode
+- [x] Dark mode
 - [x] More joyful animations
 - [ ] Languages
 - [ ] Notification
