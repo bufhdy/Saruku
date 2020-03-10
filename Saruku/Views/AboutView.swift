@@ -33,6 +33,7 @@ struct AboutView: View {
         }
     }
     
+    // Need to integrate
     var body: some View {
         VStack(spacing: 0) {
             VStack(spacing: 0) {
