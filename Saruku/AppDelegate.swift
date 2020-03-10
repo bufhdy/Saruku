@@ -105,13 +105,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
         content.userInfo = ["method": "new"]
         
         content.sound = UNNotificationSound.default
-        content.categoryIdentifier = "NOTIFICATION_DEMO"
+        content.categoryIdentifier = "NOTIFICATION"
         
-        let acceptAction = UNNotificationAction(identifier: "SHOW_ACTION", title: "Show", options: .init(rawValue: 0))
-        let declineAction = UNNotificationAction(identifier: "CLOSE_ACTION", title: "Close", options: .init(rawValue: 0))
-        let testCaregory = UNNotificationCategory(identifier: "NOTIFICATION_DEMO", actions: [acceptAction, declineAction], intentIdentifiers: [], options: .customDismissAction)
+        let showAction = UNNotificationAction(identifier: "SHOW_ACTION", title: "Show", options: .init(rawValue: 0))
+        let dismissAction = UNNotificationAction(identifier: "DISMISS_ACTION", title: "Dismiss", options: .init(rawValue: 0))
+        let testCaregory = UNNotificationCategory(identifier: "NOTIFICATION", actions: [showAction, dismissAction], intentIdentifiers: [], options: .customDismissAction)
         
-        let request = UNNotificationRequest(identifier: "NOTIFICATION_DEMO_REQUEST", content: content, trigger: nil)
+        let request = UNNotificationRequest(identifier: "NOTIFICATION_REQUEST", content: content, trigger: nil)
         
         let notificationCentre = UNUserNotificationCenter.current()
         notificationCentre.delegate = self
@@ -125,7 +125,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
         switch response.actionIdentifier {
         case "SHOW_ACTION":
             self.popover.show(relativeTo: self.statusBarItem.button!.bounds, of: self.statusBarItem.button!, preferredEdge: .minY)
-        case "CLOSE_ACTION":
+        case "DISMISS_ACTION":
             break
         default:
             break
