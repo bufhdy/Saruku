@@ -33,9 +33,9 @@ struct AboutView: View {
                     .font(.custom("Acme", size: 18))
                     .foregroundColor(Color("Newspaper"))
                 Text("Version \(self.version) (\(self.build))")
-                    .font(.system(.caption))
+                    .font(.system(size: 12, weight: .regular, design: .rounded))
                 
-                Spacer().frame(height: 10)
+                Spacer().frame(height: 12)
                 
                 Text("Credits")
                     .font(.custom("Acme", size: 15))
@@ -123,7 +123,7 @@ struct AboutView: View {
                     }
                 }
                     
-                Spacer().frame(height: 10)
+                Spacer().frame(height: 12)
                 
                 ZStack(alignment: .leading) {
                     VStack(spacing: 0) {
@@ -150,6 +150,8 @@ struct AboutView: View {
                     }
                 }
             }.frame(height: 278)
+            
+            Spacer().frame(height: 12)
             
             Rectangle()
                 .foregroundColor(.clear)
