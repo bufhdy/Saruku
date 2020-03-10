@@ -191,7 +191,10 @@ struct AboutView: View {
             
             Rectangle()
                 .foregroundColor(.clear)
-                .background(LinearGradient(gradient: Gradient(colors: [Color("Cherry").opacity(0), Color("Cherry").opacity(0.6)]), startPoint: .top, endPoint: .bottom))
+                .background(LinearGradient(
+                    gradient: Gradient(colors: [Color("Cherry").opacity(0), Color("Cherry").opacity(0.6)]),
+                    startPoint: .top,
+                    endPoint: .bottom))
                 .frame(height: 22)
         }
         .background(Color("Vintage"))
@@ -209,7 +212,7 @@ struct AboutView: View {
             backing: .buffered, defer: false)
         window.titlebarAppearsTransparent = true
         window.isMovableByWindowBackground = true
-        window.backgroundColor = NSColor(named: NSColor.Name("Vintage"))
+        window.backgroundColor = NSColor(named: NSColor.Name("Vintage"))  // TODO: Need to set by colour scheme
         window.standardWindowButton(.miniaturizeButton)?.isHidden = true
         window.standardWindowButton(.zoomButton)?.isHidden = true
         window.center()

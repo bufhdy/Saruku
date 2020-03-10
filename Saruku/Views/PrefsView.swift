@@ -38,7 +38,6 @@ struct PrefsView: View {
             }
             .padding([.horizontal, .top])
             
-            
             Toggle(isOn: $launchAtLoginModel.value) {
                 Text("Launch Saruku at login")
                     .font(.custom("Acme", size: 15))
@@ -68,7 +67,7 @@ struct PrefsView: View {
             backing: .buffered, defer: false)
         window.titlebarAppearsTransparent = true
         window.title = "Saruku " + version
-        window.backgroundColor = NSColor(named: NSColor.Name("Vintage"))
+        window.backgroundColor = NSColor(named: NSColor.Name("Vintage"))  // TODO: Need to set by colour scheme
         window.standardWindowButton(.zoomButton)?.isHidden = true
         window.center()
         window.contentView = NSHostingView(rootView: self)
@@ -80,19 +79,24 @@ struct PrefsView: View {
 
 struct GeneralView: View {
     @State var language = defaults.integer(forKey: "defaultLang")
+    let originalLang = defaults.integer(forKey: "defaultLang")
     
     @State var hour = defaults.integer(forKey: "defaultHour") {
         didSet { defaults.set(self.hour, forKey: "defaultHour") }
     }
+    
     @State var minute = defaults.integer(forKey: "defaultMinute") {
         didSet { defaults.set(self.minute, forKey: "defaultMinute") }
     }
 
+    @State private var needsRestart = false
+    
     var body: some View {
         let languageBinding = Binding<Int>(get: {
             return self.language
         }, set: {
             self.language = $0
+            self.needsRestart = self.originalLang != $0
             defaults.set(self.language, forKey: "defaultLang")
         })
         
@@ -108,22 +112,38 @@ struct GeneralView: View {
                         Text("日本語").tag(2)
                     })
                 
-                VStack(alignment: .leading) {
-                    Text("Default cooldown: \(self.hour)h \(self.minute)mins")
+                HStack {
+                    Spacer()
+                    
+                    Text("Be applied after restart.")
+                       .font(.custom("Acme", size: 12))
+                       .foregroundColor(Color("Newspaper").opacity(0.6))
+                       .opacity(needsRestart ? 1 : 0)
+                       .animation(.easeInOut)
+                }
                 
+                ZStack(alignment: .leading) {
+                    Text("Default\ncooldown: ")
+                        .font(.custom("Acme", size: 15))
+                        .foregroundColor(Color("Newspaper"))
+                        .offset(x: -72)
+                    
                     HStack {
                         VStack(spacing: 3) {
                             Button(action: {
                                 if self.hour < 10 {
                                     self.hour += 1
                                 }
-                            }) { Text("⬆️ Hour") }
+                            }) { Text("h↑").frame(width: 36) }
                             
                             Button(action: {
                                 if self.hour > 0 {
                                     self.hour -= 1
+                                    if self.hour == 0 && self.minute == 0 {
+                                        self.minute = 1
+                                    }
                                 }
-                            }) { Text("⬇️ Hour") }
+                            }) { Text("h↓").frame(width: 36) }
                         }
                         
                         VStack(spacing: 3) {
@@ -136,33 +156,42 @@ struct GeneralView: View {
                                         self.minute = 0
                                     }
                                 }
-                            }) { Text("⬆️ Minute") }
+                            }) { Text("min↑").frame(width: 36) }
                             
                             Button(action: {
                                 if self.minute > 0 {
-                                    self.minute -= 1
+                                    if self.minute != 1 || self.hour != 0 {
+                                        self.minute -= 1
+                                    }
                                 } else {
                                    if self.hour > 0 {
                                        self.hour -= 1
                                        self.minute = 59
                                    }
                                 }
-                            }) { Text("⬇️ Minute") }
+                            }) { Text("min↓").frame(width: 36) }
                         }
+                        
+                        Spacer()
+                        
+                        Text((self.hour == 0 ? "" : "\(self.hour)h ") + "\(self.minute)min")
+                            .font(.custom("Acme", size: 12))
+                            .foregroundColor(Color("Newspaper").opacity(0.6))
                     }
                 }.animation(nil)
             }
             
-            Section {
-                HStack {
-                    Button(action: {}) {
-                        Text("Set ⌥⌘Z Shortcut")
-                    }
-                    Button(action: {}) {
-                        Text("Clear")
-                    }.disabled(true)
-                }
-            }
+            // TODO: Add global shortcut
+//            Section {
+//                HStack {
+//                    Button(action: {}) {
+//                        Text("Set ⌥⌘Z Shortcut")
+//                    }
+//                    Button(action: {}) {
+//                        Text("Clear")
+//                    }.disabled(true)
+//                }
+//            }
         }
         .padding()
     }
@@ -180,8 +209,6 @@ struct CustomView: View {
             self.theme = $0
             self.needsRestart = self.originalTheme != $0
             defaults.set(self.theme, forKey: "defaultTheme")
-            let appDelegate = NSApp.delegate as? AppDelegate
-            appDelegate?.reloadTheme()
         })
         
         return Form {
@@ -191,7 +218,11 @@ struct CustomView: View {
                             .font(.custom("Acme", size: 15))
                             .foregroundColor(Color("Newspaper")),
                        content: {
-                            Text("System").tag(0)
+                            ColoursBar(name: "Auto",
+                                       colours: [Color("Cherry"),
+                                                 Color("Newspaper"),
+                                                 Color("Sorrow"),
+                                                 Color("Vintage")]).tag(0)
                             ColoursBar(name: "Blossom",
                                        colours: [Color(hex: 0xFF2B5F),
                                                  Color(hex: 0x1A1B15),
