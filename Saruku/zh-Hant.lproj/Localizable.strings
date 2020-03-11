@@ -30,7 +30,7 @@
 "cusTab" = "客製";
 "ioTab" = "導入／導出";
 "launchAtLoginInst" = "系統登錄時自動運行";
-"openAtLaunchInst" = "顯示幫助手冊";
+"openAtLaunchInst" = "開啟時顯示幫助手冊";
 "langLabel" = "語言：";
 "langSystem" = "系統語言";
 "langRestartInst" = "重啓軟體以完成更改。";

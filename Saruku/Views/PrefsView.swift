@@ -16,6 +16,31 @@ struct LaunchAtLoginToggle {
     }
 }
 
+struct LabelFont: ViewModifier {
+    enum Size {
+        case label
+        case note
+    }
+    
+    let lang = defaults.integer(forKey: "defaultLang") == 0 ?
+        Bundle.main.preferredLocalizations.first! :
+        langs[defaults.integer(forKey: "defaultLang")]
+    let size: Size
+    
+    func body(content: Content) -> some View {
+        content
+            .font(self.size == .label ?
+                (lang == "en" ? .custom("Acme", size: 15) : .system(size: 13, weight: .heavy)) :
+                (lang == "en" ? .custom("Acme", size: 12) : .system(size: 11, weight: .heavy)))
+    }
+    
+    
+    
+    init(size: Size = .label) {
+        self.size = size
+    }
+}
+
 struct PrefsView: View {
     
     var window: NSWindow!
@@ -53,13 +78,13 @@ struct PrefsView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Toggle(isOn: $launchAtLoginModel.value) {
                     Text("launchAtLoginInst".localised())
-                        .font(.custom("Acme", size: 15))
+                        .modifier(LabelFont())
                         .foregroundColor(Color("Newspaper"))
                 }
                 
                 Toggle(isOn: showsCookbookAtLaunchBinding) {
                     Text("openAtLaunchInst".localised())
-                        .font(.custom("Acme", size: 15))
+                        .modifier(LabelFont())
                         .foregroundColor(Color("Newspaper"))
                 }
             }
@@ -108,7 +133,7 @@ struct PrefsView: View {
     }
 }
 
-let coolDownXOffsets = [0, -72, -52, -60]
+let coolDownXOffsets = [0, -72, -48, -55]
 
 struct GeneralView: View {
     @State var language = defaults.integer(forKey: "defaultLang")
@@ -163,7 +188,7 @@ struct GeneralView: View {
             Section {
                 Picker(selection: languageBinding,
                     label: Text("langLabel".localised())
-                        .font(.custom("Acme", size: 15))
+                        .modifier(LabelFont())
                         .foregroundColor(Color("Newspaper")),
                     content: {
                         Text("langSystem".localised()).tag(0)
@@ -176,14 +201,14 @@ struct GeneralView: View {
                     Spacer()
                     
                     Text("langRestartInst".localised())
-                        .font(.custom("Acme", size: 12))
+                        .modifier(LabelFont(size: .note))
                         .foregroundColor(Color("Newspaper").opacity(0.6))
                         .opacity(needsRestart ? 1 : 0)
                 }
                 
                 ZStack(alignment: .leading) {
                     Text("coolDownLangLabel".localised())
-                        .font(.custom("Acme", size: 15))
+                        .modifier(LabelFont())
                         .foregroundColor(Color("Newspaper"))
                         .offset(x: coolDownXOffset)
                     
@@ -233,8 +258,8 @@ struct GeneralView: View {
                         
                         Spacer()
                         
-                        Text(cooldownString)  // Localisation needed
-                            .font(.custom("Acme", size: 12))
+                        Text(cooldownString)
+                            .modifier(LabelFont(size: .note))
                             .foregroundColor(Color("Newspaper").opacity(0.6))
                     }
                 }.animation(nil)
@@ -281,7 +306,7 @@ struct CustomView: View {
             Section {
                 Picker(selection: themeBinding,
                        label: Text("themeLabel".localised())
-                            .font(.custom("Acme", size: 15))
+                            .modifier(LabelFont())
                             .foregroundColor(Color("Newspaper")),
                        content: {
                             ColoursBar(name: "themeAuto".localised(),
@@ -305,7 +330,7 @@ struct CustomView: View {
                     Spacer()
                     
                     Text("themeRestartInst".localised())
-                        .font(.custom("Acme", size: 12))
+                        .modifier(LabelFont(size: .note))
                         .foregroundColor(Color("Newspaper").opacity(0.6))
                         .opacity(needsRestart ? 1 : 0)
                 }
