@@ -71,7 +71,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
         // Create the popover
         popover = NSPopover()
         popover.contentSize = NSSize(width: 60, height: 60)
-        popover.behavior = .semitransient
+        popover.behavior = .transient
         popover.animates = true
         // SwiftUI view with colour scheme set
         popover.contentViewController = NSHostingController(rootView: ContentView().modifier(SchemeColoured()))
