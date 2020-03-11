@@ -133,7 +133,7 @@ struct PrefsView: View {
     }
 }
 
-let coolDownXOffsets = [0, -72, -48, -55]
+let coolDownXOffsets = [0, -72, -48, -52]
 
 struct GeneralView: View {
     @State var language = defaults.integer(forKey: "defaultLang")
@@ -166,10 +166,9 @@ struct GeneralView: View {
     }
     
     var cooldownString: String {
-        self.hour == 0 ? "" : (
-            (lang == "zh-Hant" ? toLocalFigure(self.hour) : "\(self.hour)") + "hIdentifier".localised() + "space".localised() +
+        (self.hour == 0 ? "" :
+            (lang == "zh-Hant" ? toLocalFigure(self.hour) : "\(self.hour)") + "hIdentifier".localised() + "space".localised()) +
             (lang == "zh-Hant" ? toLocalFigure(self.minute) : "\(self.minute)") + "minIdentifier".localised()
-        )
     }
     
     var body: some View {

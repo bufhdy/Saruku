@@ -9,10 +9,10 @@
 "appName" = "サルク";
 
 // Menu
-"aboutItem" = "About Saruku";
-"prefsItem" = "Preferences...";
-"cookbookItem" = "Cookbook";
-"quitItem" = "Quit";
+"aboutItem" = "Saruku について";
+"prefsItem" = "環境設定⋯";
+"cookbookItem" = "クックブック";
+"quitItem" = "Saruku を終了";
 
 // CookbookView
 "cookbookTitle" = "クックブック"; // It dose't work
@@ -26,8 +26,8 @@
 "cookbookPage4Line" = "Drag down to add.\nDrag up to delete.";
 
 // PrefsView
-"generalTab" = "全般";
-"cusTab" = "カスタム";
+"generalTab" = "一般";
+"cusTab" = "外観";
 "ioTab" = "Import & Export";
 "launchAtLoginInst" = "Launch Saruku at login";
 "openAtLaunchInst" = "Open cookbook at launch";
@@ -43,7 +43,7 @@
 "minIdentifier" = "分";
 "themeLabel" = "テーマ：";
 "themeAuto" = "オート";
-"themeBlossom" = "Blossom";
+"themeBlossom" = "遅咲きの花";
 "themeCyber" = "Cyber-Nightmare";
 "themeRestartInst" = "Theme will be applied after restart.";
 
