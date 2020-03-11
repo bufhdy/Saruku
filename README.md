@@ -16,6 +16,7 @@ For who wants to build the project yourself, you should install [LaunchAtLogin](
 2. Hidden cursor not working when getting back from other apps. It'll be good after open any Saruku own window.
 3. Popover won't display correctly when hidden by hidden-bar app. (So don't hide it by default?)
 4. App will crush when running in the .dmg file.
+5. Cannot change the colour title bar text.
 
 ## To-Dos
 
