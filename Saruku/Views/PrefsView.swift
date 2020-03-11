@@ -23,8 +23,17 @@ struct PrefsView: View {
     
     @State var tabIndex: Int = 0
     
+    @State var showsCookbookAtLaunch = defaults.bool(forKey: "showsCookbookAtLaunch")
+    
     var body: some View {
-        VStack(spacing: 0) {
+        let showsCookbookAtLaunchBinding = Binding<Bool>(get: {
+            return self.showsCookbookAtLaunch
+        }, set: {
+            self.showsCookbookAtLaunch = $0
+            defaults.set(self.showsCookbookAtLaunch, forKey: "showsCookbookAtLaunch")
+        })
+        
+        return VStack(spacing: 0) {
             TabView(selection: $tabIndex) {
                 GeneralView()
                     .tabItem({ Text("General") })
@@ -38,12 +47,20 @@ struct PrefsView: View {
             }
             .padding([.horizontal, .top])
             
-            Toggle(isOn: $launchAtLoginModel.value) {
-                Text("Launch Saruku at login")
-                    .font(.custom("Acme", size: 15))
-                    .foregroundColor(Color("Newspaper"))
+            VStack(alignment: .leading, spacing: 2) {
+                Toggle(isOn: $launchAtLoginModel.value) {
+                    Text("Launch Saruku at login")
+                        .font(.custom("Acme", size: 15))
+                        .foregroundColor(Color("Newspaper"))
+                }
+                
+                Toggle(isOn: showsCookbookAtLaunchBinding) {
+                    Text("Show cookbook at launch")
+                        .font(.custom("Acme", size: 15))
+                        .foregroundColor(Color("Newspaper"))
+                }
             }
-            .padding(.vertical)
+            .padding()
             
             Rectangle()
                 .foregroundColor(.clear)
@@ -179,6 +196,8 @@ struct GeneralView: View {
                             .foregroundColor(Color("Newspaper").opacity(0.6))
                     }
                 }.animation(nil)
+                
+                
             }
             
             // TODO: Add global shortcut

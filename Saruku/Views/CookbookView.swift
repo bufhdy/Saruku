@@ -137,13 +137,14 @@ struct CookbookView: View {
                 HStack(spacing: 25) {
                     Button(action: { self.page -= 1 }) { Text("Previous").frame(width: 54) }
                     Button(action: {
+                        defaults.set(true, forKey: "hasLaunched")
                         NSApplication.shared.keyWindow?.close()
                         let appDelegate = NSApp.delegate as? AppDelegate
                         appDelegate?.popover.show(
                             relativeTo: (appDelegate?.statusBarItem.button!.bounds)!,
                             of: (appDelegate?.statusBarItem.button!)!,
                             preferredEdge: NSRectEdge.minY)
-                    }) { Text("Got it").frame(width: 54) }
+                    }) { Text("Got It").frame(width: 54) }
                 }
             }
         }

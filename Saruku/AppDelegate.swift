@@ -31,12 +31,27 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
     var prefsView: PrefsView?
     var aboutView: AboutView?
     var cookbookView: CookbookView?
+    var cookbookWindow: NSWindow!
+    
     
     var prefsWindowIsOpen = false
     
     var defaultTheme: Int { defaults.integer(forKey: "defaultTheme") }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        // Empty defaults
+//        let domain = Bundle.main.bundleIdentifier!
+//        defaults.removePersistentDomain(forName: domain)
+//        defaults.synchronize()
+//        exit(0)
+        
+        // Open cookbook at first launch
+        let showsCookbookAtLaunch = defaults.bool(forKey: "showsCookbookAtLaunch")
+        let hasLaunched = defaults.bool(forKey: "hasLaunched")
+        if showsCookbookAtLaunch || !hasLaunched {
+            cookbookView = CookbookView()
+        }
+        
         // Create the popover
         let popover = NSPopover()
         popover.contentSize = NSSize(width: 60, height: 60)
@@ -69,6 +84,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
         statusBarMenu.addItem(withTitle: "Quit",
                               action: #selector(quitApp(_:)),
                               keyEquivalent: "q")
+        
+        if !showsCookbookAtLaunch && hasLaunched {
+            self.popover.show(relativeTo: statusBarItem.button!.bounds,
+                              of: statusBarItem.button!,
+                              preferredEdge: .minY)
+        }
     }
     
     @objc func statusBarButtonClicked(_ sender: NSStatusBarButton) {
