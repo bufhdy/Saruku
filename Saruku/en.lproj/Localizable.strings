@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  Saruku
+
+  Created by 御薬袋托托 on 2020/3/11.
+  Copyright © 2020 Minai Toto. All rights reserved.
+*/
+
+"appName" = "Saraku";
+
+// Menu
+"aboutItem" = "About Saruku";
+"prefsItem" = "Preferences...";
+"cookbookItem" = "Cookbook";
+"quitItem" = "Quit";
+
+// CookbookView
+"cookbookTitle" = "Cookbook"; // It dose't work
+"nextButton" = "Next";
+"previousButton" = "Previous";
+"okButton" = "Got It";
+"cookbookPage1Line" = "Tap blue to modify.\nTap red to delete.";
+"cookbookPage2Line1" = "Slide right blue to adjust,\nleft blue to set.";
+"cookbookPage2Line2" = "Tap left blue to confirm.\nTap red to return.";
+"cookbookPage3Line" = "Tap icon to set sail.\nTap red to cancel.";
+"cookbookPage4Line" = "Drag down to add.\nDrag up to delete.";
+
+// PrefsView
+"generalTab" = "General";
+"cusTab" = "Customisations";
+"ioTab" = "Import & Export";
+"launchAtLoginInst" = "Launch Saruku at login";
+"openAtLaunchInst" = "Open cookbook at launch";
+"langLabel" = "Language: ";
+"langSystem" = "System";
+"langRestartInst" = "Language will change after restart.";
+"coolDownLangLabel" = "Default\ncool down: ";
+"hUp" = "h↑";
+"hDown" = "h↓";
+"minUp" = "min↑";
+"minDown" = "min↓";
+"themeLabel" = "Theme: ";
+"themeAuto" = "Auto";
+"themeBlossom" = "Blossom";
+"themeCyber" = "Cyber-Nightmare";
+"themeRestartInst" = "Theme will be applied after restart.";

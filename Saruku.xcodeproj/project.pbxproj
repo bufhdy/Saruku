@@ -18,6 +18,7 @@
 		1487D3652414F53C0019D49D /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1487D3642414F53C0019D49D /* Components.swift */; };
 		1487D3672414F5890019D49D /* Backyard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1487D3662414F5890019D49D /* Backyard.swift */; };
 		148C9D802417EBFC009D3A28 /* CookbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148C9D7F2417EBFC009D3A28 /* CookbookView.swift */; };
+		1490654C2419089600D1E461 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1490654E2419089600D1E461 /* Localizable.strings */; };
 		149B73042415339300DDEBD7 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 149B73032415339300DDEBD7 /* Cartfile */; };
 		149B732F2415473400DDEBD7 /* LaunchAtLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149B732D2415472000DDEBD7 /* LaunchAtLogin.framework */; };
 		149B73302415473400DDEBD7 /* LaunchAtLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 149B732D2415472000DDEBD7 /* LaunchAtLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -43,7 +44,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		145E658824169D3A00B5ABCA /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		146335B1241110C9006E6B7F /* Saruku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saruku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		146335B4241110C9006E6B7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		146335B6241110C9006E6B7F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,6 +58,9 @@
 		1487D3642414F53C0019D49D /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		1487D3662414F5890019D49D /* Backyard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backyard.swift; sourceTree = "<group>"; };
 		148C9D7F2417EBFC009D3A28 /* CookbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookbookView.swift; sourceTree = "<group>"; };
+		1490654F241908D700D1E461 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1490655024190AD500D1E461 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		14906551241917C400D1E461 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		149B73032415339300DDEBD7 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		149B732D2415472000DDEBD7 /* LaunchAtLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LaunchAtLogin.framework; path = Carthage/Build/Mac/LaunchAtLogin.framework; sourceTree = "<group>"; };
 		14DC2B3C2415F9F800A367F9 /* ImageBackyard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBackyard.swift; sourceTree = "<group>"; };
@@ -103,6 +106,7 @@
 			children = (
 				1487D35F2414D62E0019D49D /* Fonts */,
 				146335B4241110C9006E6B7F /* AppDelegate.swift */,
+				1490654E2419089600D1E461 /* Localizable.strings */,
 				1487D3662414F5890019D49D /* Backyard.swift */,
 				14DC2B3C2415F9F800A367F9 /* ImageBackyard.swift */,
 				1487D35A2414CD640019D49D /* Data */,
@@ -201,6 +205,7 @@
 				en,
 				Base,
 				"zh-Hant",
+				ja,
 			);
 			mainGroup = 146335A8241110C9006E6B7F;
 			packageReferences = (
@@ -225,6 +230,7 @@
 				146335BF241110C9006E6B7F /* Main.storyboard in Resources */,
 				146335BC241110C9006E6B7F /* Preview Assets.xcassets in Resources */,
 				1487D35C2414CEC50019D49D /* README.md in Resources */,
+				1490654C2419089600D1E461 /* Localizable.strings in Resources */,
 				14E027DB2414B92F004CA423 /* AppItemData.json in Resources */,
 				146335B9241110C9006E6B7F /* Assets.xcassets in Resources */,
 			);
@@ -279,9 +285,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				146335BE241110C9006E6B7F /* Base */,
-				145E658824169D3A00B5ABCA /* zh-Hant */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1490654E2419089600D1E461 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1490654F241908D700D1E461 /* en */,
+				1490655024190AD500D1E461 /* zh-Hant */,
+				14906551241917C400D1E461 /* ja */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

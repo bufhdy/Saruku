@@ -8,8 +8,6 @@
 
 import SwiftUI
 
-
-
 struct CookbookView: View {
     var window: NSWindow!
     @State var windowDelegate = WindowsDelegate()
@@ -32,12 +30,12 @@ struct CookbookView: View {
                         .frame(width: 132)
                 }
                 
-                Text("Tap blue to modify.\nTap red to delete.")
+                Text("cookbookPage1Line")
                     .font(.custom("Acme", size: 18))
                     .foregroundColor(Color("Newspaper"))
                     .multilineTextAlignment(.center)
                 
-                Button(action: { self.page += 1 }) { Text("Next").frame(width: 54) }
+                Button(action: { self.page += 1 }) { Text("nextButton").frame(width: 54) }
                     .offset(x: self.page == 1 ? 0 : 39.5)
             }
         }
@@ -61,19 +59,19 @@ struct CookbookView: View {
                 }
                 
                 HStack(spacing: 25) {
-                    Text("Slide right blue to adjust,\nleft blue to set.")
+                    Text("cookbookPage2Line1")
                         .font(.custom("Acme", size: 18))
                         .foregroundColor(Color("Newspaper"))
                         .multilineTextAlignment(.trailing)
-                    Text("Tap left blue to confirm.\nTap red to return.")
+                    Text("cookbookPage2Line2")
                         .font(.custom("Acme", size: 18))
                         .foregroundColor(Color("Newspaper"))
                         .multilineTextAlignment(.leading)
                 }
                 
                 HStack(spacing: 25) {
-                    Button(action: { self.page -= 1 }) { Text("Previous").frame(width: 54) }
-                    Button(action: { self.page += 1 }) { Text("Next").frame(width: 54) }
+                    Button(action: { self.page -= 1 }) { Text("previousButton").frame(width: 54) }
+                    Button(action: { self.page += 1 }) { Text("nextButton").frame(width: 54) }
                 }
             }
         }
@@ -96,14 +94,14 @@ struct CookbookView: View {
                         .frame(width: 132)
                 }
                 
-                Text("Tap icon to set sail.\nTap red to cancel.")
+                Text("cookbookPage3Line")
                     .font(.custom("Acme", size: 18))
                     .foregroundColor(Color("Newspaper"))
                     .multilineTextAlignment(.center)
                 
                 HStack(spacing: 25) {
-                    Button(action: { self.page -= 1 }) { Text("Previous").frame(width: 54) }
-                    Button(action: { self.page += 1 }) { Text("Next").frame(width: 54) }
+                    Button(action: { self.page -= 1 }) { Text("previousButton").frame(width: 54) }
+                    Button(action: { self.page += 1 }) { Text("nextButton").frame(width: 54) }
                 }
             }
         }
@@ -128,14 +126,14 @@ struct CookbookView: View {
                 .frame(height: 280)
                 .offset(y: 7)
                 
-                Text("Drag down to add.\nDrag up to delete.")
+                Text("cookbookPage4Line")
                     .font(.custom("Acme", size: 18))
                     .foregroundColor(Color("Newspaper"))
                     .multilineTextAlignment(.center)
                 
                 
                 HStack(spacing: 25) {
-                    Button(action: { self.page -= 1 }) { Text("Previous").frame(width: 54) }
+                    Button(action: { self.page -= 1 }) { Text("previousButton").frame(width: 54) }
                     Button(action: {
                         defaults.set(true, forKey: "hasLaunched")
                         NSApplication.shared.keyWindow?.close()
@@ -144,7 +142,7 @@ struct CookbookView: View {
                             relativeTo: (appDelegate?.statusBarItem.button!.bounds)!,
                             of: (appDelegate?.statusBarItem.button!)!,
                             preferredEdge: NSRectEdge.minY)
-                    }) { Text("Got It").frame(width: 54) }
+                    }) { Text("okButton").frame(width: 54) }
                 }
             }
         }
@@ -176,7 +174,7 @@ struct CookbookView: View {
             
             Spacer()
             
-            Text("Page \(roman[self.page]!)")
+            Text("Page \(roman[self.page]!)")  // Localisation needed
                 .font(.custom("Acme", size: 12))
                 .foregroundColor(Color("Newspaper").opacity(0.6))
             
@@ -203,7 +201,7 @@ struct CookbookView: View {
         window.titlebarAppearsTransparent = true
         window.isMovableByWindowBackground = true
         window.backgroundColor = NSColor(named: NSColor.Name("Vintage"))  // TODO: Need to set by colour scheme
-        window.title = "Cookbook"
+        window.title = NSLocalizedString("cookbookTitle", comment: "")
         window.standardWindowButton(.miniaturizeButton)?.isHidden = true
         window.standardWindowButton(.zoomButton)?.isHidden = true
         window.center()

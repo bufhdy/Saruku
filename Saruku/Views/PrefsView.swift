@@ -36,26 +36,26 @@ struct PrefsView: View {
         return VStack(spacing: 0) {
             TabView(selection: $tabIndex) {
                 GeneralView()
-                    .tabItem({ Text("General") })
+                    .tabItem({ Text("generalTab") })
                     .tag(0)
                 CustomView()
-                    .tabItem({ Text("Customisations") })
+                    .tabItem({ Text("cusTab") })
                     .tag(1)
-                Text("Import & Export")
-                    .tabItem({ Text("Import & Export") })
+                Text("ioTab")
+                    .tabItem({ Text("ioTab") })
                     .tag(2)
             }
             .padding([.horizontal, .top])
             
             VStack(alignment: .leading, spacing: 2) {
                 Toggle(isOn: $launchAtLoginModel.value) {
-                    Text("Launch Saruku at login")
+                    Text("launchAtLoginInst")
                         .font(.custom("Acme", size: 15))
                         .foregroundColor(Color("Newspaper"))
                 }
                 
                 Toggle(isOn: showsCookbookAtLaunchBinding) {
-                    Text("Open cookbook at launch")
+                    Text("openAtLaunchInst")
                         .font(.custom("Acme", size: 15))
                         .foregroundColor(Color("Newspaper"))
                 }
@@ -84,7 +84,7 @@ struct PrefsView: View {
             styleMask: [.closable, .miniaturizable, .fullSizeContentView, .titled],
             backing: .buffered, defer: false)
         window.titlebarAppearsTransparent = true
-        window.title = "Saruku " + version
+        window.title = NSLocalizedString("appName", comment: "") + " " + version
         window.backgroundColor = NSColor(named: NSColor.Name("Vintage"))  // TODO: Need to set by colour scheme
         window.standardWindowButton(.zoomButton)?.isHidden = true
         window.center()
@@ -103,7 +103,7 @@ struct GeneralView: View {
         didSet { defaults.set(self.hour, forKey: "defaultHour") }
     }
     
-    @State var minute = defaults.integer(forKey: "defaultMinute") {  // Bug: default zero will crash
+    @State var minute = defaults.integer(forKey: "defaultMinute") {
         didSet { defaults.set(self.minute, forKey: "defaultMinute") }
     }
 
@@ -121,19 +121,20 @@ struct GeneralView: View {
         return Form {
             Section {
                 Picker(selection: languageBinding,
-                    label: Text("Language: ")
+                    label: Text("langLabel")
                         .font(.custom("Acme", size: 15))
                         .foregroundColor(Color("Newspaper")),
                     content: {
-                        Text("English").tag(0)
-                        Text("正體中文").tag(1)
-                        Text("日本語").tag(2)
+                        Text("langSystem").tag(0)
+                        Text("English").tag(1)
+                        Text("正體中文").tag(2)
+                        Text("日本語").tag(3)
                     })
                 
                 HStack {
                     Spacer()
                     
-                    Text("Language will change after restart.")
+                    Text("langRestartInst")
                        .font(.custom("Acme", size: 12))
                        .foregroundColor(Color("Newspaper").opacity(0.6))
                        .opacity(needsRestart ? 1 : 0)
@@ -141,10 +142,10 @@ struct GeneralView: View {
                 }
                 
                 ZStack(alignment: .leading) {
-                    Text("Default\ncooldown: ")
+                    Text("coolDownLangLabel")
                         .font(.custom("Acme", size: 15))
                         .foregroundColor(Color("Newspaper"))
-                        .offset(x: -72)
+                        .offset(x: -72)  // Localisation needed
                     
                     HStack {
                         VStack(spacing: 3) {
@@ -152,7 +153,7 @@ struct GeneralView: View {
                                 if self.hour < 10 {
                                     self.hour += 1
                                 }
-                            }) { Text("h↑").frame(width: 36) }
+                            }) { Text("hUp").frame(width: 36) }
                             
                             Button(action: {
                                 if self.hour > 0 {
@@ -161,7 +162,7 @@ struct GeneralView: View {
                                         self.minute = 1
                                     }
                                 }
-                            }) { Text("h↓").frame(width: 36) }
+                            }) { Text("hDown").frame(width: 36) }
                         }
                         
                         VStack(spacing: 3) {
@@ -174,7 +175,7 @@ struct GeneralView: View {
                                         self.minute = 0
                                     }
                                 }
-                            }) { Text("min↑").frame(width: 36) }
+                            }) { Text("minUp").frame(width: 36) }
                             
                             Button(action: {
                                 if self.minute > 0 {
@@ -187,12 +188,12 @@ struct GeneralView: View {
                                        self.minute = 59
                                    }
                                 }
-                            }) { Text("min↓").frame(width: 36) }
+                            }) { Text("minDown").frame(width: 36) }
                         }
                         
                         Spacer()
                         
-                        Text((self.hour == 0 ? "" : "\(self.hour)h ") + "\(self.minute)min")
+                        Text((self.hour == 0 ? "" : "\(self.hour)h ") + "\(self.minute)min")  // Localisation needed
                             .font(.custom("Acme", size: 12))
                             .foregroundColor(Color("Newspaper").opacity(0.6))
                     }
@@ -236,24 +237,26 @@ struct CustomView: View {
             defaults.set(self.theme, forKey: "defaultTheme")
         })
         
+        
+        
         return Form {
             Section {
                 Picker(selection: themeBinding,
-                       label: Text("Theme: ")
+                       label: Text("themeLabel")
                             .font(.custom("Acme", size: 15))
                             .foregroundColor(Color("Newspaper")),
                        content: {
-                            ColoursBar(name: "Auto",
+                            ColoursBar(name: NSLocalizedString("themeAuto", comment: ""),
                                        colours: [Color("Cherry"),
                                                  Color("Newspaper"),
                                                  Color("Sorrow"),
                                                  Color("Vintage")]).tag(0)
-                            ColoursBar(name: "Blossom",
+                            ColoursBar(name: NSLocalizedString("themeBlossom", comment: ""),
                                        colours: [Color(hex: 0xFF2B5F),
                                                  Color(hex: 0x1A1B15),
                                                  Color(hex: 0x2570B9),
                                                  Color(hex: 0xF9F3DF)]).tag(1)
-                            ColoursBar(name: "Cyber-Nightmare",
+                            ColoursBar(name: NSLocalizedString("themeCyber", comment: ""),
                                        colours: [Color(hex: 0xE2270C),
                                                  Color(hex: 0xF8FBDC),
                                                  Color(hex: 0xDD682D),
@@ -263,7 +266,7 @@ struct CustomView: View {
                 HStack {
                     Spacer()
                     
-                    Text("Theme will be applied after restart.")
+                    Text("themeRestartInst")
                        .font(.custom("Acme", size: 12))
                        .foregroundColor(Color("Newspaper").opacity(0.6))
                        .opacity(needsRestart ? 1 : 0)

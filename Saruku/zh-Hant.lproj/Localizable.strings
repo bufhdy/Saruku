@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  Saruku
+
+  Created by 御薬袋托托 on 2020/3/11.
+  Copyright © 2020 Minai Toto. All rights reserved.
+*/
+
+"appName" = "Saraku";
+
+// Menu
+"aboutItem" = "關於Saruku";
+"prefsItem" = "偏好設定⋯";
+"cookbookItem" = "幫助手冊";
+"quitItem" = "結束";
+
+// CookbookView
+"cookbookTitle" = "幫助手冊";
+"nextButton" = "後項";
+"previousButton" = "前項";
+"okButton" = "瞭解";
+"cookbookPage1Line" = "　擊「藍」以變更，\n　擊「紅」以刪除。";
+"cookbookPage2Line1" = "移「藍」以加減，\n擊或鬆開以設定。";
+"cookbookPage2Line2" = "擊「藍」以確認，\n擊「紅」以返回。";
+"cookbookPage3Line" = "　擊圖示以啟時計，\n　擊「紅」以取消。";
+"cookbookPage4Line" = "　下拽以新增，\n　上推以刪除。";
+
+// PrefsView
+"generalTab" = "一般";
+"cusTab" = "客製";
+"ioTab" = "導入／導出";
+"launchAtLoginInst" = "系統登錄時自動運行";
+"openAtLaunchInst" = "顯示幫助手冊";
+"langLabel" = "語言：";
+"langSystem" = "系統語言";
+"langRestartInst" = "重啓軟體以更改語言。";
+"coolDownLangLabel" = "默認　\n冷卻：";
+"hUp" = "時增";
+"hDown" = "時減";
+"minUp" = "分增";
+"minDown" = "分減";
+"themeLabel" = "配色：";
+"themeAuto" = "跟隨系統";
+"themeBlossom" = "遲開花";
+"themeCyber" = "賽博夢魘";
+"themeRestartInst" = "重啓軟體以更改配色。";

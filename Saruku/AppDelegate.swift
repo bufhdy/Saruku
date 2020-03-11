@@ -53,18 +53,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
         // Create the status bar menu
         statusBarMenu = NSMenu()
         statusBarMenu.delegate = self
-        statusBarMenu.addItem(withTitle: "About Saruku",
+        statusBarMenu.addItem(withTitle: NSLocalizedString("aboutItem", comment: ""),
                               action: #selector(openAboutWindow(_:)),
                               keyEquivalent: "")
         statusBarMenu.addItem(NSMenuItem.separator())
-        statusBarMenu.addItem(withTitle: "Preferences...",
+        statusBarMenu.addItem(withTitle: NSLocalizedString("prefsItem", comment: ""),
                               action: #selector(openPrefsWindow(_:)),
                               keyEquivalent: ",")
-        statusBarMenu.addItem(withTitle: "Cookbook",
+        statusBarMenu.addItem(withTitle: NSLocalizedString("cookbookItem", comment: ""),
                               action: #selector(openHelpWindow(_:)),
                               keyEquivalent: "")
         statusBarMenu.addItem(NSMenuItem.separator())
-        statusBarMenu.addItem(withTitle: "Quit",
+        statusBarMenu.addItem(withTitle: NSLocalizedString("quitItem", comment: ""),
                               action: #selector(quitApp(_:)),
                               keyEquivalent: "q")
         
