@@ -10,7 +10,8 @@ import Cocoa
 import SwiftUI
 import UserNotifications
 
-public let defaults = UserDefaults.standard
+let defaults = UserDefaults.standard
+let langs = [Bundle.main.preferredLocalizations.first!, "en", "zh-Hant", "ja"]
 
 struct SchemeColoured: ViewModifier {
     func body(content: Content) -> some View {
@@ -20,6 +21,22 @@ struct SchemeColoured: ViewModifier {
             return AnyView(content
                 .colorScheme(defaults.integer(forKey: "defaultTheme") == 1 ? .light : .dark))
         }
+    }
+}
+
+extension String {
+    func localised() -> String {
+        let path = Bundle.main.path(
+            forResource: langs[defaults.integer(forKey: "defaultLang")],
+            ofType: "lproj")
+        let bundle = Bundle(path: path!)
+        
+        return NSLocalizedString(
+            self,
+            tableName: nil,
+            bundle: bundle!,
+            value: "",
+            comment: "")
     }
 }
 
@@ -53,18 +70,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
         // Create the status bar menu
         statusBarMenu = NSMenu()
         statusBarMenu.delegate = self
-        statusBarMenu.addItem(withTitle: NSLocalizedString("aboutItem", comment: ""),
+        statusBarMenu.addItem(withTitle: "aboutItem".localised(),
                               action: #selector(openAboutWindow(_:)),
                               keyEquivalent: "")
         statusBarMenu.addItem(NSMenuItem.separator())
-        statusBarMenu.addItem(withTitle: NSLocalizedString("prefsItem", comment: ""),
+        statusBarMenu.addItem(withTitle: "prefsItem".localised(),
                               action: #selector(openPrefsWindow(_:)),
                               keyEquivalent: ",")
-        statusBarMenu.addItem(withTitle: NSLocalizedString("cookbookItem", comment: ""),
+        statusBarMenu.addItem(withTitle: "cookbookItem".localised(),
                               action: #selector(openHelpWindow(_:)),
                               keyEquivalent: "")
         statusBarMenu.addItem(NSMenuItem.separator())
-        statusBarMenu.addItem(withTitle: NSLocalizedString("quitItem", comment: ""),
+        statusBarMenu.addItem(withTitle: "quitItem".localised(),
                               action: #selector(quitApp(_:)),
                               keyEquivalent: "q")
         
@@ -183,7 +200,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
         completionHandler()
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .sound])
     }
     

@@ -30,12 +30,12 @@ struct CookbookView: View {
                         .frame(width: 132)
                 }
                 
-                Text("cookbookPage1Line")
+                Text("cookbookPage1Line".localised())
                     .font(.custom("Acme", size: 18))
                     .foregroundColor(Color("Newspaper"))
                     .multilineTextAlignment(.center)
                 
-                Button(action: { self.page += 1 }) { Text("nextButton").frame(width: 54) }
+                Button(action: { self.page += 1 }) { Text("nextButton".localised()).frame(width: 54) }
                     .offset(x: self.page == 1 ? 0 : 39.5)
             }
         }
@@ -59,19 +59,19 @@ struct CookbookView: View {
                 }
                 
                 HStack(spacing: 25) {
-                    Text("cookbookPage2Line1")
+                    Text("cookbookPage2Line1".localised())
                         .font(.custom("Acme", size: 18))
                         .foregroundColor(Color("Newspaper"))
                         .multilineTextAlignment(.trailing)
-                    Text("cookbookPage2Line2")
+                    Text("cookbookPage2Line2".localised())
                         .font(.custom("Acme", size: 18))
                         .foregroundColor(Color("Newspaper"))
                         .multilineTextAlignment(.leading)
                 }
                 
                 HStack(spacing: 25) {
-                    Button(action: { self.page -= 1 }) { Text("previousButton").frame(width: 54) }
-                    Button(action: { self.page += 1 }) { Text("nextButton").frame(width: 54) }
+                    Button(action: { self.page -= 1 }) { Text("previousButton".localised()).frame(width: 54) }
+                    Button(action: { self.page += 1 }) { Text("nextButton".localised()).frame(width: 54) }
                 }
             }
         }
@@ -94,14 +94,14 @@ struct CookbookView: View {
                         .frame(width: 132)
                 }
                 
-                Text("cookbookPage3Line")
+                Text("cookbookPage3Line".localised())
                     .font(.custom("Acme", size: 18))
                     .foregroundColor(Color("Newspaper"))
                     .multilineTextAlignment(.center)
                 
                 HStack(spacing: 25) {
-                    Button(action: { self.page -= 1 }) { Text("previousButton").frame(width: 54) }
-                    Button(action: { self.page += 1 }) { Text("nextButton").frame(width: 54) }
+                    Button(action: { self.page -= 1 }) { Text("previousButton".localised()).frame(width: 54) }
+                    Button(action: { self.page += 1 }) { Text("nextButton".localised()).frame(width: 54) }
                 }
             }
         }
@@ -126,14 +126,14 @@ struct CookbookView: View {
                 .frame(height: 280)
                 .offset(y: 7)
                 
-                Text("cookbookPage4Line")
+                Text("cookbookPage4Line".localised())
                     .font(.custom("Acme", size: 18))
                     .foregroundColor(Color("Newspaper"))
                     .multilineTextAlignment(.center)
                 
                 
                 HStack(spacing: 25) {
-                    Button(action: { self.page -= 1 }) { Text("previousButton").frame(width: 54) }
+                    Button(action: { self.page -= 1 }) { Text("previousButton".localised()).frame(width: 54) }
                     Button(action: {
                         defaults.set(true, forKey: "hasLaunched")
                         NSApplication.shared.keyWindow?.close()
@@ -142,7 +142,7 @@ struct CookbookView: View {
                             relativeTo: (appDelegate?.statusBarItem.button!.bounds)!,
                             of: (appDelegate?.statusBarItem.button!)!,
                             preferredEdge: NSRectEdge.minY)
-                    }) { Text("okButton").frame(width: 54) }
+                    }) { Text("okButton".localised()).frame(width: 54) }
                 }
             }
         }
@@ -194,14 +194,24 @@ struct CookbookView: View {
     }
     
     init() {
+        var colour: NSColor
+        switch defaults.integer(forKey: "defaultTheme") {
+        case 1:
+            colour = NSColor.fromHex(hex: 0xF9F3DF)
+        case 2:
+            colour = NSColor.fromHex(hex: 0x4B3111)
+        default:
+            colour = NSColor(named: NSColor.Name("Vintage"))!
+        }
+        
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 420, height: 460),
             styleMask: [.closable, .fullSizeContentView, .titled],
             backing: .buffered, defer: false)
         window.titlebarAppearsTransparent = true
         window.isMovableByWindowBackground = true
-        window.backgroundColor = NSColor(named: NSColor.Name("Vintage"))  // TODO: Need to set by colour scheme
-        window.title = NSLocalizedString("cookbookTitle", comment: "")
+        window.backgroundColor = colour  // TODO: Need to set title colour by scheme
+        window.title = "cookbookTitle".localised()
         window.standardWindowButton(.miniaturizeButton)?.isHidden = true
         window.standardWindowButton(.zoomButton)?.isHidden = true
         window.center()

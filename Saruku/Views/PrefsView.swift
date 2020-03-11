@@ -25,6 +25,8 @@ struct PrefsView: View {
     
     @State var showsCookbookAtLaunch = defaults.bool(forKey: "showsCookbookAtLaunch")
     
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         let showsCookbookAtLaunchBinding = Binding<Bool>(get: {
             return self.showsCookbookAtLaunch
@@ -36,26 +38,26 @@ struct PrefsView: View {
         return VStack(spacing: 0) {
             TabView(selection: $tabIndex) {
                 GeneralView()
-                    .tabItem({ Text("generalTab") })
+                    .tabItem({ Text("generalTab".localised()) })
                     .tag(0)
                 CustomView()
-                    .tabItem({ Text("cusTab") })
+                    .tabItem({ Text("cusTab".localised()) })
                     .tag(1)
-                Text("ioTab")
-                    .tabItem({ Text("ioTab") })
+                Text("ioTab".localised())
+                    .tabItem({ Text("ioTab".localised()) })
                     .tag(2)
             }
             .padding([.horizontal, .top])
             
             VStack(alignment: .leading, spacing: 2) {
                 Toggle(isOn: $launchAtLoginModel.value) {
-                    Text("launchAtLoginInst")
+                    Text("launchAtLoginInst".localised())
                         .font(.custom("Acme", size: 15))
                         .foregroundColor(Color("Newspaper"))
                 }
                 
                 Toggle(isOn: showsCookbookAtLaunchBinding) {
-                    Text("openAtLaunchInst")
+                    Text("openAtLaunchInst".localised())
                         .font(.custom("Acme", size: 15))
                         .foregroundColor(Color("Newspaper"))
                 }
@@ -79,13 +81,23 @@ struct PrefsView: View {
     init() {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
         
+        var colour: NSColor
+        switch defaults.integer(forKey: "defaultTheme") {
+        case 1:
+            colour = NSColor.fromHex(hex: 0xF9F3DF)
+        case 2:
+            colour = NSColor.fromHex(hex: 0x4B3111)
+        default:
+            colour = NSColor(named: NSColor.Name("Vintage"))!
+        }
+        
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 400, height: 320),
             styleMask: [.closable, .miniaturizable, .fullSizeContentView, .titled],
             backing: .buffered, defer: false)
         window.titlebarAppearsTransparent = true
-        window.title = NSLocalizedString("appName", comment: "") + " " + version
-        window.backgroundColor = NSColor(named: NSColor.Name("Vintage"))  // TODO: Need to set by colour scheme
+        window.title = "appName".localised() + " " + version  // TODO: Need to set title colour by scheme
+        window.backgroundColor = colour
         window.standardWindowButton(.zoomButton)?.isHidden = true
         window.center()
         window.contentView = NSHostingView(rootView: self)
@@ -121,11 +133,11 @@ struct GeneralView: View {
         return Form {
             Section {
                 Picker(selection: languageBinding,
-                    label: Text("langLabel")
+                    label: Text("langLabel".localised())
                         .font(.custom("Acme", size: 15))
                         .foregroundColor(Color("Newspaper")),
                     content: {
-                        Text("langSystem").tag(0)
+                        Text("langSystem".localised()).tag(0)
                         Text("English").tag(1)
                         Text("正體中文").tag(2)
                         Text("日本語").tag(3)
@@ -134,7 +146,7 @@ struct GeneralView: View {
                 HStack {
                     Spacer()
                     
-                    Text("langRestartInst")
+                    Text("langRestartInst".localised())
                        .font(.custom("Acme", size: 12))
                        .foregroundColor(Color("Newspaper").opacity(0.6))
                        .opacity(needsRestart ? 1 : 0)
@@ -142,7 +154,7 @@ struct GeneralView: View {
                 }
                 
                 ZStack(alignment: .leading) {
-                    Text("coolDownLangLabel")
+                    Text("coolDownLangLabel".localised())
                         .font(.custom("Acme", size: 15))
                         .foregroundColor(Color("Newspaper"))
                         .offset(x: -72)  // Localisation needed
@@ -153,7 +165,7 @@ struct GeneralView: View {
                                 if self.hour < 10 {
                                     self.hour += 1
                                 }
-                            }) { Text("hUp").frame(width: 36) }
+                            }) { Text("hUp".localised()).frame(width: 36) }
                             
                             Button(action: {
                                 if self.hour > 0 {
@@ -162,7 +174,7 @@ struct GeneralView: View {
                                         self.minute = 1
                                     }
                                 }
-                            }) { Text("hDown").frame(width: 36) }
+                            }) { Text("hDown".localised()).frame(width: 36) }
                         }
                         
                         VStack(spacing: 3) {
@@ -175,7 +187,7 @@ struct GeneralView: View {
                                         self.minute = 0
                                     }
                                 }
-                            }) { Text("minUp").frame(width: 36) }
+                            }) { Text("minUp".localised()).frame(width: 36) }
                             
                             Button(action: {
                                 if self.minute > 0 {
@@ -188,7 +200,7 @@ struct GeneralView: View {
                                        self.minute = 59
                                    }
                                 }
-                            }) { Text("minDown").frame(width: 36) }
+                            }) { Text("minDown".localised()).frame(width: 36) }
                         }
                         
                         Spacer()
@@ -242,21 +254,21 @@ struct CustomView: View {
         return Form {
             Section {
                 Picker(selection: themeBinding,
-                       label: Text("themeLabel")
+                       label: Text("themeLabel".localised())
                             .font(.custom("Acme", size: 15))
                             .foregroundColor(Color("Newspaper")),
                        content: {
-                            ColoursBar(name: NSLocalizedString("themeAuto", comment: ""),
+                            ColoursBar(name: "themeAuto".localised(),
                                        colours: [Color("Cherry"),
                                                  Color("Newspaper"),
                                                  Color("Sorrow"),
                                                  Color("Vintage")]).tag(0)
-                            ColoursBar(name: NSLocalizedString("themeBlossom", comment: ""),
+                            ColoursBar(name: "themeBlossom".localised(),
                                        colours: [Color(hex: 0xFF2B5F),
                                                  Color(hex: 0x1A1B15),
                                                  Color(hex: 0x2570B9),
                                                  Color(hex: 0xF9F3DF)]).tag(1)
-                            ColoursBar(name: NSLocalizedString("themeCyber", comment: ""),
+                            ColoursBar(name: "themeCyber".localised(),
                                        colours: [Color(hex: 0xE2270C),
                                                  Color(hex: 0xF8FBDC),
                                                  Color(hex: 0xDD682D),
@@ -266,7 +278,7 @@ struct CustomView: View {
                 HStack {
                     Spacer()
                     
-                    Text("themeRestartInst")
+                    Text("themeRestartInst".localised())
                        .font(.custom("Acme", size: 12))
                        .foregroundColor(Color("Newspaper").opacity(0.6))
                        .opacity(needsRestart ? 1 : 0)

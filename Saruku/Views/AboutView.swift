@@ -206,13 +206,23 @@ struct AboutView: View {
         self.version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
         self.build = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
         
+        var colour: NSColor
+        switch defaults.integer(forKey: "defaultTheme") {
+        case 1:
+            colour = NSColor.fromHex(hex: 0xF9F3DF)
+        case 2:
+            colour = NSColor.fromHex(hex: 0x4B3111)
+        default:
+            colour = NSColor(named: NSColor.Name("Vintage"))!
+        }
+        
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 320, height: 320),
             styleMask: [.closable, .fullSizeContentView, .titled],
             backing: .buffered, defer: false)
         window.titlebarAppearsTransparent = true
         window.isMovableByWindowBackground = true
-        window.backgroundColor = NSColor(named: NSColor.Name("Vintage"))  // TODO: Need to set by colour scheme
+        window.backgroundColor = colour
         window.standardWindowButton(.miniaturizeButton)?.isHidden = true
         window.standardWindowButton(.zoomButton)?.isHidden = true
         window.center()

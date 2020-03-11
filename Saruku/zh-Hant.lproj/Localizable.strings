@@ -9,7 +9,7 @@
 "appName" = "Saraku";
 
 // Menu
-"aboutItem" = "關於Saruku";
+"aboutItem" = "關於 Saruku";
 "prefsItem" = "偏好設定⋯";
 "cookbookItem" = "幫助手冊";
 "quitItem" = "結束";

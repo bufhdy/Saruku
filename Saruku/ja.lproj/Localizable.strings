@@ -8,6 +8,12 @@
 
 "appName" = "サルク";
 
+// Menu
+"aboutItem" = "About Saruku";
+"prefsItem" = "Preferences...";
+"cookbookItem" = "Cookbook";
+"quitItem" = "Quit";
+
 // CookbookView
 "cookbookTitle" = "クックブック"; // It dose't work
 "nextButton" = "次へ";

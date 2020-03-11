@@ -27,6 +27,18 @@ extension Color {
     }
 }
 
+extension NSColor {
+    class func fromHex(hex: Int, alpha: Double = 1) -> NSColor {
+        let red = CGFloat((hex & 0xFF0000) >> 16) / 255.0
+        let green = CGFloat((hex & 0xFF00) >> 8) / 255.0
+        let blue = CGFloat((hex & 0xFF)) / 255.0
+        return NSColor(red: red,
+                       green: green,
+                       blue: blue,
+                       alpha: CGFloat(alpha))
+    }
+}
+
 func chooseColourScheme() {
     
 }
