@@ -15,7 +15,7 @@
 "quitItem" = "Quit";
 
 // CookbookView
-"cookbookTitle" = "Cookbook"; // It dose't work
+"cookbookTitle" = "Cookbook";
 "nextButton" = "Next";
 "previousButton" = "Previous";
 "okButton" = "Got It";

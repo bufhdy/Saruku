@@ -15,7 +15,7 @@
 "quitItem" = "Saruku を終了";
 
 // CookbookView
-"cookbookTitle" = "クックブック"; // It dose't work
+"cookbookTitle" = "クックブック";
 "nextButton" = "次へ";
 "previousButton" = "前に戻る";
 "okButton" = "スタート";
@@ -28,23 +28,23 @@
 // PrefsView
 "generalTab" = "一般";
 "cusTab" = "外観";
-"ioTab" = "Import & Export";
-"launchAtLoginInst" = "Launch Saruku at login";
-"openAtLaunchInst" = "Open cookbook at launch";
+"ioTab" = "ファイル";
+"launchAtLoginInst" = "ログイン時に Saruku を自動起動。";
+"openAtLaunchInst" = "Saruku の起動時にクックブックを開く。";
 "langLabel" = "言語：";
 "langSystem" = "システム";
 "langRestartInst" = "Language will change after restart.";
 "coolDownLangLabel" = "クール　\nダウン：";
-"hUp" = "h↑";
-"hDown" = "h↓";
-"minUp" = "min↑";
-"minDown" = "min↓";
+"hUp" = "時↑";
+"hDown" = "時↓";
+"minUp" = "分↑";
+"minDown" = "分↓";
 "hIdentifier" = "時";
 "minIdentifier" = "分";
 "themeLabel" = "テーマ：";
 "themeAuto" = "オート";
 "themeBlossom" = "遅咲きの花";
-"themeCyber" = "Cyber-Nightmare";
+"themeCyber" = "サイバー悪夢";
 "themeRestartInst" = "Theme will be applied after restart.";
 
 // Others
