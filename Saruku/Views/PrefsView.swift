@@ -55,12 +55,13 @@ struct PrefsView: View {
                 }
                 
                 Toggle(isOn: showsCookbookAtLaunchBinding) {
-                    Text("Show cookbook at launch")
+                    Text("Open cookbook at launch")
                         .font(.custom("Acme", size: 15))
                         .foregroundColor(Color("Newspaper"))
                 }
             }
             .padding()
+            // TODO: Add restart button?
             
             Rectangle()
                 .foregroundColor(.clear)

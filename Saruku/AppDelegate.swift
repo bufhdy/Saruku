@@ -33,10 +33,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
     var cookbookView: CookbookView?
     var cookbookWindow: NSWindow!
     
-    
     var prefsWindowIsOpen = false
     
-    var defaultTheme: Int { defaults.integer(forKey: "defaultTheme") }
+    let defaultTheme = defaults.integer(forKey: "defaultTheme")
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Empty defaults

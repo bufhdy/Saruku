@@ -96,7 +96,7 @@ struct CookbookView: View {
                         .frame(width: 132)
                 }
                 
-                Text("Tap icon to run.\nTap red to cancel.")
+                Text("Tap icon to set sail.\nTap red to cancel.")
                     .font(.custom("Acme", size: 18))
                     .foregroundColor(Color("Newspaper"))
                     .multilineTextAlignment(.center)
