@@ -54,10 +54,14 @@ struct ContentView: View {
         if openPanel.runModal() == NSApplication.ModalResponse.OK {
             if let url = openPanel.url {
                 let appName = url.deletingPathExtension().lastPathComponent
-                
+
                 let defaultHour = defaults.integer(forKey: "defaultHour")
                 let defaultMinute = defaults.integer(forKey: "defaultMinute")
-                let second = defaultHour * 3600 + defaultMinute * 60
+                var second = defaultHour * 3600 + defaultMinute * 60
+                if second == 0 {
+                    defaults.set(1, forKey: "defaultMinute")
+                    second = 1
+                }
                 
                 self.items.source.append(AppItem(
                     name: appName,
@@ -126,7 +130,9 @@ struct ContentView: View {
                         } else { self.moveBarYOffset = 14 }
                     }
                     .onEnded { value in
-                        if value.translation.height >= 14 { self.newItem() }
+                        if value.translation.height >= 14 {
+                            self.newItem()
+                        }
                         else if let removeAt = self.removeAt {
                             self.items.source.remove(at: removeAt)
                             if removeAt == 0 {

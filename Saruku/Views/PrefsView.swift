@@ -214,6 +214,11 @@ struct GeneralView: View {
 //            }
         }
         .padding()
+        .onAppear {
+            if defaults.integer(forKey: "defaultMinute") == 0 {
+                defaults.set(1, forKey: "defaultMinute")
+            }
+        }
     }
 }
 

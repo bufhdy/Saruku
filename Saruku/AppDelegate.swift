@@ -44,22 +44,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
 //        defaults.synchronize()
 //        exit(0)
         
-        // Open cookbook at first launch
-        let showsCookbookAtLaunch = defaults.bool(forKey: "showsCookbookAtLaunch")
-        let hasLaunched = defaults.bool(forKey: "hasLaunched")
-        if showsCookbookAtLaunch || !hasLaunched {
-            cookbookView = CookbookView()
-        }
-        
-        // Create the popover
-        let popover = NSPopover()
-        popover.contentSize = NSSize(width: 60, height: 60)
-        popover.behavior = .transient
-        popover.animates = true
-        // SwiftUI view with colour scheme set
-        popover.contentViewController = NSHostingController(rootView: ContentView().modifier(SchemeColoured()))
-        self.popover = popover
-        
         // Create the status bar
         statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         statusBarItem.button?.image = NSImage(named: "StatusIcon")
@@ -83,6 +67,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, UNUserNotifi
         statusBarMenu.addItem(withTitle: "Quit",
                               action: #selector(quitApp(_:)),
                               keyEquivalent: "q")
+        
+        // Create the popover
+        popover = NSPopover()
+        popover.contentSize = NSSize(width: 60, height: 60)
+        popover.behavior = .semitransient
+        popover.animates = true
+        // SwiftUI view with colour scheme set
+        popover.contentViewController = NSHostingController(rootView: ContentView().modifier(SchemeColoured()))
+        
+        // Open cookbook at first launch
+        let showsCookbookAtLaunch = defaults.bool(forKey: "showsCookbookAtLaunch")
+        let hasLaunched = defaults.bool(forKey: "hasLaunched")
+        if showsCookbookAtLaunch || !hasLaunched {
+            cookbookView = CookbookView()
+        }
         
         if !showsCookbookAtLaunch && hasLaunched {
             self.popover.show(relativeTo: statusBarItem.button!.bounds,
