@@ -34,13 +34,18 @@
 "langLabel" = "言語：";
 "langSystem" = "システム";
 "langRestartInst" = "Language will change after restart.";
-"coolDownLangLabel" = "Default\ncool down: ";
+"coolDownLangLabel" = "クール　\nダウン：";
 "hUp" = "h↑";
 "hDown" = "h↓";
 "minUp" = "min↑";
 "minDown" = "min↓";
+"hIdentifier" = "時";
+"minIdentifier" = "分";
 "themeLabel" = "テーマ：";
 "themeAuto" = "オート";
 "themeBlossom" = "Blossom";
 "themeCyber" = "Cyber-Nightmare";
 "themeRestartInst" = "Theme will be applied after restart.";
+
+// Others
+"space" = "　";

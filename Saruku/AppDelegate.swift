@@ -12,6 +12,11 @@ import UserNotifications
 
 let defaults = UserDefaults.standard
 let langs = [Bundle.main.preferredLocalizations.first!, "en", "zh-Hant", "ja"]
+let langIndex = [
+    "en": 1,
+    "zh-Hant": 2,
+    "ja": 3
+]
 
 struct SchemeColoured: ViewModifier {
     func body(content: Content) -> some View {

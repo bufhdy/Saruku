@@ -17,6 +17,7 @@ struct LaunchAtLoginToggle {
 }
 
 struct PrefsView: View {
+    
     var window: NSWindow!
     @State var windowDelegate = WindowsDelegate()
     @State var launchAtLoginModel = LaunchAtLoginToggle()
@@ -107,6 +108,8 @@ struct PrefsView: View {
     }
 }
 
+let coolDownXOffsets = [0, -72, -52, -60]
+
 struct GeneralView: View {
     @State var language = defaults.integer(forKey: "defaultLang")
     let originalLang = defaults.integer(forKey: "defaultLang")
@@ -121,6 +124,29 @@ struct GeneralView: View {
 
     @State private var needsRestart = false
     
+    @State private var coolDownXOffset = CGFloat(defaults.integer(forKey: "defaultLang") == 0 ?
+        coolDownXOffsets[langIndex[Bundle.main.preferredLocalizations.first!]!] :
+        coolDownXOffsets[defaults.integer(forKey: "defaultLang")])
+    
+    var lang: String {
+        self.language == 0 ? Bundle.main.preferredLocalizations.first! : langs[self.language]
+    }
+    
+    private func toLocalFigure(_ number: Int) -> String {
+        let userLocale = Locale(identifier: lang)
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .spellOut
+        formatter.locale = userLocale
+        return formatter.string(from: NSNumber(value: number))!
+    }
+    
+    var cooldownString: String {
+        self.hour == 0 ? "" : (
+            (lang == "zh-Hant" ? toLocalFigure(self.hour) : "\(self.hour)") + "hIdentifier".localised() + "space".localised() +
+            (lang == "zh-Hant" ? toLocalFigure(self.minute) : "\(self.minute)") + "minIdentifier".localised()
+        )
+    }
+    
     var body: some View {
         let languageBinding = Binding<Int>(get: {
             return self.language
@@ -128,6 +154,9 @@ struct GeneralView: View {
             self.language = $0
             self.needsRestart = self.originalLang != $0
             defaults.set(self.language, forKey: "defaultLang")
+            self.coolDownXOffset = CGFloat(defaults.integer(forKey: "defaultLang") == 0 ?
+                coolDownXOffsets[langIndex[Bundle.main.preferredLocalizations.first!]!] :
+                coolDownXOffsets[defaults.integer(forKey: "defaultLang")])
         })
         
         return Form {
@@ -147,17 +176,16 @@ struct GeneralView: View {
                     Spacer()
                     
                     Text("langRestartInst".localised())
-                       .font(.custom("Acme", size: 12))
-                       .foregroundColor(Color("Newspaper").opacity(0.6))
-                       .opacity(needsRestart ? 1 : 0)
-                       .animation(.easeInOut)
+                        .font(.custom("Acme", size: 12))
+                        .foregroundColor(Color("Newspaper").opacity(0.6))
+                        .opacity(needsRestart ? 1 : 0)
                 }
                 
                 ZStack(alignment: .leading) {
                     Text("coolDownLangLabel".localised())
                         .font(.custom("Acme", size: 15))
                         .foregroundColor(Color("Newspaper"))
-                        .offset(x: -72)  // Localisation needed
+                        .offset(x: coolDownXOffset)
                     
                     HStack {
                         VStack(spacing: 3) {
@@ -205,7 +233,7 @@ struct GeneralView: View {
                         
                         Spacer()
                         
-                        Text((self.hour == 0 ? "" : "\(self.hour)h ") + "\(self.minute)min")  // Localisation needed
+                        Text(cooldownString)  // Localisation needed
                             .font(.custom("Acme", size: 12))
                             .foregroundColor(Color("Newspaper").opacity(0.6))
                     }
@@ -249,8 +277,6 @@ struct CustomView: View {
             defaults.set(self.theme, forKey: "defaultTheme")
         })
         
-        
-        
         return Form {
             Section {
                 Picker(selection: themeBinding,
@@ -279,10 +305,9 @@ struct CustomView: View {
                     Spacer()
                     
                     Text("themeRestartInst".localised())
-                       .font(.custom("Acme", size: 12))
-                       .foregroundColor(Color("Newspaper").opacity(0.6))
-                       .opacity(needsRestart ? 1 : 0)
-                       .animation(.easeInOut)
+                        .font(.custom("Acme", size: 12))
+                        .foregroundColor(Color("Newspaper").opacity(0.6))
+                        .opacity(needsRestart ? 1 : 0)
                 }
             }
         }

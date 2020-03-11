@@ -33,14 +33,19 @@
 "openAtLaunchInst" = "Open cookbook at launch";
 "langLabel" = "Language: ";
 "langSystem" = "System";
-"langRestartInst" = "Language will change after restart.";
+"langRestartInst" = "Language will change completely after restart.";
 "coolDownLangLabel" = "Default\ncool down: ";
 "hUp" = "h↑";
 "hDown" = "h↓";
 "minUp" = "min↑";
 "minDown" = "min↓";
+"hIdentifier" = "h";
+"minIdentifier" = "min";
 "themeLabel" = "Theme: ";
 "themeAuto" = "Auto";
 "themeBlossom" = "Blossom";
 "themeCyber" = "Cyber-Nightmare";
 "themeRestartInst" = "Theme will be applied after restart.";
+
+// Others
+"space" = " ";

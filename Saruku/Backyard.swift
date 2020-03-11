@@ -38,7 +38,3 @@ extension NSColor {
                        alpha: CGFloat(alpha))
     }
 }
-
-func chooseColourScheme() {
-    
-}

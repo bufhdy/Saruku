@@ -33,14 +33,19 @@
 "openAtLaunchInst" = "顯示幫助手冊";
 "langLabel" = "語言：";
 "langSystem" = "系統語言";
-"langRestartInst" = "重啓軟體以更改語言。";
+"langRestartInst" = "重啓軟體以完成更改。";
 "coolDownLangLabel" = "默認　\n冷卻：";
 "hUp" = "時增";
 "hDown" = "時減";
 "minUp" = "分增";
 "minDown" = "分減";
+"hIdentifier" = "時";
+"minIdentifier" = "分";
 "themeLabel" = "配色：";
 "themeAuto" = "跟隨系統";
 "themeBlossom" = "遲開花";
 "themeCyber" = "賽博夢魘";
 "themeRestartInst" = "重啓軟體以更改配色。";
+
+// Others
+"space" = "　";
