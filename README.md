@@ -1,5 +1,7 @@
 # Saruku 
 
+[![GitHub issues](https://img.shields.io/github/issues/bufhdy/Saruku)](https://github.com/bufhdy/Saruku/issues)[![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fbufhdy)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fbufhdy%2FSaruku)
+
 Now at Alpha 0.1. Still in development. Use for test ONLY.
 
 <p style="text-align: center">
