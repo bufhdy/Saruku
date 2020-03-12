@@ -9,10 +9,10 @@
 "appName" = "サルク";
 
 // Menu
-"aboutItem" = "Saruku について";
+"aboutItem" = "サルクについて";
 "prefsItem" = "環境設定⋯";
 "cookbookItem" = "クックブック";
-"quitItem" = "Saruku を終了";
+"quitItem" = "サルクを終了";
 
 // CookbookView
 "cookbookTitle" = "クックブック";
@@ -29,8 +29,8 @@
 "generalTab" = "一般";
 "cusTab" = "外観";
 "ioTab" = "ファイル";
-"launchAtLoginInst" = "ログイン時に Saruku を自動起動。";
-"openAtLaunchInst" = "Saruku の起動時にクックブックを開く。";
+"launchAtLoginInst" = "ログイン時にサルクを自動起動。";
+"openAtLaunchInst" = "サルクの起動時にクックブックを開く。";
 "langLabel" = "言語：";
 "langSystem" = "システム";
 "langRestartInst" = "Language will change after restart.";
