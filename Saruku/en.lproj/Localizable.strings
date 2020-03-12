@@ -12,7 +12,7 @@
 "aboutItem" = "About Saruku";
 "prefsItem" = "Preferences...";
 "cookbookItem" = "Cookbook";
-"quitItem" = "Quit";
+"quitItem" = "Quit Saruku";
 
 // CookbookView
 "cookbookTitle" = "Cookbook";
