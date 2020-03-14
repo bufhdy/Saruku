@@ -17,8 +17,9 @@ For who wants to build the project yourself, you should install [LaunchAtLogin](
 1. When opening a file, timer will stop for a little while. (Have got no idea how to solve. )
 2. Hidden cursor not working when getting back from other apps. It'll be good after open any Saruku own window.
 3. Popover won't display correctly when hidden by hidden-bar app. (So don't hide it by default?)
-4. App will crush when running in the .dmg file.
-5. Cannot change the colour title bar text.
+4. App will crush when running in the .dmg file. So please drag Saruku into the Applications folder.
+5. Cannot change the colour title bar text. (Don't know how to. )
+6. It'll get stuck in open panel if view mode is list. Wwhen mode is icon it's all right
 
 ## To-Dos
 
