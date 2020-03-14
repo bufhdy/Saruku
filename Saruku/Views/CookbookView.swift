@@ -8,6 +8,23 @@
 
 import SwiftUI
 
+struct NaviFont: ViewModifier {
+    let lang = defaults.integer(forKey: "defaultLang") == 0 ?
+        Bundle.main.preferredLocalizations.first! :
+        langs[defaults.integer(forKey: "defaultLang")]
+    
+    func body(content: Content) -> some View {
+        switch lang {
+        case "zh-Hant":
+            return content.font(.custom("jf-openhuninn-1.0", size: 18))
+        case "ja":
+             return content.font(.custom("MotoyaLMaru-W3-90ms-RKSJ-H", size: 18))
+        default:
+            return content.font(.custom("Acme", size: 18))
+        }
+    }
+}
+
 struct CookbookView: View {
     var window: NSWindow!
     @State var windowDelegate = WindowsDelegate()
@@ -31,7 +48,7 @@ struct CookbookView: View {
                 }
                 
                 Text("cookbookPage1Line".localised())
-                    .font(.custom("Acme", size: 18))
+                    .modifier(NaviFont())
                     .foregroundColor(Color("Newspaper"))
                     .multilineTextAlignment(.center)
                 
@@ -60,11 +77,11 @@ struct CookbookView: View {
                 
                 HStack(spacing: 25) {
                     Text("cookbookPage2Line1".localised())
-                        .font(.custom("Acme", size: 18))
+                        .modifier(NaviFont())
                         .foregroundColor(Color("Newspaper"))
                         .multilineTextAlignment(.trailing)
                     Text("cookbookPage2Line2".localised())
-                        .font(.custom("Acme", size: 18))
+                        .modifier(NaviFont())
                         .foregroundColor(Color("Newspaper"))
                         .multilineTextAlignment(.leading)
                 }
@@ -95,7 +112,7 @@ struct CookbookView: View {
                 }
                 
                 Text("cookbookPage3Line".localised())
-                    .font(.custom("Acme", size: 18))
+                    .modifier(NaviFont())
                     .foregroundColor(Color("Newspaper"))
                     .multilineTextAlignment(.center)
                 
@@ -127,7 +144,7 @@ struct CookbookView: View {
                 .offset(y: 7)
                 
                 Text("cookbookPage4Line".localised())
-                    .font(.custom("Acme", size: 18))
+                    .modifier(NaviFont())
                     .foregroundColor(Color("Newspaper"))
                     .multilineTextAlignment(.center)
                 
