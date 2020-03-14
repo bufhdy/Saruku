@@ -36,5 +36,5 @@ For who wants to build the project yourself, you should install [LaunchAtLogin](
 ## Fonts
 
 - English: [Acme](https://fonts.google.com/specimen/Acme) by [Huerta Tipográfica](https://www.huertatipografica.com/en)
-- 正體中文: [粉圓](https://justfont.com/huninn/)
+- 正體中文: [Open 粉圓](https://justfont.com/huninn/)
 - 日本語: [Kosugi Maru](https://fonts.google.com/specimen/Kosugi+Maru)
