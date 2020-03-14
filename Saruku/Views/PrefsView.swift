@@ -28,10 +28,25 @@ struct LabelFont: ViewModifier {
     let size: Size
     
     func body(content: Content) -> some View {
-        content
-            .font(self.size == .label ?
-                (lang == "en" ? .custom("Acme", size: 15) : .system(size: 13, weight: .heavy)) :
-                (lang == "en" ? .custom("Acme", size: 12) : .system(size: 11, weight: .heavy)))
+        if self.size == .label {
+            switch lang {
+            case "zh-Hant":
+                return content.font(.custom("jf-openhuninn-1.0", size: 13))
+            case "ja":
+                 return content.font(.custom("MotoyaLMaru-W3-90ms-RKSJ-H", size: 13))
+            default:
+                return content.font(.custom("Acme", size: 15))
+            }
+        } else {
+            switch lang {
+            case "zh-Hant":
+                return content.font(.custom("jf-openhuninn-1.0", size: 11))
+            case "ja":
+                 return content.font(.custom("MotoyaLMaru-W3-90ms-RKSJ-H", size: 11))
+            default:
+                return content.font(.custom("Acme", size: 12))
+            }
+        }
     }
     
     

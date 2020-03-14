@@ -17,6 +17,8 @@
 		1487D3632414D6AA0019D49D /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1487D3622414D6AA0019D49D /* AboutView.swift */; };
 		1487D3652414F53C0019D49D /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1487D3642414F53C0019D49D /* Components.swift */; };
 		1487D3672414F5890019D49D /* Backyard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1487D3662414F5890019D49D /* Backyard.swift */; };
+		14896F72241CC6FC001905A3 /* jf-openhuninn.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14896F71241CC6FC001905A3 /* jf-openhuninn.ttf */; };
+		14896F76241CCC5F001905A3 /* KosugiMaru-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14896F75241CCC5F001905A3 /* KosugiMaru-Regular.ttf */; };
 		148C9D802417EBFC009D3A28 /* CookbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148C9D7F2417EBFC009D3A28 /* CookbookView.swift */; };
 		1490654C2419089600D1E461 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1490654E2419089600D1E461 /* Localizable.strings */; };
 		149B73042415339300DDEBD7 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 149B73032415339300DDEBD7 /* Cartfile */; };
@@ -57,6 +59,8 @@
 		1487D3622414D6AA0019D49D /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		1487D3642414F53C0019D49D /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		1487D3662414F5890019D49D /* Backyard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backyard.swift; sourceTree = "<group>"; };
+		14896F71241CC6FC001905A3 /* jf-openhuninn.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "jf-openhuninn.ttf"; sourceTree = "<group>"; };
+		14896F75241CCC5F001905A3 /* KosugiMaru-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KosugiMaru-Regular.ttf"; sourceTree = "<group>"; };
 		148C9D7F2417EBFC009D3A28 /* CookbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookbookView.swift; sourceTree = "<group>"; };
 		1490654F241908D700D1E461 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1490655024190AD500D1E461 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 		1487D35F2414D62E0019D49D /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				14896F75241CCC5F001905A3 /* KosugiMaru-Regular.ttf */,
+				14896F71241CC6FC001905A3 /* jf-openhuninn.ttf */,
 				1487D3602414D62E0019D49D /* Acme.ttf */,
 			);
 			path = Fonts;
@@ -225,11 +231,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14896F72241CC6FC001905A3 /* jf-openhuninn.ttf in Resources */,
 				149B73042415339300DDEBD7 /* Cartfile in Resources */,
 				1487D3612414D62E0019D49D /* Acme.ttf in Resources */,
 				146335BF241110C9006E6B7F /* Main.storyboard in Resources */,
 				146335BC241110C9006E6B7F /* Preview Assets.xcassets in Resources */,
 				1487D35C2414CEC50019D49D /* README.md in Resources */,
+				14896F76241CCC5F001905A3 /* KosugiMaru-Regular.ttf in Resources */,
 				1490654C2419089600D1E461 /* Localizable.strings in Resources */,
 				14E027DB2414B92F004CA423 /* AppItemData.json in Resources */,
 				146335B9241110C9006E6B7F /* Assets.xcassets in Resources */,
