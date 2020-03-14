@@ -1,6 +1,6 @@
 # Saruku 
 
-[![GitHub issues](https://img.shields.io/github/issues/bufhdy/Saruku)](https://github.com/bufhdy/Saruku/issues) [![UI frame](https://img.shields.io/badge/language-SwiftUI-yellow)](https://github.com/topics/swiftui) [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fbufhdy)](https://twitter.com/bufhdy)
+[![GitHub issues](https://img.shields.io/github/issues/bufhdy/Saruku)](https://github.com/bufhdy/Saruku/issues) [![UI frame](https://img.shields.io/badge/UI_frame-SwiftUI-yellow)](https://github.com/topics/swiftui) [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fbufhdy)](https://twitter.com/bufhdy)
 
 Now at Alpha 0.1. Still in development. Use for test ONLY. Watch test at [YouTube](https://www.youtube.com/watch?v=vfbicjnOvkw).
 
