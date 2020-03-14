@@ -1,6 +1,6 @@
 # Saruku 
 
-[![GitHub issues](https://img.shields.io/github/issues/bufhdy/Saruku)](https://github.com/bufhdy/Saruku/issues) [![Language](https://img.shields.io/badge/language-SwiftUI-yellow)](https://github.com/topics/swiftui) [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fbufhdy)](https://twitter.com/bufhdy)
+[![GitHub issues](https://img.shields.io/github/issues/bufhdy/Saruku)](https://github.com/bufhdy/Saruku/issues) [![UI frame](https://img.shields.io/badge/UI_frame-SwiftUI-yellow)](https://github.com/topics/swiftui) [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fbufhdy)](https://twitter.com/bufhdy)
 
 Now at Alpha 0.1. Still in development. Use for test ONLY. Watch test at [YouTube](https://www.youtube.com/watch?v=vfbicjnOvkw).
 
@@ -32,3 +32,9 @@ For who wants to build the project yourself, you should install [LaunchAtLogin](
 - [x] Notification
 - [ ] Import & export
 - [ ] Save JSON file
+
+## Fonts
+
+- English: [Acme](https://fonts.google.com/specimen/Acme) by [Huerta Tipográfica](https://www.huertatipografica.com/en)
+- 正體中文: [粉圓](https://justfont.com/huninn/)
+- 日本語: [Kosugi Maru](https://fonts.google.com/specimen/Kosugi+Maru)
