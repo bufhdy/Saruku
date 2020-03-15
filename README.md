@@ -20,6 +20,7 @@ For who wants to build the project yourself, you should install [LaunchAtLogin](
 4. App will crush when running in the .dmg file. So please drag Saruku into the Applications folder.
 5. Cannot change the colour title bar text. (Don't know how to. )
 6. It'll get stuck in open panel if view mode is list. Wwhen mode is icon it's all right
+7. On full screen, Saruku will be cropped.
 
 ## To-Dos
 

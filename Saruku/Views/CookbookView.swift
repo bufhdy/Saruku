@@ -9,9 +9,7 @@
 import SwiftUI
 
 struct NaviFont: ViewModifier {
-    let lang = defaults.integer(forKey: "defaultLang") == 0 ?
-        Bundle.main.preferredLocalizations.first! :
-        langs[defaults.integer(forKey: "defaultLang")]
+    let lang = getLang()
     
     func body(content: Content) -> some View {
         switch lang {
@@ -51,6 +49,7 @@ struct CookbookView: View {
                     .modifier(NaviFont())
                     .foregroundColor(Color("Newspaper"))
                     .multilineTextAlignment(.center)
+                    .lineSpacing(getLang() == "en" ? 0 : 4)
                 
                 Button(action: { self.page += 1 }) { Text("nextButton".localised()).frame(width: 54) }
                     .offset(x: self.page == 1 ? 0 : 39.5)
@@ -80,10 +79,12 @@ struct CookbookView: View {
                         .modifier(NaviFont())
                         .foregroundColor(Color("Newspaper"))
                         .multilineTextAlignment(.trailing)
+                        .lineSpacing(getLang() == "en" ? 0 : 4)
                     Text("cookbookPage2Line2".localised())
                         .modifier(NaviFont())
                         .foregroundColor(Color("Newspaper"))
                         .multilineTextAlignment(.leading)
+                        .lineSpacing(getLang() == "en" ? 0 : 4)
                 }
                 
                 HStack(spacing: 25) {
@@ -115,6 +116,7 @@ struct CookbookView: View {
                     .modifier(NaviFont())
                     .foregroundColor(Color("Newspaper"))
                     .multilineTextAlignment(.center)
+                    .lineSpacing(getLang() == "en" ? 0 : 4)
                 
                 HStack(spacing: 25) {
                     Button(action: { self.page -= 1 }) { Text("previousButton".localised()).frame(width: 54) }
@@ -147,7 +149,7 @@ struct CookbookView: View {
                     .modifier(NaviFont())
                     .foregroundColor(Color("Newspaper"))
                     .multilineTextAlignment(.center)
-                
+                    .lineSpacing(getLang() == "en" ? 0 : 4)
                 
                 HStack(spacing: 25) {
                     Button(action: { self.page -= 1 }) { Text("previousButton".localised()).frame(width: 54) }

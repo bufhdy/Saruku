@@ -22,9 +22,7 @@ struct LabelFont: ViewModifier {
         case note
     }
     
-    let lang = defaults.integer(forKey: "defaultLang") == 0 ?
-        Bundle.main.preferredLocalizations.first! :
-        langs[defaults.integer(forKey: "defaultLang")]
+    let lang = getLang()
     let size: Size
     
     func body(content: Content) -> some View {

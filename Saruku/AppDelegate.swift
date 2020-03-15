@@ -18,6 +18,12 @@ let langIndex = [
     "ja": 3
 ]
 
+func getLang() -> String {
+    return defaults.integer(forKey: "defaultLang") == 0 ?
+        Bundle.main.preferredLocalizations.first! :
+        langs[defaults.integer(forKey: "defaultLang")]
+}
+
 struct SchemeColoured: ViewModifier {
     func body(content: Content) -> some View {
         if defaults.integer(forKey: "defaultTheme") == 0 {
