@@ -10,7 +10,7 @@ Now at Alpha 0.1. Still in development. Use for test ONLY. Watch test at [YouTub
 
 Saruku is a macOS menu bar app that provides cool down time for SNS apps to help you focus on your current work.
 
-For who wants to build the project yourself, you should install [LaunchAtLogin](https://github.com/sindresorhus/LaunchAtLogin) by [Carthage](https://github.com/Carthage/Carthage). Please follow their instructions before hatching your own Saruku.
+For who wants to build the project yourself, you should install [LaunchAtLogin](https://github.com/sindresorhus/LaunchAtLogin) by [Carthage](https://github.com/Carthage/Carthage). Please follow their instructions before hatching your own Saruku. And there's something extra that you may modify the JSON file (`AppItemData.json`) to fit your custom apps.
 
 ## Known Issues
 
